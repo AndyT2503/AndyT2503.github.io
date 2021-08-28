@@ -1,0 +1,13 @@
+<div class="lg:ml-96 flex pt-12 justify-center lg:justify-start">
+  <img src="assets/avatar.jpg" alt="avatar" class="h-28 w-28 rounded-full object-cover">
+  <aside class="ml-4">
+    <h3 class="font-serif font-extrabold text-3xl">Tu Hoang</h3>
+    <div class="w-8 rounded-full h-2 bg-blue-400"></div>
+    <h3 class="font-semibold">Full-stack Developer</h3>
+    <h3>Ho Chi Minh, Viet Nam</h3>
+    <ul class="sm:flex sm:space-x-4 mt-4">
+      <li *ngFor="let item of listMenu" class="font-serif font-bold cursor-pointer hover:text-blue-400"
+        [ngClass]="menuSelected === item.title ? 'text-blue-400' : 'text-gray-500'" (click)="onSelectMenu(item)">{{item.title}}</li>
+    </ul>
+  </aside>
+</div>

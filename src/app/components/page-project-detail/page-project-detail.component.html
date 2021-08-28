@@ -1,0 +1,27 @@
+<h2 class="font-semibold text-4xl flex justify-center text-center">{{projectDetail.title}}</h2>
+<p class="text-lg mt-4 flex ml-auto mr-auto text-center w-80">{{projectDetail.description}}</p>
+<ul class="flex justify-center flex-wrap">
+  <li *ngFor="let tech of projectDetail.technologies" class="text-gray-500 text-base ml-4 mt-4 w-fit"><i
+      class="fa fa-angle-double-right mr-1"></i>{{tech}}</li>
+</ul>
+<div class="bg-gray-100 p-8 flex ml-auto w-fit mr-auto justify-center mt-8">
+  <img class="h-96" [src]="projectDetail.image">
+</div>
+<h2 class="font-semibold text-4xl flex justify-center mt-8">The Brief</h2>
+<p class="mt-4 text-lg">{{projectDetail.brief}}</p>
+<div *ngIf="projectDetail.achievements" class="mt-8">
+  <h2 class="font-semibold text-4xl flex justify-center mt-4">The Achievement</h2>
+  <div class="flex justify-center mt-4">
+    <div *ngFor="let item of projectDetail.achievements" class="flex ml-4">
+      <div class="flex items-center">
+        <i class="fa fa-trophy h-fit text-yellow-400 text-lg" aria-hidden="true"></i>
+      </div>
+      <div class=" text-lg font-semibold ml-2 overflow-clip">{{item}}</div>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center mt-8 mb-8">
+  <a target="_blank" [href]="projectDetail.link"
+    class="bg-blue-600 text-white hover:bg-white hover:text-blue-600 border-blue-600 border-solid border-2 rounded-3xl p-2 font-medium">Link
+    Reference</a>
+</div>
