@@ -1,0 +1,62 @@
+<ng-container *ngIf="!(isMobile$ | async)!; else mobileTmp">
+  <div class="project">
+    <div
+      class="project-img"
+      [ngClass]="position === 'left' ? 'reverse-project-img' : ''"
+    >
+      <img [src]="projectData.image" alt="" />
+    </div>
+    <div
+      class="project-detail"
+      [ngClass]="position === 'left' ? 'reverse-project-detail' : ''"
+    >
+      <h6>Featured Project</h6>
+      <h2>{{ projectData.name }}</h2>
+      <div class="project-description">
+        <p>
+          {{ projectData.description }}
+        </p>
+      </div>
+      <ul>
+        <li *ngFor="let item of projectData.tech">{{ item }}</li>
+      </ul>
+      <div class="group-button">
+        <ng-container *ngFor="let item of projectData.repoUrls">
+          <div
+            nz-tooltip
+            [nzTooltipTitle]="item.tooltip"
+            class="button"
+            (click)="openRepo(item.url)"
+          >
+            <i nz-icon nzType="github" nzTheme="outline"></i>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #mobileTmp>
+  <div class="mobile-template">
+    <h6>Featured Project</h6>
+    <h2>{{ projectData.name }}</h2>
+    <p>
+      {{ projectData.description }}
+    </p>
+    <ul>
+      <li *ngFor="let item of projectData.tech">{{ item }}</li>
+    </ul>
+    <div class="group-button">
+      <ng-container *ngFor="let item of projectData.repoUrls">
+        <div
+          nz-tooltip
+          [nzTooltipTitle]="item.tooltip"
+          class="button"
+          (click)="openRepo(item.url)"
+        >
+          <i nz-icon nzType="github" nzTheme="outline"></i>
+        </div>
+      </ng-container>
+    </div>
+    <img [src]="projectData.image" class="bg-image">
+  </div>
+</ng-template>

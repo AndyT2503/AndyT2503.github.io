@@ -1,0 +1,114 @@
+@import "color";
+@import "font";
+@import "font-size";
+.menu {
+  display: flex; 
+}
+
+.menu-desktop {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  li {
+    margin: 0 5px;
+    counter-increment: item 1;
+    font-size: $fs-sm;
+
+    a {
+      text-decoration: none;
+      padding: 10px;
+      font-family: $font-mono;
+      color: $default-color;
+      &::before {
+        content: "0" counter(item) ".";
+        margin-right: 5px;
+        color: $primary-color;
+      }
+
+      &:hover {
+        color: $primary-color;
+      }
+
+      &.active {
+        color: $primary-color;
+      }
+    }
+  }
+
+  button {
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-family: $font-mono;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
+      background-color: $green-tint;
+    }
+  }
+}
+
+.menu-mobile {
+  display: block;
+  list-style: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 0;
+  text-align: center;
+  li {
+    margin: 0 5px;
+    counter-increment: item 1;
+    font-size: $fs-xl;
+    margin: 0px auto 16px;
+    a {
+      text-decoration: none;
+      padding: 10px;
+      font-family: $font-mono;
+      color: $default-color;
+      &::before {
+        content: "0" counter(item) ".";
+        margin-right: 5px;
+        color: $primary-color;
+        display: block;
+      }
+
+      &:hover {
+        color: $primary-color;
+      }
+
+      &.active {
+        color: $primary-color;
+      }
+    }
+  }
+
+  button {
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-family: $font-mono;
+    font-size: $fs-md;
+    background-color: transparent;
+    margin: 10% 0 0;
+    cursor: pointer;
+    &:hover {
+      background-color: $green-tint;
+    }
+  }
+}
+
+.hamburger-menu {
+  color: $primary-color;
+  font-size: 36px;
+  width: 36px;
+}
+
+mat-drawer-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

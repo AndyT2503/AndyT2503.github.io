@@ -1,0 +1,58 @@
+@import "./font";
+@import "./font-size";
+@import "./color";
+.content {
+  background-color: $drawer-bg-color;
+  padding: 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .top {
+    .header {
+      display: flex;
+      margin-bottom: 20px;
+      .icon {
+        font-size: 40px;
+        color: $primary-color;
+      }
+
+      .button {
+        margin-left: auto;
+        display: flex;
+        gap: 8px;
+
+        i {
+          cursor: pointer;
+          font-size: $fs-xxl;
+          color: $default-color;
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+
+    h2 {
+      font-size: $fs-heading-2;
+      color: $default-color;
+    }
+
+    p {
+      color: $tertiary-color;
+      font-family: $font-mono;
+      font-size: $fs-lg;
+    }
+  }
+
+  ul {
+    padding-left: 0;
+    margin: 25px 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    color: $tertiary-color;
+    font-family: $font-mono;
+    gap: 16px;
+  }
+}

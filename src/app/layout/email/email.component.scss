@@ -1,0 +1,36 @@
+@import "./font-size";
+@import "./color";
+@import "./font";
+
+div {
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  p {
+    cursor: pointer;
+    font-size: $fs-md;
+    font-family: $font-mono;
+    color: $default-color;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    writing-mode: vertical-lr;
+    &:hover {
+      color: $primary-color;
+      transform: translateY(-3px);
+      transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 90px;
+    margin: 0 auto;
+    background-color: $default-color;
+  }
+
+  @media (max-width: 1080px) {
+    display: none;
+  }
+}

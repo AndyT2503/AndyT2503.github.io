@@ -1,0 +1,25 @@
+<section id="experience">
+  <div class="header">
+    <h4>Work Experience</h4>
+  </div>
+  <div class="content">
+    <nz-tabset nzTabPosition="left">
+      <ng-container *ngFor="let item of listWorkExperience">
+        <nz-tab [nzTitle]="item.companyName">
+          <div class="tab-content">
+            <h3>
+              {{ item.role }}
+              <span
+                ><a [href]="item.url" target="_blank">@ {{ item.companyName }}</a></span
+              >
+            </h3>
+            <p class="time">{{ item.time }}</p>
+            <ul>
+              <li *ngFor="let detail of item.jobDetails">{{ detail }}</li>
+            </ul>
+          </div>
+        </nz-tab>
+      </ng-container>
+    </nz-tabset>
+  </div>
+</section>

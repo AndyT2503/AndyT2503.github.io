@@ -1,0 +1,98 @@
+@import "./font";
+@import "./font-size";
+@import "./color";
+
+section {
+  padding: 100px 0;
+  min-height: 70vh;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  .header {
+    h4 {
+      font-family: $font-mono;
+      font-size: $fs-heading;
+      margin: 10px 0px 40px;
+      color: $default-color;
+      font-weight: 600;
+
+      &::before {
+        content: "02.";
+        margin-right: 8px;
+        color: $primary-color;
+        font-size: $fs-xxl;
+        font-weight: 300;
+      }
+      &::after {
+        content: "";
+        display: inline-flex;
+        width: 250px;
+        height: 1px;
+        background-color: $light-navy;
+        margin-left: 16px;
+        position: relative;
+        bottom: 8px;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+nz-tabset {
+  color: $tertiary-color;
+}
+
+.tab-content {
+  h3 {
+    font-size: $fs-xxl;
+    color: $default-color;
+  }
+
+  .time {
+    font-size: $fs-xs;
+    color: $light-slate;
+  }
+
+  ul {
+    gap: 0px 10px;
+    padding: 0px;
+    margin: 20px 0px 0px;
+    overflow: hidden;
+    list-style: none;
+    font-size: $fs-lg;
+
+
+    li {
+      position: relative;
+      margin-bottom: 10px;
+      padding-left: 30px;
+      &::before {
+        content: "▹";
+        color: $primary-color;
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .ant-tabs-left > .ant-tabs-content-holder,
+.ant-tabs-left > div > .ant-tabs-content-holder {
+  border-left: none;
+}
+
+:host ::ng-deep .ant-tabs-left > .ant-tabs-nav .ant-tabs-ink-bar,
+.ant-tabs-left > div > .ant-tabs-nav .ant-tabs-ink-bar {
+  left: 0;
+}
+
+:host ::ng-deep .ant-tabs-nav-list {
+  border-left: 1px solid $light-navy !important;
+}
+
+:host ::ng-deep .ant-tabs > .ant-tabs-nav, .ant-tabs > div > .ant-tabs-nav {
+  height: fit-content;
+}

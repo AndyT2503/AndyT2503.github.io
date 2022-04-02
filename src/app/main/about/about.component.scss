@@ -1,0 +1,119 @@
+@import "./font";
+@import "./font-size";
+@import "./color";
+
+section {
+  padding: 100px 0;
+  min-height: 100vh;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  .header {
+    h4 {
+      font-family: $font-mono;
+      font-size: $fs-heading;
+      margin: 0 8px;
+      color: $default-color;
+      font-weight: 600;
+
+      &::before {
+        content: "01.";;
+        margin-right: 8px;
+        color: $primary-color;
+        font-size: $fs-xxl;
+        font-weight: 300;
+      }
+      &::after {
+        content: "";
+        display: inline-flex;
+        width: 250px;
+        height: 1px;
+        background-color: $light-navy;
+        margin-left: 16px;
+        position: relative;
+        bottom: 8px;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .content-layout {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 50px;
+
+    @media (max-width: 768px) {
+      display: block;
+
+      .image {
+        margin-top: 16px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .content {
+      font-size: $fs-md;
+      color: $tertiary-color;
+      font-family: $font-sans;
+      p {
+        a {
+          color: $primary-color;
+        }
+      }
+
+      ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(140px, 200px));
+        gap: 0px 10px;
+        padding: 0px;
+        margin: 20px 0px 0px;
+        overflow: hidden;
+        list-style: none;
+
+        li::before {
+          content: "▹";
+          margin-right: 4px;
+          color: $primary-color;
+        }
+      }
+    }
+
+    .wrapper {
+      position: relative;
+      margin-left: auto;
+      height: fit-content;
+      width: fit-content;
+      margin: auto;
+      img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        @media (min-width: 768px) and (max-width: 960px) {
+          width: 250px !important;
+          height: 250px !important;
+        }
+      }
+      &::after {
+        display: block;
+        width: 300px;
+        height: 300px;
+        content: "";
+        border: 2px solid $primary-color;
+        border-radius: 4px;
+        position: absolute;
+        top: 32px;
+        left: 32px;
+        z-index: -100;
+        @media (min-width: 768px) and (max-width: 960px) {
+          width: 250px !important;
+          height: 250px !important;
+          top: 24px;
+          left: 24px;
+        }
+      }
+    }
+  }
+}

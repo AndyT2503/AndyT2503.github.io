@@ -1,0 +1,28 @@
+@import "./color";
+@import "./font-size";
+@import "./font";
+footer {
+  text-align: center;
+  a {
+    font-size: $fs-sm;
+    color: $primary-color;
+    text-decoration: none;
+    font-family: $font-mono;
+
+    .github-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      div {
+        margin: 8px;
+        display: flex;
+        align-items: center;
+
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

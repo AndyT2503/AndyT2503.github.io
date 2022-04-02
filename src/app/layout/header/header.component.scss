@@ -1,0 +1,24 @@
+@import "./color";
+header {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 100;
+  width: stretch;
+  background-color: $base-color;
+  opacity: 0.99;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  @media (max-width: 768px) {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+app-logo {
+  width: 42px;
+  height: 42px;
+}

@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="top">
+    <div class="header">
+      <i class="icon" nz-icon nzType="folder" nzTheme="outline"></i>
+      <div class="button">
+        <ng-container *ngFor="let item of projectData.repoUrls">
+          <i
+            nz-tooltip
+            [nzTooltipTitle]="item.tooltip"
+            (click)="openRepo(item.url)"
+            nz-icon
+            nzType="github"
+            nzTheme="outline"
+          ></i>
+        </ng-container>
+      </div>
+    </div>
+    <h2>{{ projectData.name }}</h2>
+    <p>
+      {{ projectData.description }}
+    </p>
+  </div>
+  <ul>
+    <ng-container *ngFor="let item of projectData.tech">
+      <li>{{item}}</li>
+    </ng-container>
+  </ul>
+</div>

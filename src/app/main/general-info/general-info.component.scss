@@ -1,0 +1,45 @@
+@import "./font";
+@import "./font-size";
+@import "./color";
+
+section {
+  display: flex;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  max-width: 1000px;
+
+  @media (max-width: 1280px) {
+    max-width: 900px;
+  }
+  div {
+    p {
+      font-size: $fs-md;
+      color: $tertiary-color;
+      font-family: $font-sans;
+    }
+
+    h3 {
+      font-size: clamp($fs-sm,5vw, $fs-md);
+      font-family: $font-mono;
+      color: $primary-color;
+      font-weight: 400;
+    }
+
+    h2 {
+      color: $default-color;
+      font-family: $font-sans;
+      font-size: clamp(40px, 8vw, 80px);
+    }
+
+    .content {
+      max-width: 540px;
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+      }
+    }
+  }
+}

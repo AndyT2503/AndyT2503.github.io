@@ -1,0 +1,46 @@
+@import "./font-size";
+@import "./color";
+ul {
+  position: fixed;
+  bottom: 0;
+  left: 15px;
+  margin-bottom: 0px;
+  @media (max-width: 1080px) {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-left: 0px;
+    left: 0px;
+    li {
+      margin: 0 8px !important;
+    }
+  }
+  li {
+    list-style: none;
+    font-size: $fs-xxl;
+    margin: 10px 0;
+    a {
+      color: $default-color;
+
+      &:hover {
+        color: $primary-color;
+        i {
+          transform: translateY(-3px);
+          transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 90px;
+    margin: 0px auto;
+    background-color: $default-color;
+    @media (max-width: 1080px) {
+      display: none;
+    }
+  }
+}

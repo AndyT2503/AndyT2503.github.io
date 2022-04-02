@@ -1,0 +1,53 @@
+@import "./font";
+@import "./font-size";
+@import "./color";
+
+section {
+  padding: 100px 0;
+  min-height: 50vh;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  h3 {
+    font-size: $fs-md;
+    font-family: $font-mono;
+    color: $primary-color;
+    font-weight: 400;
+
+    &::before {
+      content: "04.";
+      margin-right: 8px;
+      font-weight: 300;
+    }
+  }
+
+  h2 {
+    font-family: $font-mono;
+    font-size: $fs-heading;
+    color: $default-color;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: $fs-md;
+    color: $tertiary-color;
+    font-family: $font-sans;
+  }
+
+  button {
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-family: $font-mono;
+    font-size: $fs-md;
+    background-color: transparent;
+    margin: 10px 0 0;
+    cursor: pointer;
+    &:hover {
+      background-color: $green-tint;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import "color";
+#logo {
+  color: $primary-color;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  fill: currentcolor;
+  vertical-align: middle;
+  fill: none;
+}

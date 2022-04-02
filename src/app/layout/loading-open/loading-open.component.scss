@@ -1,0 +1,46 @@
+@import "color";
+
+#shape {
+  stroke-dasharray: 1000;
+  animation: dash 5s linear;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+#text {
+  animation: visibility 2s linear;
+}
+
+@keyframes visibility {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+div {
+  height: 100vh;
+  display: flex;
+}
+svg {
+  color: $primary-color;
+  width: 200px;
+  height: 200px;
+  fill: currentcolor;
+  fill: none;
+  margin: auto;
+}

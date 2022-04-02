@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./styles/color"; 
+@import "./styles/font";
+
+body {
+  background-color: $base-color;
+  font-family: $font-sans;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $tertiary-color;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $tertiary-color;
+}

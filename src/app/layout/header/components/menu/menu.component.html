@@ -1,0 +1,36 @@
+<div class="menu" *ngIf="!isMobile">
+  <ng-container *ngTemplateOutlet="menu"></ng-container>
+</div>
+
+<div *ngIf="isMobile">
+  <i
+    (click)="isOpenDrawerMenu = true"
+    class="hamburger-menu"
+    nz-icon
+    nzType="menu"
+    nzTheme="outline"
+  ></i>
+</div>
+
+<app-drawer
+  [(isOpen)]="isOpenDrawerMenu"
+  position="right"
+  width="70%"
+  [content]="menu"
+></app-drawer>
+
+<ng-template #menu>
+  <ol [ngClass]="{ 'menu-desktop': !isMobile, 'menu-mobile': isMobile }">
+    <ng-container *ngFor="let item of listMenu">
+      <li>
+        <a
+          (click)="onClickMenu(item)"
+          [ngClass]="{ 'active': item.name === selectedMenuItem }"
+          [href]="item.link"
+          >{{ item.name }}</a
+        >
+      </li>
+    </ng-container>
+    <button (click)="openResume()">Resume</button>
+  </ol>
+</ng-template>
