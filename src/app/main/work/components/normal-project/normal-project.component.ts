@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { ProjectData } from '../../model/project.model';
+import { ProjectData } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-normal-project',

@@ -24,8 +24,8 @@
     <ng-container *ngFor="let item of listMenu">
       <li>
         <a
-          (click)="onClickMenu(item)"
-          [ngClass]="{ 'active': item.name === selectedMenuItem }"
+          (click)="onClickMenu()"
+          [ngClass]="{ active: item.name === (currentMenuSelected$ | async) }"
           [href]="item.link"
           >{{ item.name }}</a
         >

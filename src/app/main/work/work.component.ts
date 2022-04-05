@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ProjectData } from './model/project.model';
+import { ProjectData } from 'src/app/shared/models';
+
 
 @Component({
   selector: 'app-work',
@@ -35,7 +36,7 @@ export class WorkComponent implements OnInit {
           url: 'https://github.com/AndyT2503/ecommerceBE'
         }
       ],
-      tech: ['Angular', 'MailKit', '.NET Core', 'Redis', 'Tailwind CSS']
+      tech: ['Angular', 'MailKit', '.NET Core', 'Redis']
     },
   ];
 

@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ProjectData } from 'src/app/shared/models';
 import { BreakPointService } from 'src/app/shared/services';
-import { ProjectData } from '../../model/project.model';
+
 
 @Component({
   selector: 'app-featured-project',

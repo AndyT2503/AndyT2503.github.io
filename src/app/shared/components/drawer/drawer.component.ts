@@ -1,5 +1,5 @@
-import { trigger, transition, style, animate } from '@angular/animations';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-drawer',
@@ -39,9 +39,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Ho
     ])
   ]
 })
-export class DrawerComponent implements OnInit {
+export class DrawerComponent {
   _width!: string;
   _height!: string;
+  _isOpen!: boolean;
   @Input() closeIcon: boolean = true;
   @Input() content!: TemplateRef<any>;
   @Input() position!: 'top' |'left' | 'bottom' | 'right';
@@ -53,21 +54,22 @@ export class DrawerComponent implements OnInit {
     if (this.position === 'right' || this.position === 'left') return;
     this._height = value;
   };
-  @Input() isOpen: boolean = false;
+  @Input() set isOpen(value: boolean) {
+    if (!value) {
+      this.isVisible = value;
+    }
+    this._isOpen = value;
+  }
   @Output() isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output() onClose = new EventEmitter<void>();
 
   private isVisible = false; //Checking whether drawer is really visible with user
   constructor(
-    private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
-    console.log('asd')
-  }
 
-  onClickOutSide(): void {
+  onClickOutside(): void {
     //when drawer was initialized but not visible with user, set visible = true and skip close action
     if (!this.isVisible) {
       this.isVisible = true;
@@ -77,8 +79,7 @@ export class DrawerComponent implements OnInit {
   }
 
   close(): void {
-    this.isVisible = false;
-    this.isOpen = false;
-    this.isOpenChange.emit(this.isOpen);
+    this._isOpen = false;
+    this.isOpenChange.emit(this._isOpen);
   }
 }

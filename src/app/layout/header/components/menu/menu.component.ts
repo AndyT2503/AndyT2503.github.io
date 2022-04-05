@@ -1,3 +1,4 @@
+import { MenuService } from './../../../../shared/services/menu.service';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { BreakPointService } from 'src/app/shared/services';
@@ -5,7 +6,26 @@ import { BreakPointService } from 'src/app/shared/services';
 interface MenuItem {
   name: string;
   link: string;
-} 
+}
+
+export const appMenuList = [
+  {
+    name: 'About',
+    link: '#about'
+  },
+  {
+    name: 'Experience',
+    link: '#experience'
+  },
+  {
+    name: 'Work',
+    link: '#work'
+  },
+  {
+    name: 'Contact',
+    link: '#contact'
+  },
+];
 
 @Component({
   selector: 'app-menu',
@@ -17,29 +37,13 @@ export class MenuComponent implements OnInit, OnDestroy {
   isMobile!: boolean;
   isOpenDrawerMenu = false;
   destroyed$ = new Subject<void>();
-  readonly listMenu: ReadonlyArray<MenuItem> = [
-    {
-      name: 'About',
-      link: '#about'
-    },
-    {
-      name: 'Experience',
-      link: '#experience'
-    },
-    {
-      name: 'Work',
-      link: '#work'
-    },
-    {
-      name: 'Contact',
-      link: '#contact'
-    },
-  ];
 
-  selectedMenuItem!: string;
+  readonly currentMenuSelected$ = this.menuService.getCurrentMenuSelected();
+  readonly listMenu: ReadonlyArray<MenuItem> = appMenuList;
   constructor(
     private breakPointService: BreakPointService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private menuService: MenuService
   ) { }
 
   ngOnInit(): void {
@@ -51,8 +55,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  onClickMenu(item: MenuItem): void {
-    this.selectedMenuItem = item.name;
+  onClickMenu(): void {
     this.isOpenDrawerMenu = false;
   }
 
