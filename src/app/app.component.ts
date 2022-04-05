@@ -15,7 +15,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('contact', { read: ElementRef }) contactComponent!: ElementRef;
 
   private destroyed$ = new Subject<void>();
-  isOpen = true;
+  isOpen = false;
 
   constructor(
     private menuService: MenuService
