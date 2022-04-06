@@ -1,13 +1,10 @@
-@import "./color";
-@import "./font-size";
-@import "./font";
 footer {
   text-align: center;
   a {
-    font-size: $fs-sm;
-    color: $primary-color;
+    font-size: var(--fs-sm);
+    color: var(--primary-color);
     text-decoration: none;
-    font-family: $font-mono;
+    font-family: var(--font-mono);
 
     .github-info {
       display: flex;

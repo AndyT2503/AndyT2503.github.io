@@ -1,9 +1,9 @@
-@import "./styles/color"; 
-@import "./styles/font";
-
+@import "color"; 
+@import "font";
+@import "font-size";
 body {
-  background-color: $base-color;
-  font-family: $font-sans;
+  background-color: var(--base-color);
+  font-family: var(--font-sans);
 }
 
 
@@ -19,11 +19,11 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $tertiary-color;
+  background: var(--tertiary-color);
   border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: $tertiary-color;
+  background: var(--tertiary-color);
 }

@@ -1,6 +1,5 @@
-@import "color";
 #logo {
-  color: $primary-color;
+  color: var(--primary-color);
 }
 
 svg {

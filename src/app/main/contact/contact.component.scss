@@ -1,7 +1,3 @@
-@import "./font";
-@import "./font-size";
-@import "./color";
-
 section {
   padding: 100px 0;
   min-height: 50vh;
@@ -11,9 +7,9 @@ section {
   text-align: center;
 
   h3 {
-    font-size: $fs-md;
-    font-family: $font-mono;
-    color: $primary-color;
+    font-size: var(--fs-md);
+    font-family: var(--font-mono);
+    color: var(--primary-color);
     font-weight: 400;
 
     &::before {
@@ -24,30 +20,30 @@ section {
   }
 
   h2 {
-    font-family: $font-mono;
-    font-size: $fs-heading;
-    color: $default-color;
+    font-family: var(--font-mono);
+    font-size: var(--fs-heading);
+    color: var(--default-color);
     font-weight: 600;
   }
 
   p {
-    font-size: $fs-md;
-    color: $tertiary-color;
-    font-family: $font-sans;
+    font-size: var(--fs-md);
+    color: var(--tertiary-color);
+    font-family: var(--font-sans);
   }
 
   button {
-    color: $primary-color;
-    border: 1px solid $primary-color;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
     padding: 0.75rem 1rem;
-    font-family: $font-mono;
-    font-size: $fs-md;
+    font-family: var(--font-mono);
+    font-size: var(--fs-md);
     background-color: transparent;
     margin: 10px 0 0;
     cursor: pointer;
     &:hover {
-      background-color: $green-tint;
+      background-color: var(var(--green-tint));
     }
   }
 }

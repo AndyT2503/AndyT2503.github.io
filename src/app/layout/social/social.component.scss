@@ -1,5 +1,5 @@
-@import "./font-size";
-@import "./color";
+
+
 ul {
   position: fixed;
   bottom: 0;
@@ -17,13 +17,13 @@ ul {
   }
   li {
     list-style: none;
-    font-size: $fs-xxl;
+    font-size: var(--fs-xxl);
     margin: 10px 0;
     a {
-      color: $default-color;
+      color: var(--default-color);
 
       &:hover {
-        color: $primary-color;
+        color: var(--primary-color);
         i {
           transform: translateY(-3px);
           transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -38,7 +38,7 @@ ul {
     width: 1px;
     height: 90px;
     margin: 0px auto;
-    background-color: $default-color;
+    background-color: var(--default-color);
     @media (max-width: 1080px) {
       display: none;
     }

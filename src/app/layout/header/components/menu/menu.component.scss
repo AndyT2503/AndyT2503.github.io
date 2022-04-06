@@ -1,6 +1,3 @@
-@import "color";
-@import "font";
-@import "font-size";
 .menu {
   display: flex; 
 }
@@ -13,39 +10,39 @@
   li {
     margin: 0 5px;
     counter-increment: item 1;
-    font-size: $fs-sm;
+    font-size: var(--fs-sm);
 
     a {
       text-decoration: none;
       padding: 10px;
-      font-family: $font-mono;
-      color: $default-color;
+      font-family: var(--font-mono);
+      color: var(--default-color);
       &::before {
         content: "0" counter(item) ".";
         margin-right: 5px;
-        color: $primary-color;
+        color: var(--primary-color);
       }
 
       &:hover {
-        color: $primary-color;
+        color: var(--primary-color);
       }
 
       &.active {
-        color: $primary-color;
+        color: var(--primary-color);
       }
     }
   }
 
   button {
-    color: $primary-color;
-    border: 1px solid $primary-color;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
     padding: 0.75rem 1rem;
-    font-family: $font-mono;
+    font-family: var(--font-mono);
     background-color: transparent;
     cursor: pointer;
     &:hover {
-      background-color: $green-tint;
+      background-color: var(var(--green-tint));
     }
   }
 }
@@ -60,48 +57,48 @@
   li {
     margin: 0 5px;
     counter-increment: item 1;
-    font-size: $fs-xl;
+    font-size: var(--fs-xl);
     margin: 0px auto 16px;
     a {
       text-decoration: none;
       padding: 10px;
-      font-family: $font-mono;
-      color: $default-color;
+      font-family: var(--font-mono);
+      color: var(--default-color);
       &::before {
         content: "0" counter(item) ".";
         margin-right: 5px;
-        color: $primary-color;
+        color: var(--primary-color);
         display: block;
       }
 
       &:hover {
-        color: $primary-color;
+        color: var(--primary-color);
       }
 
       &.active {
-        color: $primary-color;
+        color: var(--primary-color);
       }
     }
   }
 
   button {
-    color: $primary-color;
-    border: 1px solid $primary-color;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
     padding: 0.75rem 1rem;
-    font-family: $font-mono;
-    font-size: $fs-md;
+    font-family: var(--font-mono);
+    font-size: var(--fs-md);
     background-color: transparent;
     margin: 10% 0 0;
     cursor: pointer;
     &:hover {
-      background-color: $green-tint;
+      background-color: var(var(--green-tint));
     }
   }
 }
 
 .hamburger-menu {
-  color: $primary-color;
+  color: var(--primary-color);
   font-size: 36px;
   width: 36px;
 }

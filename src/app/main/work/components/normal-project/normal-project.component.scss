@@ -1,8 +1,5 @@
-@import "./font";
-@import "./font-size";
-@import "./color";
 .content {
-  background-color: $drawer-bg-color;
+  background-color: var(--light-navy);
   padding: 25px;
   height: 100%;
   display: flex;
@@ -14,7 +11,7 @@
       margin-bottom: 20px;
       .icon {
         font-size: 40px;
-        color: $primary-color;
+        color: var(--primary-color);
       }
 
       .button {
@@ -24,24 +21,24 @@
 
         i {
           cursor: pointer;
-          font-size: $fs-xxl;
-          color: $default-color;
+          font-size: var(--fs-xxl);
+          color: var(--default-color);
           &:hover {
-            color: $primary-color;
+            color: var(--primary-color);
           }
         }
       }
     }
 
     h2 {
-      font-size: $fs-heading-2;
-      color: $default-color;
+      font-size: var(--fs-heading-2);
+      color: var(--default-color);
     }
 
     p {
-      color: $tertiary-color;
-      font-family: $font-mono;
-      font-size: $fs-lg;
+      color: var(--tertiary-color);
+      font-family: var(--font-mono);
+      font-size: var(--fs-lg);
     }
   }
 
@@ -51,8 +48,8 @@
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    color: $tertiary-color;
-    font-family: $font-mono;
+    color: var(--tertiary-color);
+    font-family: var(--font-mono);
     gap: 16px;
   }
 }

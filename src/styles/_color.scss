@@ -7,4 +7,14 @@ $tertiary-color: #7E88A5;
 $light-slate: #a8b2d1;
 $light-navy: #112240;
 $green-tint: rgba(100,255,218,0.1);
-$drawer-bg-color: #112240;
+
+:root {
+  --base-color: #{$base-color};
+  --default-color: #{$default-color};
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --tertiary-color: #{$tertiary-color};
+  --light-slate: #{$light-slate};
+  --light-navy: #{$light-navy};
+  --green-tint: #{$green-tint};
+}

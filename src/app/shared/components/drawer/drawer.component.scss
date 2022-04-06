@@ -1,10 +1,8 @@
-@import './color';
-
 .drawer {
   position: fixed;
   display: flex;
   flex-direction: column;
-  background-color: $drawer-bg-color;
+  background-color: var(--light-navy);
 }
 
 .drawer-left {
@@ -36,7 +34,7 @@
 }
 
 .close-icon {
-  color: $primary-color;
+  color: var(--primary-color);
   font-size: 36px;
   width: 36px;
   margin-left: auto;

@@ -37,7 +37,7 @@ div {
   display: flex;
 }
 svg {
-  color: $primary-color;
+  color: var(--primary-color);
   width: 200px;
   height: 200px;
   fill: currentcolor;
