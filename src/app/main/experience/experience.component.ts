@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 interface WorkExperience {
   companyName: string;
@@ -12,9 +14,11 @@ interface WorkExperience {
   selector: 'app-experience',
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule, NzTabsModule],
 })
-export class ExperienceComponent implements OnInit {
+export class ExperienceComponent {
   readonly listWorkExperience: ReadonlyArray<WorkExperience> = [
     {
       companyName: 'Smartlog',
@@ -25,8 +29,8 @@ export class ExperienceComponent implements OnInit {
         'Working with team to build logistic solutions',
         'Developed product with Angular, .Net Core and PostgeSQL',
         'Built Container Optimization Solution, which is the first re-use container platform in Vietnam',
-        'Guide fresher and intern members to learn Angular and .NET Core'
-      ]
+        'Guide fresher and intern members to learn Angular and .NET Core',
+      ],
     },
     {
       companyName: 'TagForm.com.my',
@@ -36,8 +40,8 @@ export class ExperienceComponent implements OnInit {
       jobDetails: [
         `Developed Tracking System with Selenium, which can tracking performance of company websites and alert when they slowed`,
         'Developed and maintained code for Transportation Management System using Ionic, .NET Core',
-        'Built Ngx-Danmaku, which is Angular library using for display flying comments on video'
-      ]
+        'Built Ngx-Danmaku, which is Angular library using for display flying comments on video',
+      ],
     },
     {
       companyName: 'Smartlog',
@@ -46,13 +50,8 @@ export class ExperienceComponent implements OnInit {
       url: 'https://gosmartlog.com/',
       jobDetails: [
         'Analysing business requirement from customer and work with technical team to develop product',
-        'Creating document workflow of feature with BPMN diagram'
-      ]
+        'Creating document workflow of feature with BPMN diagram',
+      ],
     },
   ];
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

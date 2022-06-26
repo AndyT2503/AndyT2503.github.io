@@ -1,11 +1,15 @@
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-
+import { ClickOutsideDirective } from '../../directives';
 @Component({
   selector: 'app-drawer',
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule, ClickOutsideDirective, NzIconModule],
   animations: [
     trigger('slideInOut', [
       transition('void => right', [

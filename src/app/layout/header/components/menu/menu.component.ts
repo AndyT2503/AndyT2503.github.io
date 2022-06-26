@@ -1,7 +1,17 @@
-import { MenuService } from './../../../../shared/services/menu.service';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Subject, takeUntil } from 'rxjs';
+import { DrawerComponent } from 'src/app/shared/components';
 import { BreakPointService } from 'src/app/shared/services';
+import { MenuService } from './../../../../shared/services/menu.service';
 
 interface MenuItem {
   name: string;
@@ -11,19 +21,19 @@ interface MenuItem {
 export const appMenuList = [
   {
     name: 'About',
-    link: '#about'
+    link: '#about',
   },
   {
     name: 'Experience',
-    link: '#experience'
+    link: '#experience',
   },
   {
     name: 'Work',
-    link: '#work'
+    link: '#work',
   },
   {
     name: 'Contact',
-    link: '#contact'
+    link: '#contact',
   },
 ];
 
@@ -31,20 +41,20 @@ export const appMenuList = [
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule, DrawerComponent, NzIconModule],
 })
 export class MenuComponent implements OnInit, OnDestroy {
+  private readonly breakPointService = inject(BreakPointService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly menuService = inject(MenuService);
   isMobile!: boolean;
   isOpenDrawerMenu = false;
   destroyed$ = new Subject<void>();
 
   readonly currentMenuSelected$ = this.menuService.getCurrentMenuSelected();
   readonly listMenu: ReadonlyArray<MenuItem> = appMenuList;
-  constructor(
-    private breakPointService: BreakPointService,
-    private cdr: ChangeDetectorRef,
-    private menuService: MenuService
-  ) { }
 
   ngOnInit(): void {
     this.detectViewSizeChange();
@@ -60,16 +70,18 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   detectViewSizeChange(): void {
-    this.breakPointService.isMobile$.pipe(takeUntil(this.destroyed$)).subscribe(
-      (isMobile) => {
+    this.breakPointService.isMobile$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((isMobile) => {
         this.isMobile = isMobile;
         this.cdr.markForCheck();
-      }
-    )
+      });
   }
 
   openResume(): void {
-    window.open('https://www.topcv.vn/xem-cv/B1YAUANXAVMEVVcBDwAACw0CUAhfCwtUAVFbAQ9044', '_blank');
+    window.open(
+      'https://www.topcv.vn/xem-cv/B1YAUANXAVMEVVcBDwAACw0CUAhfCwtUAVFbAQ9044',
+      '_blank'
+    );
   }
-
 }

@@ -1,63 +1,40 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
-import { appMenuList } from './layout/header/components/menu/menu.component';
-import { MenuService } from './shared/services/menu.service';
+import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import en from '@angular/common/locales/en';
+import { Component, importProvidersFrom } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
+
+registerLocaleData(en);
+
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: '<router-outlet></router-outlet>',
+  standalone: true,
+  imports: [RouterModule],
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
-  @ViewChild('experience', { read: ElementRef }) experienceComponent!: ElementRef;
-  @ViewChild('work', { read: ElementRef }) workComponent!: ElementRef;
-  @ViewChild('contact', { read: ElementRef }) contactComponent!: ElementRef;
-
-  private destroyed$ = new Subject<void>();
-  isOpen = false;
-
-  constructor(
-    private menuService: MenuService
-  ) { }
-
-  ngOnInit(): void {
-    setTimeout(() => this.isOpen = true, 4000);
-  }
-
-  ngAfterViewInit(): void {
-    this.initEventGetCurrentElementIsReading();
-  }
-
-  initEventGetCurrentElementIsReading(): void {
-    fromEvent(document, 'scroll').pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe(() => {
-      const listElement = [this.aboutComponent, this.experienceComponent, this.workComponent, this.contactComponent];
-      let indexCurrentElementIsReading = -1;
-      if (document.body.scrollHeight === window.innerHeight + window.scrollY) {
-        indexCurrentElementIsReading = listElement.length - 1;
-      } else {
-        listElement.forEach((item, index) => {
-          const top = item.nativeElement.getBoundingClientRect().top;
-          if (top <= 1) {
-            if (!listElement[indexCurrentElementIsReading] || listElement[indexCurrentElementIsReading].nativeElement.getBoundingClientRect().top < top) {
-              indexCurrentElementIsReading = index;
-            }
-          }
-        });
-      }
-
-      if (indexCurrentElementIsReading !== -1) {
-        this.menuService.updateCurrentMenuSelected(appMenuList[indexCurrentElementIsReading].name);
-      } else {
-        this.menuService.updateCurrentMenuSelected('');
-      }
-    })
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
+export class AppComponent {
+  static bootstrap() {
+    bootstrapApplication(this, {
+      providers: [
+        importProvidersFrom(
+          RouterModule.forRoot(
+            [
+              {
+                path: '',
+                loadComponent: () =>
+                  import('./main/main.component').then((c) => c.MainComponent),
+              },
+            ],
+          ),
+          HttpClientModule,
+        ),
+        importProvidersFrom(BrowserAnimationsModule),
+        { provide: NZ_I18N, useValue: en_US }
+      ],
+    }).catch((err) => console.error(err));
   }
 }

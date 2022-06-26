@@ -1,4 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef, Component, inject, OnInit
+} from '@angular/core';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { GithubResponse } from 'src/app/shared/models';
 import { GithubService } from 'src/app/shared/services';
 import { environment } from 'src/environments/environment';
@@ -7,23 +11,20 @@ import { environment } from 'src/environments/environment';
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzIconModule]
 })
 export class FooterComponent implements OnInit {
-  repoInfo!: GithubResponse
+  private readonly githubService = inject(GithubService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  repoInfo!: GithubResponse;
   repoUrl = environment.sourceControlUrl + environment.repoName;
-  constructor(
-    private githubService: GithubService,
-    private cdr: ChangeDetectorRef
-  ) { }
 
   ngOnInit(): void {
-    this.githubService.getRepoInfo(environment.repoName).subscribe(
-      res => {
-        this.repoInfo = res;
-        this.cdr.markForCheck();
-      }
-    );
+    this.githubService.getRepoInfo(environment.repoName).subscribe((res) => {
+      this.repoInfo = res;
+      this.cdr.markForCheck();
+    });
   }
-
 }

@@ -1,26 +1,31 @@
+import { FeaturedProjectComponent } from './components/featured-project/featured-project.component';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ProjectData } from 'src/app/shared/models';
-
+import { NormalProjectComponent } from './components/normal-project/normal-project.component';
 
 @Component({
   selector: 'app-work',
   templateUrl: './work.component.html',
   styleUrls: ['./work.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule, FeaturedProjectComponent, NormalProjectComponent],
 })
-export class WorkComponent implements OnInit {
+export class WorkComponent {
   readonly listFeaturedProject: ReadonlyArray<ProjectData> = [
     {
       name: 'Ngx-Danmaku',
-      description: 'Ngx-Danmaku is the Angular library to display flying comments on iframe element.',
+      description:
+        'Ngx-Danmaku is the Angular library to display flying comments on iframe element.',
       image: 'assets/img/danmaku.png',
       repoUrls: [
         {
           tooltip: 'Ngx-Danmaku',
-          url: 'https://github.com/AndyT2503/ngx-danmanku'
-        }
+          url: 'https://github.com/AndyT2503/ngx-danmanku',
+        },
       ],
-      tech: ['Angular', 'Typescript']
+      tech: ['Angular', 'Typescript'],
     },
     {
       name: 'E-commerce Shop',
@@ -29,14 +34,14 @@ export class WorkComponent implements OnInit {
       repoUrls: [
         {
           tooltip: 'Front-end',
-          url: 'https://github.com/AndyT2503/ecommerceFE'
+          url: 'https://github.com/AndyT2503/ecommerceFE',
         },
         {
           tooltip: 'Back-end',
-          url: 'https://github.com/AndyT2503/ecommerceBE'
-        }
+          url: 'https://github.com/AndyT2503/ecommerceBE',
+        },
       ],
-      tech: ['Angular', 'MailKit', '.NET Core', 'Redis']
+      tech: ['Angular', 'MailKit', '.NET Core', 'Redis'],
     },
   ];
 
@@ -47,10 +52,10 @@ export class WorkComponent implements OnInit {
       repoUrls: [
         {
           tooltip: 'Django Product Manager',
-          url: 'https://github.com/AndyT2503/django-product-manager'
-        }
+          url: 'https://github.com/AndyT2503/django-product-manager',
+        },
       ],
-      tech: ['Django', 'Javascript', 'Ajax']
+      tech: ['Django', 'Javascript', 'Ajax'],
     },
     {
       name: 'Giphy Clone',
@@ -58,10 +63,10 @@ export class WorkComponent implements OnInit {
       repoUrls: [
         {
           tooltip: 'Giphy Clone',
-          url: 'https://github.com/AndyT2503/giphy-clone'
-        }
+          url: 'https://github.com/AndyT2503/giphy-clone',
+        },
       ],
-      tech: ['Angular', 'Ng-zorro', 'Akita']
+      tech: ['Angular', 'Ng-zorro', 'Akita'],
     },
     {
       name: 'Flappy Bird',
@@ -69,10 +74,10 @@ export class WorkComponent implements OnInit {
       repoUrls: [
         {
           tooltip: 'Flappy Bird',
-          url: 'https://github.com/AndyT2503/FlappyBird'
-        }
+          url: 'https://github.com/AndyT2503/FlappyBird',
+        },
       ],
-      tech: ['C#', 'Winform']
+      tech: ['C#', 'Winform'],
     },
     {
       name: 'V-Shop',
@@ -80,15 +85,10 @@ export class WorkComponent implements OnInit {
       repoUrls: [
         {
           tooltip: 'V-Shop',
-          url: 'https://github.com/AndyT2503/vshop'
-        }
+          url: 'https://github.com/AndyT2503/vshop',
+        },
       ],
-      tech: ['Bootstrap', 'ReactJs']
+      tech: ['Bootstrap', 'ReactJs'],
     },
-  ]
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ];
 }
