@@ -43,6 +43,23 @@ export class WorkComponent {
       ],
       tech: ['Angular', 'MailKit', '.NET Core', 'Redis'],
     },
+    {
+      name: 'RealWorld Conduit',
+      description:
+        'Medium.com clone (called Conduit) was built using Angular version 14 with Standalone Component.',
+      image: 'assets/img/realworld.png',
+      repoUrls: [
+        {
+          tooltip: 'RealWorld Conduit',
+          url: 'https://github.com/AndyT2503/real-word-conduit-angular',
+        },
+      ],
+      linkDemo: {
+        tooltip: 'Demo RealWorld Conduit',
+        url: 'https://bright-centaur-dc348e.netlify.app/#/',
+      },
+      tech: ['Angular', 'Typescript'],
+    },
   ];
 
   readonly listOtherProject: ReadonlyArray<ProjectData> = [

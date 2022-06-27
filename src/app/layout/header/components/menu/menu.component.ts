@@ -5,13 +5,12 @@ import {
   Component,
   inject,
   OnDestroy,
-  OnInit,
+  OnInit
 } from '@angular/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Subject, takeUntil } from 'rxjs';
 import { DrawerComponent } from 'src/app/shared/components';
-import { BreakPointService } from 'src/app/shared/services';
-import { MenuService } from './../../../../shared/services/menu.service';
+import { BreakPointService, MenuService } from 'src/app/shared/services';
 
 interface MenuItem {
   name: string;

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {
   AfterViewInit,
@@ -55,6 +55,7 @@ import {
 export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly menuService = inject(MenuService);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly document = inject(DOCUMENT);
   @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
   @ViewChild('experience', { read: ElementRef })
   experienceComponent!: ElementRef;
@@ -76,7 +77,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   initEventGetCurrentElementIsReading(): void {
-    fromEvent(document, 'scroll')
+    fromEvent(this.document, 'scroll')
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         const listElement = [
@@ -87,7 +88,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
         ];
         let indexCurrentElementIsReading = -1;
         if (
-          document.body.scrollHeight ===
+          this.document.body.scrollHeight ===
           window.innerHeight + window.scrollY
         ) {
           indexCurrentElementIsReading = listElement.length - 1;
