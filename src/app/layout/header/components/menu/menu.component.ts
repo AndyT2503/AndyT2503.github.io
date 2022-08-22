@@ -79,7 +79,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   openResume(): void {
     window.open(
-      'https://www.topcv.vn/xem-cv/B1YAUANXAVMEVVcBDwAACw0CUAhfCwtUAVFbAQ9044',
+      'https://www.topcv.vn/xem-cv/UFRTAgIEAlQDBVRdX1BTA1MFBlFXV1MLAFJUAAcf99',
       '_blank'
     );
   }
