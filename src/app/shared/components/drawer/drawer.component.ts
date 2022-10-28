@@ -68,13 +68,13 @@ export class DrawerComponent {
 
   @Output() onClose = new EventEmitter<void>();
 
-  private isVisible = false; //Checking whether drawer is really visible with user
+  private isVisible = false; //Checking whether drawer is actually visible to user
   constructor(
   ) { }
 
 
   onClickOutside(): void {
-    //when drawer was initialized but not visible with user, set visible = true and skip close action
+    //when drawer was initialized but not visible to user, set visible = true and skip close action
     if (!this.isVisible) {
       this.isVisible = true;
       return;
