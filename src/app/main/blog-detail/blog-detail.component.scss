@@ -1,0 +1,8 @@
+.content {
+  padding-top: 116px;
+
+  @media (min-width: 1080px) {
+    padding-left: 180px;
+    padding-right: 180px;
+  }
+}

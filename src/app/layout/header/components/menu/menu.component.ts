@@ -10,31 +10,10 @@ import {
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Subject, takeUntil } from 'rxjs';
 import { DrawerComponent } from 'src/app/shared/components';
+import { MENU } from 'src/app/shared/data';
 import { BreakPointService, MenuService } from 'src/app/shared/services';
 
-interface MenuItem {
-  name: string;
-  link: string;
-}
 
-export const appMenuList = [
-  {
-    name: 'About',
-    link: '#about',
-  },
-  {
-    name: 'Experience',
-    link: '#experience',
-  },
-  {
-    name: 'Work',
-    link: '#work',
-  },
-  {
-    name: 'Contact',
-    link: '#contact',
-  },
-];
 
 @Component({
   selector: 'app-menu',
@@ -53,7 +32,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   destroyed$ = new Subject<void>();
 
   readonly currentMenuSelected$ = this.menuService.getCurrentMenuSelected();
-  readonly listMenu: ReadonlyArray<MenuItem> = appMenuList;
+  readonly listMenu = MENU;
 
   ngOnInit(): void {
     this.detectViewSizeChange();
@@ -65,7 +44,9 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   onClickMenu(): void {
-    this.isOpenDrawerMenu = false;
+    if (this.isMobile) {
+      this.isOpenDrawerMenu = false;
+    }
   }
 
   detectViewSizeChange(): void {

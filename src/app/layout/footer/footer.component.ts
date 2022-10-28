@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
 export class FooterComponent implements OnInit {
   private readonly githubService = inject(GithubService);
   private readonly cdr = inject(ChangeDetectorRef);
-  repoInfo!: GithubResponse;
+  repoInfo = {} as GithubResponse;
   repoUrl = environment.sourceControlUrl + environment.repoName;
 
   ngOnInit(): void {

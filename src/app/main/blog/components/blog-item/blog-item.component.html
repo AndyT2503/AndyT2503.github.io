@@ -1,0 +1,18 @@
+<article class="article" routerLink="/blog/{{blogItem.id}}">
+  <span class="tag">
+    <span>{{ blogItem.type }}</span>
+  </span>
+  <a class="article-image"  routerLink="/blog/{{blogItem.id}}">
+    <img
+      [alt]="blogItem.title"
+      src="assets/blog/images/blog-{{ blogItem.id }}/default.jpg"
+    />
+  </a>
+  <span class="footer">
+    <a class="title"  routerLink="/blog/{{blogItem.id}}">{{ blogItem.title }}</a>
+    <div class="meta-data">
+      <p class="date">{{ blogItem.date }}</p>
+      <p class="reading-time">{{ blogItem.minRead }} min read</p>
+    </div>
+  </span>
+</article>

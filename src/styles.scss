@@ -1,9 +1,17 @@
-@import "color"; 
+@import "color";
 @import "font";
 @import "font-size";
 body {
   background-color: var(--base-color);
   font-family: var(--font-sans);
+
+}
+
+markdown {
+  color: var(--default-color);
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--default-color);
+  }
 }
 
 

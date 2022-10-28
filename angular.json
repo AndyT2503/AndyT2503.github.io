@@ -9,7 +9,9 @@
         "@schematics/angular:component": {
           "style": "scss",
           "changeDetection": "OnPush",
-          "skipTests": true
+          "skipTests": true,
+          "standalone": true,
+          "skipImport": true
         },
         "@schematics/angular:application": {
           "strict": true
