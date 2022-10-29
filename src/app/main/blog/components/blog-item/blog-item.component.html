@@ -1,15 +1,17 @@
-<article class="article" routerLink="/blog/{{blogItem.id}}">
+<article class="article" (click)="showDetail()">
   <span class="tag">
     <span>{{ blogItem.type }}</span>
   </span>
-  <a class="article-image"  routerLink="/blog/{{blogItem.id}}">
+  <a class="article-image" (click)="showDetail()">
     <img
       [alt]="blogItem.title"
-      src="assets/blog/images/blog-{{ blogItem.id }}/default.jpg"
+      src="content/images/{{ blogItem.slug }}/default.jpg"
     />
   </a>
   <span class="footer">
-    <a class="title"  routerLink="/blog/{{blogItem.id}}">{{ blogItem.title }}</a>
+    <a class="title" (click)="showDetail()">{{
+      blogItem.title
+    }}</a>
     <div class="meta-data">
       <p class="date">{{ blogItem.date }}</p>
       <p class="reading-time">{{ blogItem.minRead }} min read</p>

@@ -18,7 +18,7 @@ import { MarkdownModule } from 'ngx-markdown';
 })
 export class BlogDetailComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
-  blogId = this.activatedRoute.snapshot.params['id'];
+  slug = this.activatedRoute.snapshot.params['slug'];
 
   ngOnInit(): void {
     window.scroll({

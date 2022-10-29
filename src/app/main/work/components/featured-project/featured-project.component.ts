@@ -10,6 +10,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { map, tap } from 'rxjs';
 import { ProjectData } from 'src/app/shared/models';
 import { BreakPointService } from 'src/app/shared/services';
+import { trackByIndex } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-featured-project',
@@ -23,6 +24,7 @@ export class FeaturedProjectComponent {
   @Input() projectData!: ProjectData;
   @Input() position: 'left' | 'right' = 'left';
   private readonly breakPointService = inject(BreakPointService);
+  readonly trackByIndex = trackByIndex;
   isMobile = false;
   isScreenResize$ = this.breakPointService.isMobile$.pipe(
     tap((isMobile) => (this.isMobile = isMobile)),

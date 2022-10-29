@@ -12,6 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { DrawerComponent } from 'src/app/shared/components';
 import { MENU } from 'src/app/shared/data';
 import { BreakPointService, MenuService } from 'src/app/shared/services';
+import { trackByIndex } from 'src/app/shared/utils';
 
 
 
@@ -33,6 +34,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   readonly currentMenuSelected$ = this.menuService.getCurrentMenuSelected();
   readonly listMenu = MENU;
+  readonly trackByIndex = trackByIndex;
 
   ngOnInit(): void {
     this.detectViewSizeChange();

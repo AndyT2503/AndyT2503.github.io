@@ -3,7 +3,7 @@
     <h4>Some Things I've Built</h4>
   </div>
   <div class="featured-projects">
-    <ng-container *ngFor="let item of listFeaturedProject; let isOdd = odd">
+    <ng-container *ngFor="let item of listFeaturedProject; let isOdd = odd; trackBy: trackByProjectName">
       <div class="project-item">
         <app-featured-project [projectData]="item" [position]="isOdd ? 'left' : 'right'"></app-featured-project>
       </div>
@@ -12,7 +12,7 @@
   <div class="other-projects">
     <h4>Other Noteworthy Projects</h4>
     <div class="list-other-project">
-      <ng-container *ngFor="let item of listOtherProject">
+      <ng-container *ngFor="let item of listOtherProject; trackBy: trackByProjectName">
         <app-normal-project [projectData]="item"></app-normal-project>
       </ng-container>
     </div>

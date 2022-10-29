@@ -21,7 +21,7 @@
 
 <ng-template #menu>
   <ol [ngClass]="{ 'menu-desktop': !isMobile, 'menu-mobile': isMobile }">
-    <ng-container *ngFor="let item of listMenu">
+    <ng-container *ngFor="let item of listMenu; trackBy: trackByIndex">
       <li>
         <a
           (click)="onClickMenu()"

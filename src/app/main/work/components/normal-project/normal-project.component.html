@@ -21,7 +21,7 @@
     </p>
   </div>
   <ul>
-    <ng-container *ngFor="let item of projectData.tech">
+    <ng-container *ngFor="let item of projectData.tech; trackBy: trackByIndex">
       <li>{{item}}</li>
     </ng-container>
   </ul>

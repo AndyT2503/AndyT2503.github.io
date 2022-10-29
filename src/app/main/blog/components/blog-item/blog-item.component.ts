@@ -1,9 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input
+  inject,
+  Input,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Blog } from 'src/app/shared/models';
 
 @Component({
@@ -16,4 +17,9 @@ import { Blog } from 'src/app/shared/models';
 })
 export class BlogItemComponent {
   @Input() blogItem!: Blog;
+  private readonly router = inject(Router);
+
+  showDetail(): void {
+    this.router.navigate([`/blog/${this.blogItem.slug}`]);
+  }
 }

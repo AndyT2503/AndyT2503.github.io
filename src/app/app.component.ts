@@ -6,11 +6,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   PreloadAllModules,
-  provideRouter,
-  provideRoutes,
-  RouterModule,
-  withInMemoryScrolling,
-  withPreloading,
+  provideRouter, RouterModule, withPreloading
 } from '@angular/router';
 import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { MarkdownModule } from 'ngx-markdown';

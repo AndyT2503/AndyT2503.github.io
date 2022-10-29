@@ -22,10 +22,10 @@
       </p>
     </div>
     <ul>
-      <li *ngFor="let item of projectData.tech">{{ item }}</li>
+      <li *ngFor="let item of projectData.tech; trackBy: trackByIndex">{{ item }}</li>
     </ul>
     <div class="group-button">
-      <ng-container *ngFor="let item of projectData.repoUrls">
+      <ng-container *ngFor="let item of projectData.repoUrls;">
         <div
           nz-tooltip
           [nzTooltipTitle]="item.tooltip"

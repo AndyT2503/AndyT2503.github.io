@@ -1,11 +1,11 @@
 import { Blog } from '../models';
 
 export const LIST_BLOG: ReadonlyArray<Blog> = [
-  {
-    id: 1,
-    title: 'Deep understand about Expression has changed after it was checked.',
-    type: 'Angular',
-    date: '27 October 2022',
-    minRead: 8,
-  },
+  new Blog(
+    1,
+    'Deep understanding about Expression has changed after it was checked',
+    'Angular',
+    '27 October 2022',
+    8
+  ),
 ];

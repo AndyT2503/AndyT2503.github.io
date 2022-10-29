@@ -3,7 +3,7 @@
     <h4>My Knowledge About Angular And Others</h4>
   </div>
   <div class="list-blog">
-    <ng-container *ngFor="let item of listBlog">
+    <ng-container *ngFor="let item of listBlog; trackBy: trackByBlogId">
       <app-blog-item [blogItem]="item"></app-blog-item>
     </ng-container>
   </div>
