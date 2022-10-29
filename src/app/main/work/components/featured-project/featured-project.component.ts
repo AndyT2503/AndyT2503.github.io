@@ -24,7 +24,7 @@ export class FeaturedProjectComponent {
   @Input() projectData!: ProjectData;
   @Input() position: 'left' | 'right' = 'left';
   private readonly breakPointService = inject(BreakPointService);
-  readonly trackByIndex = trackByIndex;
+  readonly trackByIndex = trackByIndex();
   isMobile = false;
   isScreenResize$ = this.breakPointService.isMobile$.pipe(
     tap((isMobile) => (this.isMobile = isMobile)),

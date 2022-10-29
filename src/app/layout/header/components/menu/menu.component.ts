@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   readonly currentMenuSelected$ = this.menuService.getCurrentMenuSelected();
   readonly listMenu = MENU;
-  readonly trackByIndex = trackByIndex;
+  readonly trackByIndex = trackByIndex();
 
   ngOnInit(): void {
     this.detectViewSizeChange();

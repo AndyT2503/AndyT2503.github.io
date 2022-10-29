@@ -3,7 +3,7 @@
     <div class="header">
       <i class="icon" nz-icon nzType="folder" nzTheme="outline"></i>
       <div class="button">
-        <ng-container *ngFor="let item of projectData.repoUrls">
+        <ng-container *ngFor="let item of projectData.repoUrls; trackBy: trackByIndex">
           <i
             nz-tooltip
             [nzTooltipTitle]="item.tooltip"

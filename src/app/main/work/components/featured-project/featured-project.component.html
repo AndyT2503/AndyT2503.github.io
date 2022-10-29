@@ -25,7 +25,7 @@
       <li *ngFor="let item of projectData.tech; trackBy: trackByIndex">{{ item }}</li>
     </ul>
     <div class="group-button">
-      <ng-container *ngFor="let item of projectData.repoUrls;">
+      <ng-container *ngFor="let item of projectData.repoUrls; trackBy: trackByIndex">
         <div
           nz-tooltip
           [nzTooltipTitle]="item.tooltip"

@@ -4,7 +4,7 @@
   </div>
   <div class="content">
     <nz-tabset nzTabPosition="left">
-      <ng-container *ngFor="let item of listWorkExperience">
+      <ng-container *ngFor="let item of listWorkExperience; trackBy: trackByIndex">
         <nz-tab [nzTitle]="item.companyName">
           <div class="tab-content">
             <h3>
@@ -15,7 +15,7 @@
             </h3>
             <p class="time">{{ item.time }}</p>
             <ul>
-              <li *ngFor="let detail of item.jobDetails">{{ detail }}</li>
+              <li *ngFor="let detail of item.jobDetails; trackBy: trackByIndex">{{ detail }}</li>
             </ul>
           </div>
         </nz-tab>

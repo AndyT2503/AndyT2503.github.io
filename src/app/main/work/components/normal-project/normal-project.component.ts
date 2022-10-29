@@ -15,7 +15,7 @@ import { trackByIndex } from 'src/app/shared/utils';
 })
 export class NormalProjectComponent {
   @Input() projectData!: ProjectData;
-  readonly trackByIndex = trackByIndex;
+  readonly trackByIndex = trackByIndex();
   openRepo(url: string): void {
     window.open(url, '_blank');
   }
