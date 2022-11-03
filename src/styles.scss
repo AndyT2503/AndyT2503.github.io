@@ -17,8 +17,27 @@ markdown {
   blockquote {
     background-color: var(--light-navy);
     border-left: 5px solid var(--primary-color);
-    padding: 20px 30px;
+    padding: 20px;
     width: fit-content;
+
+    p {
+      margin-top: unset;
+      margin-bottom: unset;
+    }
+  }
+
+  code {
+    background-color: var(--light-navy);
+  }
+
+  pre {
+    background-color: var(--light-navy);
+    padding: 20px;
+  }
+
+  img {
+    width: 100%;
+    object-fit: contain;
   }
 }
 
