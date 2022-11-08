@@ -5,11 +5,15 @@ import {
   Component,
   ElementRef,
   inject,
-  OnDestroy, ViewChild
+  OnDestroy,
+  OnInit,
+  ViewChild,
 } from '@angular/core';
+import { MetaDefinition } from '@angular/platform-browser';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { MENU } from 'src/app/shared/data';
-import { MenuService } from 'src/app/shared/services';
+import { MenuService, SeoService } from 'src/app/shared/services';
+import { environment } from 'src/environments/environment';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { ExperienceComponent } from '../experience/experience.component';
@@ -26,15 +30,16 @@ import { BlogComponent } from './../blog/blog.component';
     ExperienceComponent,
     GeneralInfoComponent,
     WorkComponent,
-    BlogComponent
+    BlogComponent,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
+export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   private readonly document = inject(DOCUMENT);
   private readonly menuService = inject(MenuService);
+  private readonly seoService = inject(SeoService);
   private destroyed$ = new Subject<void>();
   @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
   @ViewChild('experience', { read: ElementRef })
@@ -43,11 +48,15 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('blog', { read: ElementRef }) blogComponent!: ElementRef;
   @ViewChild('contact', { read: ElementRef }) contactComponent!: ElementRef;
 
+  ngOnInit(): void {
+    this.setupSeo();
+  }
+
   ngAfterViewInit(): void {
     this.initEventGetCurrentElementIsReading();
   }
 
-  initEventGetCurrentElementIsReading(): void {
+  private initEventGetCurrentElementIsReading(): void {
     fromEvent(this.document, 'scroll')
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
@@ -88,6 +97,37 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
           this.menuService.updateCurrentMenuSelected('');
         }
       });
+  }
+
+  private setupSeo(): void {
+    const seoData: MetaDefinition[] = [
+      {
+        name: 'title',
+        content: 'Tu Hoang - Portfolio',
+      },
+      {
+        name: 'description',
+        content: `This is Tu Hoang's portfolio was built by Angular`,
+      },
+      {
+        property: 'og:title',
+        content: 'Tu Hoang - Portfolio',
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:url',
+        content: environment.appDomain,
+      },
+      {
+        property: 'og:description',
+        content: `This is Tu Hoang's portfolio was built by Angular`,
+      },
+    ];
+    this.seoService.setTitle('Tu Hoang - Portfolio');
+    this.seoService.setMetaTags(seoData);
   }
 
   ngOnDestroy(): void {
