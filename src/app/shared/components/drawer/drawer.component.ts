@@ -66,6 +66,7 @@ export class DrawerComponent {
   }
   @Output() isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onClose = new EventEmitter<void>();
 
   private isVisible = false; //Checking whether drawer is actually visible to user
