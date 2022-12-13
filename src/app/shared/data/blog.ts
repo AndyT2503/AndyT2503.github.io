@@ -6,6 +6,7 @@ export const LIST_BLOG: ReadonlyArray<Blog> = [
     'Deep understanding about Expression has changed after it was checked',
     'Angular',
     '27 October 2022',
-    8
+    8,
+    'Explain why Angular throw Expression has changed after it was checked'
   ),
 ];

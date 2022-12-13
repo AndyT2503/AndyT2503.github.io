@@ -3,9 +3,10 @@ import {
   ChangeDetectorRef, Component, inject, OnInit
 } from '@angular/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { GithubResponse } from 'src/app/shared/models';
 import { GithubService } from 'src/app/shared/services';
-import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-footer',
@@ -17,12 +18,13 @@ import { environment } from 'src/environments/environment';
 })
 export class FooterComponent implements OnInit {
   private readonly githubService = inject(GithubService);
+  private readonly appConfig = injectAppConfig();
   private readonly cdr = inject(ChangeDetectorRef);
   repoInfo = {} as GithubResponse;
-  repoUrl = environment.sourceControlUrl + environment.repoName;
+  repoUrl = this.appConfig.sourceControlUrl + this.appConfig.repoName;
 
   ngOnInit(): void {
-    this.githubService.getRepoInfo(environment.repoName).subscribe((res) => {
+    this.githubService.getRepoInfo(this.appConfig.repoName).subscribe((res) => {
       this.repoInfo = res;
       this.cdr.markForCheck();
     });

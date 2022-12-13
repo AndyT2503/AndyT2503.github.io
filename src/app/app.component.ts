@@ -10,6 +10,8 @@ import {
 } from '@angular/router';
 import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { MarkdownModule } from 'ngx-markdown';
+import { provideAppConfig } from './shared/config/config.di';
+import { AppConfig } from './shared/config/config.model';
 
 registerLocaleData(en);
 
@@ -20,7 +22,7 @@ registerLocaleData(en);
   imports: [RouterModule],
 })
 export class AppComponent {
-  static bootstrap() {
+  static bootstrap(config: AppConfig) {
     bootstrapApplication(this, {
       providers: [
         provideRouter(
@@ -41,6 +43,7 @@ export class AppComponent {
           MarkdownModule.forRoot()
         ),
         { provide: NZ_I18N, useValue: en_US },
+        provideAppConfig(config),
       ],
     }).catch((err) => console.error(err));
   }

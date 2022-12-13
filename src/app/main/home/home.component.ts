@@ -11,9 +11,9 @@ import {
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
+import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { MENU } from 'src/app/shared/data';
 import { MenuService, SeoService } from 'src/app/shared/services';
-import { environment } from 'src/environments/environment';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { ExperienceComponent } from '../experience/experience.component';
@@ -40,6 +40,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   private readonly document = inject(DOCUMENT);
   private readonly menuService = inject(MenuService);
   private readonly seoService = inject(SeoService);
+  private readonly appConfig = injectAppConfig();
   private destroyed$ = new Subject<void>();
   @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
   @ViewChild('experience', { read: ElementRef })
@@ -119,7 +120,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
       },
       {
         property: 'og:url',
-        content: environment.appDomain,
+        content: this.appConfig.appDomain,
       },
       {
         property: 'og:description',

@@ -3,13 +3,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
+import { injectAppConfig } from 'src/app/shared/config/config.di';
+import { LIST_BLOG } from 'src/app/shared/data';
 import { SeoService } from 'src/app/shared/services';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-blog-detail',
@@ -23,6 +24,7 @@ export class BlogDetailComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly seoService = inject(SeoService);
   private readonly document = inject(DOCUMENT);
+  private readonly appConfig = injectAppConfig();
   slug = this.activatedRoute.snapshot.params['slug'];
 
   ngOnInit(): void {
@@ -35,6 +37,9 @@ export class BlogDetailComponent implements OnInit {
 
   private setTitleAndMetaData(): void {
     const title = this.document.querySelector('h1')?.textContent;
+    const description =
+      LIST_BLOG.find((x) => x.slug === this.slug)?.description ||
+      'This is something I know about Angular';
     if (title) {
       this.seoService.setTitle(`Tu Hoang - ${title}`);
       const seoData: MetaDefinition[] = [
@@ -44,7 +49,7 @@ export class BlogDetailComponent implements OnInit {
         },
         {
           name: 'description',
-          content: `This is something I know about Angular`,
+          content: description,
         },
         {
           property: 'og:title',
@@ -56,11 +61,11 @@ export class BlogDetailComponent implements OnInit {
         },
         {
           property: 'og:url',
-          content: `${environment.appDomain}/blog/${this.slug}`,
+          content: `${this.appConfig.appDomain}/blog/${this.slug}`,
         },
         {
           property: 'og:description',
-          content: `This is something I know about Angular`,
+          content: description,
         },
       ];
       this.seoService.setMetaTags(seoData);
