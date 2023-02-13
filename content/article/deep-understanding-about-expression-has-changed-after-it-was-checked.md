@@ -62,9 +62,9 @@ export function bindingUpdated(lView: LView, bindingIndex: number, value: any): 
 
 
 ## Why Angular throw this error?
-
-First of all, as we explain above **ExpressionChangedAfterItHasBeenCheckedError** only occur in **development mode**, so it can be seen not a error, but as a warning from Angular.  
-Look at the example, we can see the data biding is changed 2 times in 1 time CD run. In most of cases, your data biding will be stable in next CD, but in some cases, it will keep changing because your data biding is in an infinity loop. So Angular need to throw this warning like the error in development mode to force you to verify your code and ensure your data is stable in every CD run.
+ 
+Look at the example, we can see the data binding is changed 2 times in 1 time CD run. And in the 2nd CD running, value of your data binding in TS class would not be updated in template, obviously it make your data is not consistent between template and TS class.  
+**Note:** Sometimes when you see this error, you will see data display in your view consistent with data in TS class. The reason why is after Angular run the CD that throw this error, something trigger your application run CD again, it's maybe another Asynchronous Task..., and it make your data consistent.
 
 
 ## How to fix that?
