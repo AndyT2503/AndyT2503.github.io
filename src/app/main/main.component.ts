@@ -36,7 +36,7 @@ import {
 })
 export class MainComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
-  isOpen = true;
+  isOpen = false;
 
   ngOnInit(): void {
     setTimeout(() => {
