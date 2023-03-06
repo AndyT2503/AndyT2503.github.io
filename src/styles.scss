@@ -39,6 +39,14 @@ markdown {
     width: 100%;
     object-fit: contain;
   }
+
+  table,th,td {
+    border: 1px solid whitesmoke;
+  }
+
+  th, td {
+    padding: 8px;
+  }
 }
 
 
