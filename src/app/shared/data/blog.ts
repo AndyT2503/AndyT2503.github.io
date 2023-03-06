@@ -6,7 +6,6 @@ export const LIST_BLOG: ReadonlyArray<Blog> = [
     'Deep understanding about Expression has changed after it was checked',
     'Angular',
     '27 October 2022',
-    8,
     'Explain why Angular throw Expression has changed after it was checked'
   ),
   new Blog(
@@ -14,7 +13,6 @@ export const LIST_BLOG: ReadonlyArray<Blog> = [
     'What is NgZone and How it trigger Change Detection',
     'Angular',
     '25 February 2023',
-    8,
     'Explain how ngZone work in Angular'
   ),
 ];

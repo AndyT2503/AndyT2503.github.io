@@ -3,7 +3,7 @@ export class Blog {
   title!: string;
   type!: string;
   date!: string;
-  minRead!: number;
+  minRead?: number;
   description!: string;
 
   get slug() {
@@ -15,14 +15,12 @@ export class Blog {
     title: string,
     type: string,
     date: string,
-    minRead: number,
     description: string
   ) {
     this.id = id;
     this.title = title;
     this.type = type;
     this.date = date;
-    this.minRead = minRead;
     this.description = description;
   }
 }
