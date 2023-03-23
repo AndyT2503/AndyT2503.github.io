@@ -1,0 +1,44 @@
+[
+  {
+    "companyName": "HCL Technology",
+    "role": "Senior Software Engineer",
+    "time": "April 2023 - Present",
+    "url": "https://www.hcltech.com/",
+    "jobDetails": [
+      "Developing product by Angular"
+    ]
+  },
+  {
+    "companyName": "TagForm.com.my",
+    "role": "Middle Software Engineer",
+    "time": "March 2022 - March 2023",
+    "url": "https://tagform.com.my/",
+    "jobDetails": [
+      "Developing Tracking System with Selenium, which can tracking performance of company websites and alert when they slowed",
+      "Developing and maintained code for Streaming Platform using Angular, .NET Core",
+      "Building Ngx-Danmaku, which is Angular library using for display flying comments on video"
+    ]
+  },
+  {
+    "companyName": "Smartlog",
+    "role": "Part-time Business Analyst",
+    "time": "March 2022 - Present",
+    "url": "https://gosmartlog.com/",
+    "jobDetails": [
+      "Analysing business requirement from customer and work with technical team to develop product",
+      "Creating document workflow of feature with BPMN diagram"
+    ]
+  },
+  {
+    "companyName": "Smartlog",
+    "role": "Junior Software Engineer",
+    "time": "August 2020 - February 2022",
+    "url": "https://gosmartlog.com/",
+    "jobDetails": [
+      "Working with team to build logistic solutions",
+      "Developing product with Angular, .Net Core and PostgeSQL",
+      "Building Container Optimization Solution, which is the first re-use container platform in Vietnam",
+      "Training fresher and intern members to learn Angular and .NET Core"
+    ]
+  }
+]
