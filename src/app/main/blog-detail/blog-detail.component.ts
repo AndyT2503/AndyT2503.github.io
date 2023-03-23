@@ -9,8 +9,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { injectAppConfig } from 'src/app/shared/config/config.di';
-import { LIST_BLOG } from 'src/app/shared/data';
-import { SeoService } from 'src/app/shared/services';
+import { DataService, SeoService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-blog-detail',
@@ -23,6 +22,7 @@ import { SeoService } from 'src/app/shared/services';
 export class BlogDetailComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly seoService = inject(SeoService);
+  private readonly dataService = inject(DataService);
   private readonly document = inject(DOCUMENT);
   private readonly appConfig = injectAppConfig();
   slug = this.activatedRoute.snapshot.params['slug'];
@@ -37,10 +37,14 @@ export class BlogDetailComponent implements OnInit {
 
   private setTitleAndMetaData(): void {
     const title = this.document.querySelector('h1')?.textContent;
-    const description =
-      LIST_BLOG.find((x) => x.slug === this.slug)?.description ||
-      'This is something I know about Angular';
-    if (title) {
+    if (!title) {
+      this.seoService.setTitle('Tu Hoang');
+      return;
+    }
+    this.dataService.getBlogData().subscribe((listBlog) => {
+      const description =
+        listBlog.find((x) => x.slug === this.slug)?.description ||
+        'This is something I know about Angular';
       this.seoService.setTitle(`Tu Hoang - ${title}`);
       const seoData: MetaDefinition[] = [
         {
@@ -69,9 +73,7 @@ export class BlogDetailComponent implements OnInit {
         },
       ];
       this.seoService.setMetaTags(seoData);
-      return;
-    }
-    this.seoService.setTitle('Tu Hoang');
+    });
   }
 
   private scrollToTop(): void {

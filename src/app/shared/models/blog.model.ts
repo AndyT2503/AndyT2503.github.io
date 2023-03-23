@@ -1,26 +1,29 @@
-export class Blog {
-  id!: number;
-  title!: string;
-  type!: string;
-  date!: string;
-  minRead?: number;
-  description!: string;
+export interface IBlog {
+  id: number;
+  title: string;
+  type: string;
+  date: string;
+  description: string;
+}
 
+export class Blog {
+  id: number;
+  title: string;
+  type: string;
+  date: string;
+  description: string;
+  minRead?: number;
   get slug() {
     return this.title.replaceAll(' ', '-').toLowerCase();
   }
 
   constructor(
-    id: number,
-    title: string,
-    type: string,
-    date: string,
-    description: string
+    blog: IBlog
   ) {
-    this.id = id;
-    this.title = title;
-    this.type = type;
-    this.date = date;
-    this.description = description;
+    this.id = blog.id;
+    this.title = blog.title;
+    this.type = blog.type;
+    this.date = blog.date;
+    this.description = blog.description;
   }
 }

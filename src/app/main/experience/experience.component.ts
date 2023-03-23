@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { LIST_WORK_EXPERIENCE } from 'src/app/shared/data';
+import { DataService } from 'src/app/shared/services';
 import { trackByIndex } from 'src/app/shared/utils';
 
 @Component({
@@ -13,6 +13,6 @@ import { trackByIndex } from 'src/app/shared/utils';
   imports: [CommonModule, NzTabsModule],
 })
 export class ExperienceComponent {
-  readonly listWorkExperience = LIST_WORK_EXPERIENCE;
+  readonly listWorkExperience$ = inject(DataService).getWorkExperienceData();
   readonly trackByIndex = trackByIndex();
 }

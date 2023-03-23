@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BlogItemComponent } from './components/blog-item/blog-item.component';
-import { LIST_BLOG } from 'src/app/shared/data';
-import { trackByProp } from 'src/app/shared/utils';
+import {
+  ChangeDetectionStrategy,
+  Component, inject
+} from '@angular/core';
 import { Blog } from 'src/app/shared/models';
+import { DataService } from 'src/app/shared/services';
+import { trackByProp } from 'src/app/shared/utils';
+import { BlogItemComponent } from './components/blog-item/blog-item.component';
 
 @Component({
   selector: 'app-blog',
@@ -14,6 +17,6 @@ import { Blog } from 'src/app/shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogComponent {
-  readonly listBlog = LIST_BLOG;
+  readonly listBlog$ = inject(DataService).getBlogData();
   readonly trackByBlogId = trackByProp<Blog>('id');
 }

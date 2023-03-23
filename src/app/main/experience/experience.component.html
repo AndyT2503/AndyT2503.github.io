@@ -4,7 +4,7 @@
   </div>
   <div class="content">
     <nz-tabset nzTabPosition="left">
-      <ng-container *ngFor="let item of listWorkExperience; trackBy: trackByIndex">
+      <ng-container *ngFor="let item of listWorkExperience$ | async; trackBy: trackByIndex">
         <nz-tab [nzTitle]="item.companyName">
           <div class="tab-content">
             <h3>
