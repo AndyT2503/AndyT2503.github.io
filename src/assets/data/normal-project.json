@@ -1,17 +1,16 @@
 [
   {
-    "name": "Django Product Manager",
-    "description": "System product management using Django.",
+    "name": "Nx Angular Tic Tac Toe Game",
+    "description": "Explore how to use Nx-Workspace in real project.",
     "repoUrls": [
       {
-        "tooltip": "Django Product Manager",
-        "url": "https://github.com/AndyT2503/django-product-manager"
+        "tooltip": "Tic Tac Toe Game",
+        "url": "https://github.com/AndyT2503/nx-ng-caro-game"
       }
     ],
     "tech": [
-      "Django",
-      "Javascript",
-      "Ajax"
+      "Angular",
+      "Nx"
     ]
   },
   {
@@ -30,6 +29,21 @@
     ]
   },
   {
+    "name": "Django Product Manager",
+    "description": "System product management using Django.",
+    "repoUrls": [
+      {
+        "tooltip": "Django Product Manager",
+        "url": "https://github.com/AndyT2503/django-product-manager"
+      }
+    ],
+    "tech": [
+      "Django",
+      "Javascript",
+      "Ajax"
+    ]
+  },
+  {
     "name": "Flappy Bird",
     "description": "The online version of Flappy Bird. Player can play and compare high scores with other players.",
     "repoUrls": [
@@ -45,7 +59,7 @@
   },
   {
     "name": "V-Shop",
-    "description": "Project was built when I learnt ReactJs. This project using class component",
+    "description": "Project was built when I learnt ReactJs. This project using class component.",
     "repoUrls": [
       {
         "tooltip": "V-Shop",
