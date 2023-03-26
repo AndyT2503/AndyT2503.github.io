@@ -1,12 +1,7 @@
-import { readFileSync, writeFileSync } from 'fs';
 import { createBuilder } from '@angular-devkit/architect';
-import { getSystemPath, JsonObject, normalize } from '@angular-devkit/core';
+import { readFileSync, writeFileSync } from 'fs';
 
-interface BuildInfoOptions extends JsonObject {
-  outputPath: string;
-}
-
-export default createBuilder(async (options: BuildInfoOptions, ctx) => {
+export default createBuilder(async (options, ctx) => {
   ctx.logger.info('Builder has been started...');
   try {
     const build = await ctx.scheduleTarget({
@@ -14,16 +9,15 @@ export default createBuilder(async (options: BuildInfoOptions, ctx) => {
       project: ctx.target!.project,
       configuration: ctx.target!.configuration!,
     });
-    const { success } = await build.result;
+    const result = await build.result;
+    const success = result.success;
+    const outputPath = result.outputPath as string;
     if (success) {
-      const pathOfIndexPage = `${getSystemPath(normalize(ctx.workspaceRoot))}/${
-        options.outputPath
-      }/index.html`;
+      const pathOfIndexPage = `${outputPath}/index.html`;
       const contentOfIndexPage = readFileSync(pathOfIndexPage, 'utf-8');
-      const pathOfNotFoundPage = `${getSystemPath(
-        normalize(ctx.workspaceRoot)
-      )}/${options.outputPath}/404.html`;
+      const pathOfNotFoundPage = `${outputPath}/404.html`;
       writeFileSync(pathOfNotFoundPage, contentOfIndexPage);
+      ctx.logger.info('Builder has been completed!!!');
       return { success };
     } else {
       return {
