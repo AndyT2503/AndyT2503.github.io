@@ -1,0 +1,22 @@
+{
+  "name": "@andyt/custom-builder",
+  "version": "1.0.0",
+  "description": "Angular CLI custom builder",
+  "builders": "builders.json",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "postbuild": "copyfiles --up 1 ./src/**/*.json ./dist",
+    "build:watch": "tsc-watch --onSuccess 'npm run postbuild'"
+  },
+  "author": "Andy Tu Hoang",
+  "license": "ISC",
+  "devDependencies": {
+    "@angular-devkit/architect": "^0.1402.8",
+    "@angular-devkit/core": "^14.2.8",
+    "@types/node": "^18.11.12",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "tsc-watch": "^6.0.0",
+    "typescript": "~4.6.2"
+  }
+}

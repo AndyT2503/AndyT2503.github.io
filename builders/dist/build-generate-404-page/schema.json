@@ -1,0 +1,11 @@
+
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "properties": {
+    "outputPath": {
+      "description": "The full path for the new output directory, relative to the current workspace.",
+      "type": "string"
+    }
+  }
+}

@@ -128,6 +128,12 @@
               "src/**/*.html"
             ]
           }
+        },
+        "build-generate-404-page": {
+          "builder": "./builders:build-generate-404-page",
+          "options": {
+            "outputPath": "docs"
+          }
         }
       }
     }

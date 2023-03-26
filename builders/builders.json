@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "build-generate-404-page": {
+      "description": "It builds application and then auto generate 404.html",
+      "implementation": "./dist/build-generate-404-page",
+      "schema": "./dist/build-generate-404-page/schema.json"
+    }
+  }
+}
