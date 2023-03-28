@@ -12,5 +12,12 @@
     "type": "Angular",
     "date": "25 February 2023",
     "description": "Explain how ngZone work in Angular"
+  },
+  {
+    "id": 3,
+    "title": "Fix 404 error when refreshing Github Page with Custom Builder",
+    "type": "Angular",
+    "date": "28 Match 2023",
+    "description": "Instruction for creating Custom Angular CLI Builder"
   }
 ]
