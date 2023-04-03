@@ -51,7 +51,7 @@ To run our builder, use following CLI command:
 ng run [project name]:build-generate-404-page
 ```
 
-Of course, if you run this command right now, you will get the error because, we have not implemented any logic for our custom builder. Back to `angular.json`, you can see in `build-generate-404-page` object, we added `builder` property. This property will instruct Angular should which method to invoke when this target is called. Value of `builder` is a string with 2 sections that separated by the colon:  
+Of course, if you run this command right now, you will get the error because, we have not implemented any logic for our custom builder. Back to `angular.json`, you can see in `build-generate-404-page` object, we added `builder` property. This property will instruct Angular which method to invoke when this target is called. Value of `builder` is a string with 2 sections that separated by the colon:  
 * The first section is the path to folder which contain our custom builder. It can be a relative path if you create custom builder project in same workspace our project (like we will do in the example). Or it can be a name of `npm library` if you publish our builder as a library, it will look like this: `@builder-example`.
 * The second path is the command that we want our builder executed. In the example, it is `build-generate-404-page`.  
 
