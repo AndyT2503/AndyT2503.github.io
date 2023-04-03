@@ -48,7 +48,7 @@ We have to update the `angular.json` file to add a target for this builder to th
 ```
 To run our builder, use following CLI command:
 ```
-ng run build-generate-404-page
+ng run [project name]:build-generate-404-page
 ```
 
 Of course, if you run this command right now, you will get the error because, we have not implemented any logic for our custom builder. Back to `angular.json`, you can see in `build-generate-404-page` object, we added `builder` property. This property will instruct Angular should which method to invoke when this target is called. Value of `builder` is a string with 2 sections that separated by the colon:  
@@ -207,7 +207,7 @@ export default createBuilder(async (options, ctx) => {
 });
 ```
 
-Our builder logic is done. we run `npm run build` to compile it to Node.js script. And then go to our Angular application, run `ng run build-generate-404-page` and push all to Github Repository. Your application will be run ok on Github Page without **404 redirect issue**.
+Our builder logic is done. we run `npm run build` to compile it to Node.js script. And then go to our Angular application, run `ng run [project name]:build-generate-404-page` and push all to Github Repository. Your application will be run ok on Github Page without **404 redirect issue**.
 
 ## Summary
 We already explore how to create a custom **Angular CLI Builder** to fix **404 redirect issue** on Github Page. **CLI Builder API** is an intensive tool which you can do a lot of thing with this. If you want learn more about **CLI Builder**, you can visit [Angular.io](https://angular.io/guide/cli-builder "Angular.io").  
