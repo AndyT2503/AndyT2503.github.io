@@ -114,7 +114,7 @@ In our `package.json`, we also describes some scripts:
 This file describes all available builders that exist in our builder projects. Each key under the `builders` property is the name of the builder, in this case, it is `build-generate-404-page`. Every builder will have some following property:
 * **description** – This field contains a message that describes what this builder does and it appears when you run e.g ng build --help command.
 * **implementation** – This field points to the NodeJS script that will be executed when Angular CLI call to corresponding builder.
-* **schema** – This field points to the JSON file that describes a list of *options* that can be provided for the builder function in the builder script. You can also describe type as well as default value an many other thing of the option. **Note**: If your builder script doesn't have any options like the example, you still have to define this property and create corresponding `schema.json` file.  
+* **schema** – This field points to the JSON file that describes a list of *options* that can be provided for the builder function in the builder script. You can also describe type as well as default value and many other thing of the option. **Note**: If your builder script doesn't have any options like the example, you still have to define this property and create corresponding `schema.json` file.  
 
 **tsconfig.json**
 ```
