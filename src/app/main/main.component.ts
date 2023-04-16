@@ -15,6 +15,8 @@ import {
   LoadingOpenComponent,
   SocialComponent
 } from '../layout';
+import { SessionStorageService } from '../shared/services';
+import { StorageKey } from '../shared/const';
 
 @Component({
   selector: 'app-main',
@@ -36,12 +38,21 @@ import {
 })
 export class MainComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
-  isOpen = false;
+  private readonly storage = inject(SessionStorageService);
+  isOpen!: boolean;
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.isOpen = true;
-      this.cdr.markForCheck();
-    }, 4000);
+    this.showLoadingAnimation();
+  }
+
+  private showLoadingAnimation() {
+    this.isOpen = this.storage.getItem<boolean>(StorageKey.wasLoaded) ? true : false;
+    if(!this.isOpen) {
+      setTimeout(() => {
+        this.isOpen = true;
+        this.storage.setItem(StorageKey.wasLoaded, true);
+        this.cdr.markForCheck();
+      }, 4000);
+    }
   }
 }
