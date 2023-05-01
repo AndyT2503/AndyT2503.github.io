@@ -9,7 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "build-generate-404-page": "ng run new-portfolio:build-generate-404-page",
-    "update-static-file": "rimraf docs/assets/config && rimraf docs/assets/data && rimraf docs/content && copyfiles --up 1  ./src/assets/** ./docs && copyfiles  ./content/** ./docs"
+    "update-static-file": "rimraf docs/assets/config && rimraf docs/assets/data && rimraf docs/content && copyfiles --up 1  ./src/assets/** ./docs && copyfiles  ./content/** ./docs",
+    "storybook": "ng run new-portfolio:storybook",
+    "build-storybook": "ng run new-portfolio:build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -37,20 +39,30 @@
     "@angular-eslint/template-parser": "15.2.1",
     "@angular/cli": "^15.2.6",
     "@angular/compiler-cli": "^15.2.7",
+    "@storybook/addon-essentials": "^7.0.7",
+    "@storybook/addon-interactions": "^7.0.7",
+    "@storybook/addon-links": "^7.0.7",
+    "@storybook/angular": "^7.0.7",
+    "@storybook/blocks": "^7.0.7",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.28.0",
+    "eslint-plugin-storybook": "^0.6.11",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^3.0.2",
+    "storybook": "^7.0.7",
     "tslib": "^2.4.0",
-    "typescript": "~4.9.5",
-    "copyfiles": "^2.4.1",
-    "rimraf": "^3.0.2"
+    "typescript": "~4.9.5"
   }
 }

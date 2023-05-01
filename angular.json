@@ -131,6 +131,24 @@
         },
         "build-generate-404-page": {
           "builder": "./builders:build-generate-404-page"
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "new-portfolio:build",
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "new-portfolio:build",
+            "compodoc": false,
+            "outputDir": "storybook-static"
+          }
         }
       }
     }
