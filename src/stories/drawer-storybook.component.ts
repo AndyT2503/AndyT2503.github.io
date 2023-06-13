@@ -31,8 +31,4 @@ export class DrawerStorybookComponent {
   @Input() width!: string;
   @Input() height!: string;
   isOpen = false;
-
-  ngOnChanges() {
-    console.log(this.position);
-  }
 }
