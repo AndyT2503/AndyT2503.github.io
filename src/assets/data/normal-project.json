@@ -14,6 +14,20 @@
     ]
   },
   {
+    "name": "RealWorld Conduit Standalone API",
+    "description": "Using Angular v14 w/ Standalone API to built Medium clone (Conduit)",
+    "repoUrls": [
+      {
+        "tooltip": "RealWorld Conduit Standalone Component",
+        "url": "https://github.com/AndyT2503/angular-conduit"
+      }
+    ],
+    "tech": [
+      "Angular",
+      "Elf"
+    ]
+  },
+  {
     "name": "Giphy Clone",
     "description": "The Cloning Giphy Page integrate with Giphy public API. This app will show Trending GIFs, GIF's detail.",
     "repoUrls": [
@@ -26,6 +40,21 @@
       "Angular",
       "Ng-zorro",
       "Akita"
+    ]
+  },
+  {
+    "name": "NestJs Conduit API",
+    "description": "Realworld Conduit API was built by NestJS + PostgreSQL + Onion Architecture",
+    "repoUrls": [
+      {
+        "tooltip": "NestJs Conduit API",
+        "url": "https://github.com/AndyT2503/nestjs-conduit-onion-architecture"
+      }
+    ],
+    "tech": [
+      "NestJs",
+      "PostgreSQL",
+      "TypeORM"
     ]
   },
   {

@@ -36,18 +36,18 @@
     ]
   },
   {
-    "name": "RealWorld Conduit",
-    "description": "Medium.com clone (called Conduit) was built using Angular version 14 with Standalone Component.",
+    "name": "Angular Conduit Signal",
+    "description": "Medium.com clone (called Conduit) was built using Angular version 16 with Signal API.",
     "image": "assets/img/realworld.png",
     "repoUrls": [
       {
         "tooltip": "RealWorld Conduit",
-        "url": "https://github.com/AndyT2503/real-word-conduit-angular"
+        "url": "https://github.com/AndyT2503/angular-conduit-signals"
       }
     ],
     "linkDemo": {
       "tooltip": "Demo RealWorld Conduit",
-      "url": "https://bright-centaur-dc348e.netlify.app/#/"
+      "url": "https://dev--taupe-pithivier-3c339a.netlify.app/#/"
     },
     "tech": [
       "Angular",
