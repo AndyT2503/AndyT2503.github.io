@@ -1,5 +1,4 @@
-import { Component, Input, TemplateRef } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component, Input } from '@angular/core';
 import { DrawerComponent } from 'src/app/shared/components';
 
 @Component({

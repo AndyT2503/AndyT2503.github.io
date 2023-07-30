@@ -58,6 +58,20 @@
     ]
   },
   {
+    "name": "Next Conduit",
+    "description": "Conduit was built by NextJS. This is project that I use to learn ReactJs and NextJS",
+    "repoUrls": [
+      {
+        "tooltip": "Next Conduit",
+        "url": "https://github.com/AndyT2503/next-conduit"
+      }
+    ],
+    "tech": [
+      "Next",
+      "ReactJs"
+    ]
+  },
+  {
     "name": "Django Product Manager",
     "description": "System product management using Django.",
     "repoUrls": [
@@ -84,20 +98,6 @@
     "tech": [
       "C#",
       "Winform"
-    ]
-  },
-  {
-    "name": "V-Shop",
-    "description": "Project was built when I learnt ReactJs. This project using class component.",
-    "repoUrls": [
-      {
-        "tooltip": "V-Shop",
-        "url": "https://github.com/AndyT2503/vshop"
-      }
-    ],
-    "tech": [
-      "Bootstrap",
-      "ReactJs"
     ]
   }
 ]
