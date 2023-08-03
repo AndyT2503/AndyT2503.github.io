@@ -26,7 +26,7 @@
     "@angular/router": "^16.1.7",
     "markdown-reading-time": "^0.1.1",
     "ng-zorro-antd": "^16.1.0",
-    "ngx-markdown": "^14.0.1",
+    "ngx-markdown": "^16.0.0",
     "rxjs": "~7.5.0",
     "zone.js": "~0.13.1"
   },

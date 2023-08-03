@@ -70,8 +70,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
         ];
         let indexCurrentElementIsReading = -1;
         if (
-          this.document.body.scrollHeight ===
-          window.innerHeight + window.scrollY
+          Math.trunc(this.document.body.scrollHeight) ===
+          Math.trunc(window.innerHeight + window.scrollY)
         ) {
           indexCurrentElementIsReading = listElement.length - 1;
         } else {
