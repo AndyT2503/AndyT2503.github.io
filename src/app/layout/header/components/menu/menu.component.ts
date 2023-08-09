@@ -1,20 +1,15 @@
-import { CommonModule } from '@angular/common';
+import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  inject,
-  OnDestroy,
-  OnInit
+  inject
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { Subject, takeUntil } from 'rxjs';
 import { DrawerComponent } from 'src/app/shared/components';
 import { MENU } from 'src/app/shared/data';
 import { BreakPointService, MenuService } from 'src/app/shared/services';
 import { trackByIndex } from 'src/app/shared/utils';
-
-
 
 @Component({
   selector: 'app-menu',
@@ -22,42 +17,22 @@ import { trackByIndex } from 'src/app/shared/utils';
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, DrawerComponent, NzIconModule],
+  imports: [NgClass, NgIf, DrawerComponent, NzIconModule, NgFor, NgTemplateOutlet],
 })
-export class MenuComponent implements OnInit, OnDestroy {
+export class MenuComponent {
   private readonly breakPointService = inject(BreakPointService);
-  private readonly cdr = inject(ChangeDetectorRef);
   private readonly menuService = inject(MenuService);
-  isMobile!: boolean;
-  isOpenDrawerMenu = false;
-  destroyed$ = new Subject<void>();
-
-  readonly currentMenuSelected$ = this.menuService.getCurrentMenuSelected();
+  readonly isMobile = toSignal(this.breakPointService.isMobile$);
+  readonly currentMenuSelected = this.menuService.getCurrentMenuSelected();
   readonly listMenu = MENU;
   readonly trackByIndex = trackByIndex();
+  isOpenDrawerMenu = false;
 
-  ngOnInit(): void {
-    this.detectViewSizeChange();
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
-  }
 
   onClickMenu(): void {
-    if (this.isMobile) {
+    if (this.isMobile()) {
       this.isOpenDrawerMenu = false;
     }
-  }
-
-  detectViewSizeChange(): void {
-    this.breakPointService.isMobile$
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((isMobile) => {
-        this.isMobile = isMobile;
-        this.cdr.markForCheck();
-      });
   }
 
   openResume(): void {

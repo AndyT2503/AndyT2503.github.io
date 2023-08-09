@@ -1,17 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
-  private currentMenuSelected$ = new BehaviorSubject<string>('');
+  private currentMenuSelected = signal('')
 
   getCurrentMenuSelected() {
-    return this.currentMenuSelected$.asObservable();
+    return this.currentMenuSelected.asReadonly();
   }
 
   updateCurrentMenuSelected(name: string) {
-    this.currentMenuSelected$.next(name);
+    this.currentMenuSelected.update(() => name);
   }
 }

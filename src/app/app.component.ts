@@ -1,14 +1,17 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import { Component, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   PreloadAllModules,
-  provideRouter, RouterModule, withPreloading
+  RouterModule,
+  provideRouter,
+  withComponentInputBinding,
+  withPreloading,
 } from '@angular/router';
-import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { MarkdownModule } from 'ngx-markdown';
 import { provideAppConfig } from './shared/config/config.di';
 import { AppConfig } from './shared/config/config.model';
@@ -35,13 +38,11 @@ export class AppComponent {
                 import('./main/main.routes').then((m) => m.mainRoutes),
             },
           ],
-          withPreloading(PreloadAllModules)
+          withPreloading(PreloadAllModules),
+          withComponentInputBinding()
         ),
-        importProvidersFrom(
-          BrowserAnimationsModule,
-          HttpClientModule,
-          MarkdownModule.forRoot()
-        ),
+        importProvidersFrom(BrowserAnimationsModule, MarkdownModule.forRoot()),
+        provideHttpClient(),
         { provide: NZ_I18N, useValue: en_US },
         provideAppConfig(config),
       ],

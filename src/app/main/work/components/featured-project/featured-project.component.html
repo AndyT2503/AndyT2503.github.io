@@ -1,13 +1,23 @@
-<div *ngIf="isScreenResize$ | async" [ngClass]="!isMobile ? 'project' : 'mobile-template'">
+<div [ngClass]="!isMobile() ? 'project' : 'mobile-template'">
   <div
     class="project-img"
-    [ngClass]="isMobile ? '' : position === 'left' ? 'reverse-project-img project-img' : ' project-img'"
+    [ngClass]="
+      isMobile()
+        ? ''
+        : position === 'left'
+        ? 'reverse-project-img project-img'
+        : ' project-img'
+    "
   >
-    <img [src]="projectData.image"  [ngClass]="isMobile ? 'bg-image' : ''" alt="" />
+    <img
+      [src]="projectData.image"
+      [ngClass]="isMobile() ? 'bg-image' : ''"
+      alt=""
+    />
   </div>
   <div
     [ngClass]="
-      isMobile
+      isMobile()
         ? ''
         : position === 'left'
         ? 'reverse-project-detail project-detail'
@@ -16,16 +26,20 @@
   >
     <h6>Featured Project</h6>
     <h2>{{ projectData.name }}</h2>
-    <div [ngClass]="!isMobile ? 'project-description' : ''">
+    <div [ngClass]="!isMobile() ? 'project-description' : ''">
       <p>
         {{ projectData.description }}
       </p>
     </div>
     <ul>
-      <li *ngFor="let item of projectData.tech; trackBy: trackByIndex">{{ item }}</li>
+      <li *ngFor="let item of projectData.tech; trackBy: trackByIndex">
+        {{ item }}
+      </li>
     </ul>
     <div class="group-button">
-      <ng-container *ngFor="let item of projectData.repoUrls; trackBy: trackByIndex">
+      <ng-container
+        *ngFor="let item of projectData.repoUrls; trackBy: trackByIndex"
+      >
         <div
           nz-tooltip
           [nzTooltipTitle]="item.tooltip"

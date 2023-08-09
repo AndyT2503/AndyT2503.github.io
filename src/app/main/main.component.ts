@@ -1,11 +1,10 @@
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  inject, OnInit
+  OnInit,
+  inject
 } from '@angular/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
@@ -15,22 +14,22 @@ import {
   LoadingOpenComponent,
   SocialComponent
 } from '../layout';
-import { SessionStorageService } from '../shared/services';
 import { StorageKey } from '../shared/const';
+import { SessionStorageService } from '../shared/services';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   standalone: true,
   imports: [
-    CommonModule,
-    HttpClientModule,
+    NgIf,
     NzIconModule,
     EmailComponent,
     FooterComponent,
     HeaderComponent,
     LoadingOpenComponent,
     SocialComponent,
-    RouterModule
+    RouterOutlet
   ],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
@@ -46,7 +45,7 @@ export class MainComponent implements OnInit {
   }
 
   private showLoadingAnimation() {
-    this.isOpen = this.storage.getItem<boolean>(StorageKey.wasLoaded) ? true : false;
+    this.isOpen = !!this.storage.getItem(StorageKey.wasLoaded);
     if(!this.isOpen) {
       setTimeout(() => {
         this.isOpen = true;

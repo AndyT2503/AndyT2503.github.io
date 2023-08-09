@@ -1,6 +1,6 @@
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { CommonModule } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { ProjectData } from 'src/app/shared/models';
 import { trackByIndex } from 'src/app/shared/utils';
@@ -11,10 +11,10 @@ import { trackByIndex } from 'src/app/shared/utils';
   styleUrls: ['./normal-project.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, NzToolTipModule, NzIconModule],
+  imports: [NgFor, NzToolTipModule, NzIconModule],
 })
 export class NormalProjectComponent {
-  @Input() projectData!: ProjectData;
+  @Input({required: true}) projectData!: ProjectData;
   readonly trackByIndex = trackByIndex();
   openRepo(url: string): void {
     window.open(url, '_blank');

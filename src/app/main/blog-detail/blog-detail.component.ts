@@ -2,11 +2,11 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
+  Input,
   OnInit,
+  inject,
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { DataService, SeoService } from 'src/app/shared/services';
@@ -20,12 +20,11 @@ import { DataService, SeoService } from 'src/app/shared/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogDetailComponent implements OnInit {
-  private readonly activatedRoute = inject(ActivatedRoute);
+  @Input() slug!: string
   private readonly seoService = inject(SeoService);
   private readonly dataService = inject(DataService);
   private readonly document = inject(DOCUMENT);
   private readonly appConfig = injectAppConfig();
-  slug = this.activatedRoute.snapshot.params['slug'];
 
   ngOnInit(): void {
     this.scrollToTop();

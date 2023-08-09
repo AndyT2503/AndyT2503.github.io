@@ -1,8 +1,8 @@
-<div class="menu" *ngIf="!isMobile">
+<div class="menu" *ngIf="!isMobile()">
   <ng-container *ngTemplateOutlet="menu"></ng-container>
 </div>
 
-<div *ngIf="isMobile">
+<div *ngIf="isMobile()">
   <i
     (click)="isOpenDrawerMenu = true"
     class="hamburger-menu"
@@ -20,12 +20,12 @@
 ></app-drawer>
 
 <ng-template #menu>
-  <ol [ngClass]="{ 'menu-desktop': !isMobile, 'menu-mobile': isMobile }">
+  <ol [ngClass]="{ 'menu-desktop': !isMobile(), 'menu-mobile': isMobile() }">
     <ng-container *ngFor="let item of listMenu; trackBy: trackByIndex">
       <li>
         <a
           (click)="onClickMenu()"
-          [ngClass]="{ active: item.name === (currentMenuSelected$ | async) }"
+          [ngClass]="{ active: item.name === currentMenuSelected() }"
           [href]="item.link"
           >{{ item.name }}</a
         >
