@@ -1,20 +1,17 @@
-import {
-  CdkVirtualScrollViewport,
-  ScrollingModule,
-} from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  inject,
+  NgZone,
   OnDestroy,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { debounceTime, fromEvent, startWith, Subject, takeUntil } from 'rxjs';
+import { Subject, fromEvent, startWith, takeUntil } from 'rxjs';
 import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { MENU } from 'src/app/shared/data';
 import { MenuService, SeoService } from 'src/app/shared/services';
@@ -35,18 +32,17 @@ import { BlogComponent } from './../blog/blog.component';
     GeneralInfoComponent,
     WorkComponent,
     BlogComponent,
-    ScrollingModule,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
-  @ViewChild('scroller', { static: true }) scroller!: CdkVirtualScrollViewport;
   private readonly document = inject(DOCUMENT);
   private readonly menuService = inject(MenuService);
   private readonly seoService = inject(SeoService);
   private readonly appConfig = injectAppConfig();
+  private readonly ngZone = inject(NgZone);
   private destroyed$ = new Subject<void>();
   @ViewChild('generalInfo', { read: ElementRef })
   generalInfoComponent!: ElementRef;
@@ -66,35 +62,40 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private setupGetCurrentElementIsReading(): void {
-    fromEvent(this.document, 'scroll')
-      .pipe(startWith(null), debounceTime(300), takeUntil(this.destroyed$))
-      .subscribe(() => {
-        const setElements = [
-          this.aboutComponent,
-          this.experienceComponent,
-          this.workComponent,
-          this.blogComponent,
-          this.contactComponent,
-          this.generalInfoComponent,
-        ];
-        const setVisibleHeightOfElement = setElements.map((item) =>
-          this.calculateVisibleHeightOfElement(
-            item.nativeElement.getBoundingClientRect().top,
-            item.nativeElement.getBoundingClientRect().height,
-            item.nativeElement.getBoundingClientRect().bottom
-          )
-        );
-        const indexCurrentElementIsReading = setVisibleHeightOfElement.indexOf(
-          Math.max(...setVisibleHeightOfElement)
-        );
-        if (!MENU[indexCurrentElementIsReading]) {
-          this.menuService.updateCurrentMenuSelected('');
-        } else {
-          this.menuService.updateCurrentMenuSelected(
-            MENU[indexCurrentElementIsReading].name
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent(this.document, 'scroll')
+        .pipe(startWith(null), takeUntil(this.destroyed$))
+        .subscribe(() => {
+          const setElements = [
+            this.aboutComponent,
+            this.experienceComponent,
+            this.workComponent,
+            this.blogComponent,
+            this.contactComponent,
+            this.generalInfoComponent,
+          ];
+          const setVisibleHeightOfElement = setElements.map((item) =>
+            this.calculateVisibleHeightOfElement(
+              item.nativeElement.getBoundingClientRect().top,
+              item.nativeElement.getBoundingClientRect().height,
+              item.nativeElement.getBoundingClientRect().bottom
+            )
           );
-        }
-      });
+          const indexCurrentElementIsReading =
+            setVisibleHeightOfElement.indexOf(
+              Math.max(...setVisibleHeightOfElement)
+            );
+          this.ngZone.run(() => {
+            if (!MENU[indexCurrentElementIsReading]) {
+              this.menuService.updateCurrentMenuSelected('');
+            } else {
+              this.menuService.updateCurrentMenuSelected(
+                MENU[indexCurrentElementIsReading].name
+              );
+            }
+          });
+        });
+    });
   }
 
   /**
