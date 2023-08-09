@@ -1,3 +1,7 @@
+import {
+  CdkVirtualScrollViewport,
+  ScrollingModule,
+} from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
@@ -10,7 +14,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
+import { debounceTime, fromEvent, startWith, Subject, takeUntil } from 'rxjs';
 import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { MENU } from 'src/app/shared/data';
 import { MenuService, SeoService } from 'src/app/shared/services';
@@ -31,17 +35,21 @@ import { BlogComponent } from './../blog/blog.component';
     GeneralInfoComponent,
     WorkComponent,
     BlogComponent,
+    ScrollingModule,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
+  @ViewChild('scroller', { static: true }) scroller!: CdkVirtualScrollViewport;
   private readonly document = inject(DOCUMENT);
   private readonly menuService = inject(MenuService);
   private readonly seoService = inject(SeoService);
   private readonly appConfig = injectAppConfig();
   private destroyed$ = new Subject<void>();
+  @ViewChild('generalInfo', { read: ElementRef })
+  generalInfoComponent!: ElementRef;
   @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
   @ViewChild('experience', { read: ElementRef })
   experienceComponent!: ElementRef;
@@ -54,50 +62,62 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.initEventGetCurrentElementIsReading();
+    this.setupGetCurrentElementIsReading();
   }
 
-  private initEventGetCurrentElementIsReading(): void {
+  private setupGetCurrentElementIsReading(): void {
     fromEvent(this.document, 'scroll')
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(startWith(null), debounceTime(300), takeUntil(this.destroyed$))
       .subscribe(() => {
-        const listElement = [
+        const setElements = [
           this.aboutComponent,
           this.experienceComponent,
           this.workComponent,
           this.blogComponent,
           this.contactComponent,
+          this.generalInfoComponent,
         ];
-        let indexCurrentElementIsReading = -1;
-        if (
-          Math.trunc(this.document.body.scrollHeight) ===
-          Math.trunc(window.innerHeight + window.scrollY)
-        ) {
-          indexCurrentElementIsReading = listElement.length - 1;
+        const setVisibleHeightOfElement = setElements.map((item) =>
+          this.calculateVisibleHeightOfElement(
+            item.nativeElement.getBoundingClientRect().top,
+            item.nativeElement.getBoundingClientRect().height,
+            item.nativeElement.getBoundingClientRect().bottom
+          )
+        );
+        const indexCurrentElementIsReading = setVisibleHeightOfElement.indexOf(
+          Math.max(...setVisibleHeightOfElement)
+        );
+        if (!MENU[indexCurrentElementIsReading]) {
+          this.menuService.updateCurrentMenuSelected('');
         } else {
-          listElement.forEach((item, index) => {
-            const top = item.nativeElement.getBoundingClientRect().top;
-            if (top <= 1) {
-              if (
-                !listElement[indexCurrentElementIsReading] ||
-                listElement[
-                  indexCurrentElementIsReading
-                ].nativeElement.getBoundingClientRect().top < top
-              ) {
-                indexCurrentElementIsReading = index;
-              }
-            }
-          });
-        }
-
-        if (indexCurrentElementIsReading !== -1) {
           this.menuService.updateCurrentMenuSelected(
             MENU[indexCurrentElementIsReading].name
           );
-        } else {
-          this.menuService.updateCurrentMenuSelected('');
         }
       });
+  }
+
+  /**
+   * return visible height of element if it is not visible, return -1
+   */
+  private calculateVisibleHeightOfElement(
+    top: number,
+    height: number,
+    bottom: number
+  ): number {
+    if (bottom < 0) {
+      return -1;
+    }
+    if (top > window.innerHeight) {
+      return -1;
+    }
+    if (top < 0 && bottom >= window.innerHeight) {
+      return height;
+    }
+    if (top < 0 && bottom < window.innerHeight) {
+      return bottom;
+    }
+    return window.innerHeight - top;
   }
 
   private setupSeo(): void {

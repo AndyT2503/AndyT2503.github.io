@@ -21,4 +21,4 @@ export const MENU: ReadonlyArray<Menu> = [
     name: 'Contact',
     link: '#contact',
   },
-];
+] as const;
