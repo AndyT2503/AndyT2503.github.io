@@ -11,7 +11,7 @@ export default createBuilder(async (options, ctx) => {
     });
     const result = await build.result;
     const success = result.success;
-    const outputPath = result.outputPath as string;
+    const outputPath = result.baseOutputPath as string;
     if (success) {
       const pathOfIndexPage = `${outputPath}/index.html`;
       const contentOfIndexPage = readFileSync(pathOfIndexPage, 'utf-8');

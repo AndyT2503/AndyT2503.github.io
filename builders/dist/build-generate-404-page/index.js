@@ -12,7 +12,7 @@ exports.default = (0, architect_1.createBuilder)(async (options, ctx) => {
         });
         const result = await build.result;
         const success = result.success;
-        const outputPath = result.outputPath;
+        const outputPath = result.baseOutputPath;
         if (success) {
             const pathOfIndexPage = `${outputPath}/index.html`;
             const contentOfIndexPage = (0, fs_1.readFileSync)(pathOfIndexPage, 'utf-8');
