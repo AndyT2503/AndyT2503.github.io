@@ -19,6 +19,6 @@ import { tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogComponent {
-  readonly listBlog = toSignal(inject(DataService).getBlogData().pipe(tap(console.log)));
+  readonly listBlog = toSignal(inject(DataService).getBlogData());
   readonly trackByBlogId = trackByProp<Blog>('id');
 }
