@@ -12,7 +12,6 @@ export class Blog {
   type: string;
   date: string;
   description: string;
-  minRead?: number;
   get slug() {
     return this.title.replaceAll(' ', '-').toLowerCase();
   }

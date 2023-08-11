@@ -8,6 +8,7 @@ import { DataService } from 'src/app/shared/services';
 import { trackByProp } from 'src/app/shared/utils';
 import { BlogItemComponent } from './components/blog-item/blog-item.component';
 import { NgFor } from '@angular/common';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-blog',
@@ -18,6 +19,6 @@ import { NgFor } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogComponent {
-  readonly listBlog = toSignal(inject(DataService).getBlogData());
+  readonly listBlog = toSignal(inject(DataService).getBlogData().pipe(tap(console.log)));
   readonly trackByBlogId = trackByProp<Blog>('id');
 }

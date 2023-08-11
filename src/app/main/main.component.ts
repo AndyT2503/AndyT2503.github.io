@@ -1,22 +1,22 @@
 import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnInit,
-  inject
+  inject,
+  signal
 } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
   EmailComponent,
   FooterComponent,
   HeaderComponent,
   LoadingOpenComponent,
-  SocialComponent
+  SocialComponent,
 } from '../layout';
 import { StorageKey } from '../shared/const';
 import { SessionStorageService } from '../shared/services';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -29,28 +29,26 @@ import { RouterOutlet } from '@angular/router';
     HeaderComponent,
     LoadingOpenComponent,
     SocialComponent,
-    RouterOutlet
+    RouterOutlet,
   ],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent implements OnInit {
-  private readonly cdr = inject(ChangeDetectorRef);
   private readonly storage = inject(SessionStorageService);
-  isOpen!: boolean;
+  isOpen = signal(false);
 
   ngOnInit(): void {
     this.showLoadingAnimation();
   }
 
   private showLoadingAnimation() {
-    this.isOpen = !!this.storage.getItem(StorageKey.wasLoaded);
-    if(!this.isOpen) {
+    this.isOpen.set(!!this.storage.getItem(StorageKey.wasLoaded));
+    if (!this.isOpen()) {
       setTimeout(() => {
-        this.isOpen = true;
+        this.isOpen.set(true);
         this.storage.setItem(StorageKey.wasLoaded, true);
-        this.cdr.markForCheck();
       }, 4000);
     }
   }

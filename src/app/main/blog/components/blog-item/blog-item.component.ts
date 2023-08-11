@@ -1,41 +1,39 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   inject,
   Input,
   OnInit,
+  signal,
+  Signal,
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { Blog } from 'src/app/shared/models';
-import fs from 'fs';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { calculateReadingTime } from 'markdown-reading-time';
 import { MarkdownService } from 'ngx-markdown';
+import { map } from 'rxjs';
+import { Blog } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-blog-item[blogItem]',
   standalone: true,
-  imports: [RouterModule],
   templateUrl: './blog-item.component.html',
   styleUrls: ['./blog-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogItemComponent implements OnInit {
-  @Input() blogItem!: Blog;
+  @Input({ required: true }) blogItem!: Blog;
   private readonly router = inject(Router);
   private readonly markDownService = inject(MarkdownService);
-  private readonly cdr = inject(ChangeDetectorRef);
-  ngOnInit(): void {
-    this.getReadingTime();
-  }
+  readingTime = signal(0);
 
-  getReadingTime(): void {
+  ngOnInit(): void {
     this.markDownService
       .getSource(`content/article/${this.blogItem.slug}.md`)
-      .subscribe((content) => {
-        const readingStats = calculateReadingTime(content);
-        this.blogItem.minRead = readingStats.minutes;
-        this.cdr.markForCheck();
+      .pipe(map((content) => calculateReadingTime(content).minutes))
+      .subscribe((min) => {
+        this.readingTime.set(min);
       });
   }
 

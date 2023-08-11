@@ -1,4 +1,4 @@
-<ng-container *ngIf="isOpen">
+<ng-container *ngIf="isOpen(); else loading">
   <app-header></app-header>
   <main class="container">
     <router-outlet></router-outlet>
@@ -8,6 +8,6 @@
   <app-footer></app-footer>
 </ng-container>
 
-<ng-container *ngIf="!isOpen">
+<ng-template #loading>
   <app-loading-open></app-loading-open>
-</ng-container>
+</ng-template>

@@ -4,11 +4,11 @@
     <div class="github-info">
       <div>
         <i nz-icon nzType="star" nzTheme="outline"></i>
-        {{ repoInfo.stargazers_count }}
+        {{ repoInfo()?.stargazers_count }}
       </div>
       <div>
         <i nz-icon nzType="fork" nzTheme="outline"></i>
-        {{ repoInfo.forks_count }}
+        {{ repoInfo()?.forks_count }}
       </div>
     </div>
   </a>
