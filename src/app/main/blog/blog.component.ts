@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component, inject
@@ -7,8 +8,6 @@ import { Blog } from 'src/app/shared/models';
 import { DataService } from 'src/app/shared/services';
 import { trackByProp } from 'src/app/shared/utils';
 import { BlogItemComponent } from './components/blog-item/blog-item.component';
-import { NgFor } from '@angular/common';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-blog',
