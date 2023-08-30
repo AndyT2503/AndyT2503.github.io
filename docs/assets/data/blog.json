@@ -19,5 +19,12 @@
     "type": "Angular",
     "date": "28 Match 2023",
     "description": "Instruction for creating Custom Angular CLI Builder"
+  },
+  {
+    "id": 4,
+    "title": "The Power of Conditional Type in Angular",
+    "type": "Angular",
+    "date": "28 August 2023",
+    "description": "Explore how conditional type is useful in Angular"
   }
 ]
