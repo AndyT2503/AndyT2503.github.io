@@ -248,4 +248,4 @@ const customUserForm: TypedFormGroup<User, {
 ```
 
 ## Conclusion
-**Conditional Type** is  really an intensive type of Typescript, but we haven't used it enough in Angular. In this article, we explored two use cases that we can use **Conditional Type** effectively in Angular. If you have any other use cases of **Conditional Type**, I'm looking to hear you via [Facebook Messenger](http://m.me/AndyTu.Hoang/ "Tu Hoang facebook messenger").
+**Conditional Type** is  really an intensive type of Typescript, but we haven't used it enough in Angular. In this article, we explored two use cases that we can use **Conditional Type** effectively in Angular. If you have any other use cases of **Conditional Type**, I'm looking to hear you via [Facebook Messenger](http://m.me/AndyTu.Hoang/ "Tu Hoang facebook messenger"). If you like this article, please give me 1 star for this [personal website](https://github.com/AndyT2503/AndyT2503.github.io "personal website").
