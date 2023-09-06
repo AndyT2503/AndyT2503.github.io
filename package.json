@@ -4,11 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4500",
-    "build": "ng build --optimization",
+    "build": "ng run new-portfolio:build-generate-404-page",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "build-generate-404-page": "ng run new-portfolio:build-generate-404-page",
     "update-static-file": "rimraf docs/assets/config && rimraf docs/assets/data && rimraf docs/content && copyfiles --up 1  ./src/assets/** ./docs && copyfiles  ./content/** ./docs",
     "storybook": "ng run new-portfolio:storybook",
     "build-storybook": "ng run new-portfolio:build-storybook"

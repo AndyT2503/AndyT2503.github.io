@@ -5,7 +5,7 @@ import {
   OverlayModule,
   OverlayRef,
 } from '@angular/cdk/overlay';
-import { CdkPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -23,6 +23,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Subject, takeUntil } from 'rxjs';
 import { ClickOutsideDirective } from '../../directives';
 
+const ANIMATE_TIMINGS = 200;
 @Component({
   selector: 'app-drawer',
   templateUrl: './drawer.component.html',
@@ -41,31 +42,49 @@ import { ClickOutsideDirective } from '../../directives';
     trigger('slideInOut', [
       transition('void => right', [
         style({ transform: 'translateX(100%)' }),
-        animate('200ms ease-in'),
+        animate(`${ANIMATE_TIMINGS}ms ease-in`),
       ]),
       transition('right => void', [
-        animate('200ms ease-in', style({ transform: 'translateX(100%)' })),
+        animate(
+          `${ANIMATE_TIMINGS}ms ease-in`,
+          style({ transform: 'translateX(100%)' })
+        ),
       ]),
       transition('void => left', [
         style({ transform: 'translateX(-100%)' }),
-        animate('200ms ease-in', style({ transform: 'translateX(0%)' })),
+        animate(
+          `${ANIMATE_TIMINGS}ms ease-in`,
+          style({ transform: 'translateX(0%)' })
+        ),
       ]),
       transition('left => void', [
-        animate('200ms ease-in', style({ transform: 'translateX(-100%)' })),
+        animate(
+          `${ANIMATE_TIMINGS}ms ease-in`,
+          style({ transform: 'translateX(-100%)' })
+        ),
       ]),
       transition('void => top', [
         style({ transform: 'translateY(-100%)' }),
-        animate('200ms ease-in', style({ transform: 'translateY(0%)' })),
+        animate(
+          `${ANIMATE_TIMINGS}ms ease-in`,
+          style({ transform: 'translateY(0%)' })
+        ),
       ]),
       transition('top => void', [
-        animate('200ms ease-in', style({ transform: 'translateY(-100%)' })),
+        animate(
+          `${ANIMATE_TIMINGS}ms ease-in`,
+          style({ transform: 'translateY(-100%)' })
+        ),
       ]),
       transition('void => bottom', [
         style({ transform: 'translateY(100%)' }),
-        animate('200ms ease-in'),
+        animate(`${ANIMATE_TIMINGS}ms ease-in`),
       ]),
       transition('bottom => void', [
-        animate('200ms ease-in', style({ transform: 'translateY(100%)' })),
+        animate(
+          `${ANIMATE_TIMINGS}ms ease-in`,
+          style({ transform: 'translateY(100%)' })
+        ),
       ]),
     ]),
   ],
@@ -73,13 +92,12 @@ import { ClickOutsideDirective } from '../../directives';
 export class DrawerComponent implements OnDestroy {
   @ViewChild('drawerTemplate', { static: true })
   drawerTemplate!: TemplateRef<void>;
-  @ViewChild(CdkPortalOutlet, { static: false })
-  bodyPortalOutlet?: CdkPortalOutlet;
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly overlay = inject(Overlay);
-  private overlayRef?: OverlayRef | null;
-  private portal?: TemplatePortal;
   private readonly destroyed$ = new Subject<void>();
+  private overlayRef?: OverlayRef | null;
+  private portal?: TemplatePortal | null;
+  private isVisible = false; //Checking whether drawer is actually visible to user
   _width!: string;
   _height!: string;
   _isOpen!: boolean;
@@ -109,13 +127,6 @@ export class DrawerComponent implements OnDestroy {
 
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onClose = new EventEmitter<void>();
-
-  private isVisible = false; //Checking whether drawer is actually visible to user
-  ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
-    this.disposeOverlay();
-  }
 
   onClickOutside(): void {
     //when drawer was initialized but not visible to user, set visible = true and skip close action
@@ -155,16 +166,22 @@ export class DrawerComponent implements OnDestroy {
   }
 
   private disposeOverlay(): void {
-    const transitionTime = 200;
     setTimeout(() => {
-      this.overlayRef?.dispose();
-      this.overlayRef = null;
-    }, transitionTime);
+      if (this.overlayRef && this.portal) {
+        this.overlayRef.dispose();
+        this.overlayRef = null;
+        this.portal = null;
+      }
+    }, ANIMATE_TIMINGS);
   }
 
   close(): void {
+    this.isOpenChange.emit(false);
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
     this.disposeOverlay();
-    this._isOpen = false;
-    this.isOpenChange.emit(this._isOpen);
   }
 }
