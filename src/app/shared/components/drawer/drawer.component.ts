@@ -101,6 +101,8 @@ export class DrawerComponent implements OnDestroy {
     this._isOpen = value;
     if (value) {
       this.attachOverlay();
+    } else {
+      this.disposeOverlay();
     }
   }
   @Output() isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -132,7 +134,7 @@ export class DrawerComponent implements OnDestroy {
       );
       this.overlayRef = this.overlay.create(
         new OverlayConfig({
-          disposeOnNavigation: true,
+          disposeOnNavigation: false,
           positionStrategy: this.overlay.position().global(),
           scrollStrategy: this.overlay.scrollStrategies.reposition(),
         })
@@ -141,7 +143,8 @@ export class DrawerComponent implements OnDestroy {
 
     if (this.overlayRef && !this.overlayRef.hasAttached()) {
       this.overlayRef.attach(this.portal);
-      this.overlayRef.keydownEvents()
+      this.overlayRef
+        .keydownEvents()
         .pipe(takeUntil(this.destroyed$))
         .subscribe((event: KeyboardEvent) => {
           if (event.code === 'Escape' && this._isOpen) {
@@ -152,14 +155,15 @@ export class DrawerComponent implements OnDestroy {
   }
 
   private disposeOverlay(): void {
-    this.overlayRef?.dispose();
-    this.overlayRef = null;
+    const transitionTime = 200;
+    setTimeout(() => {
+      this.overlayRef?.dispose();
+      this.overlayRef = null;
+    }, transitionTime);
   }
 
   close(): void {
-    setTimeout(() => {
-      this.disposeOverlay()
-    }, 200);
+    this.disposeOverlay();
     this._isOpen = false;
     this.isOpenChange.emit(this._isOpen);
   }
