@@ -1,21 +1,11 @@
-$fs-xxs: 12px;
-$fs-xs: 13px;
-$fs-sm: 14px;
-$fs-md: 16px;
-$fs-lg: 18px;
-$fs-xl: 20px;
-$fs-xxl: 22px;
-$fs-heading: 32px;
-$fs-heading-2: 28px;
-
 :root {
-  --fs-xxs: #{$fs-xxs};
-  --fs-xs: #{$fs-xs};
-  --fs-sm: #{$fs-sm};
-  --fs-md: #{$fs-md};
-  --fs-lg: #{$fs-lg};
-  --fs-xl: #{$fs-xl};
-  --fs-xxl: #{$fs-xxl};
-  --fs-heading: #{$fs-heading};
-  --fs-heading-2: #{$fs-heading-2};
+  --fs-xxs: 12px;
+  --fs-xs: 13px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 20px;
+  --fs-xxl: 22px;
+  --fs-heading: 32px;
+  --fs-heading-2: 28px;
 }

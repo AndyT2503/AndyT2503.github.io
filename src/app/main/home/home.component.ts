@@ -11,7 +11,7 @@ import {
   inject,
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { Subject, fromEvent, startWith, takeUntil } from 'rxjs';
+import { Subject, debounceTime, fromEvent, startWith, takeUntil } from 'rxjs';
 import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { MENU } from 'src/app/shared/data';
 import { MenuService, SeoService } from 'src/app/shared/services';
@@ -64,7 +64,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   private setupGetCurrentElementIsReading(): void {
     this.ngZone.runOutsideAngular(() => {
       fromEvent(this.document, 'scroll')
-        .pipe(startWith(null), takeUntil(this.destroyed$))
+        .pipe(startWith(null), debounceTime(300), takeUntil(this.destroyed$))
         .subscribe(() => {
           const setElements = [
             this.aboutComponent,

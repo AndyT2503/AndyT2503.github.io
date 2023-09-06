@@ -10,11 +10,16 @@ header {
   opacity: 0.99;
   padding-left: 50px;
   padding-right: 50px;
+  transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
 
   @media (max-width: 768px) {
     padding-left: 25px;
     padding-right: 25px;
   }
+}
+
+.hidden-header {
+  transform: translateY(calc(100px * -1));
 }
 
 app-logo {

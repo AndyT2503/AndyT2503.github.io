@@ -1,6 +1,8 @@
 @import "color";
 @import "font";
 @import "font-size";
+@import '~@angular/cdk/overlay-prebuilt.css';
+
 body {
   background-color: var(--base-color);
   font-family: var(--font-sans);
@@ -49,6 +51,14 @@ markdown {
   }
 }
 
+.animation-btn {
+  transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
+  &:hover {
+    outline: none;
+    box-shadow: 3px 3px 0 0 var(--primary-color);
+    transform: translate(-4px, -4px);
+  }
+}
 
 /* width */
 ::-webkit-scrollbar {
