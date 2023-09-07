@@ -20,8 +20,9 @@ import {
   inject,
 } from '@angular/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { ClickOutsideDirective } from '../../directives';
+import { DestroyService } from '../../services';
 
 const ANIMATE_TIMINGS = 200;
 @Component({
@@ -38,6 +39,7 @@ const ANIMATE_TIMINGS = 200;
     NgTemplateOutlet,
     NgIf,
   ],
+  providers: [DestroyService],
   animations: [
     trigger('slideInOut', [
       transition('void => right', [
@@ -94,7 +96,7 @@ export class DrawerComponent implements OnDestroy {
   drawerTemplate!: TemplateRef<void>;
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly overlay = inject(Overlay);
-  private readonly destroyed$ = new Subject<void>();
+  private readonly destroyed$ = inject(DestroyService);
   private overlayRef?: OverlayRef | null;
   private portal?: TemplatePortal | null;
   private isVisible = false; //Checking whether drawer is actually visible to user
@@ -180,8 +182,6 @@ export class DrawerComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
     this.disposeOverlay();
   }
 }

@@ -23,9 +23,9 @@
   <ol [ngClass]="{ 'menu-desktop': !isMobile(), 'menu-mobile': isMobile() }">
     <ng-container *ngFor="let item of listMenu; trackBy: trackByIndex">
       <li>
-        <a
+        <a 
+          #menuItem
           (click)="onClickMenu()"
-          [ngClass]="{ active: item.name === currentMenuSelected() }"
           [href]="item.link"
           >{{ item.name }}</a
         >

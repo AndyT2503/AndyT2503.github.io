@@ -5,16 +5,19 @@ import {
   Component,
   ElementRef,
   NgZone,
-  OnDestroy,
   OnInit,
   ViewChild,
   inject,
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { Subject, debounceTime, fromEvent, startWith, takeUntil } from 'rxjs';
+import { fromEvent, startWith, takeUntil } from 'rxjs';
 import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { MENU } from 'src/app/shared/data';
-import { MenuService, SeoService } from 'src/app/shared/services';
+import {
+  DestroyService,
+  MenuService,
+  SeoService,
+} from 'src/app/shared/services';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { ExperienceComponent } from '../experience/experience.component';
@@ -36,14 +39,15 @@ import { BlogComponent } from './../blog/blog.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
 })
-export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
+export class HomeComponent implements AfterViewInit, OnInit {
   private readonly document = inject(DOCUMENT);
   private readonly menuService = inject(MenuService);
   private readonly seoService = inject(SeoService);
   private readonly appConfig = injectAppConfig();
   private readonly ngZone = inject(NgZone);
-  private destroyed$ = new Subject<void>();
+  private destroyed$ = inject(DestroyService);
   @ViewChild('generalInfo', { read: ElementRef })
   generalInfoComponent!: ElementRef;
   @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
@@ -64,7 +68,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   private setupGetCurrentElementIsReading(): void {
     this.ngZone.runOutsideAngular(() => {
       fromEvent(this.document, 'scroll')
-        .pipe(startWith(null), debounceTime(300), takeUntil(this.destroyed$))
+        .pipe(startWith(null), takeUntil(this.destroyed$))
         .subscribe(() => {
           const setElements = [
             this.aboutComponent,
@@ -85,15 +89,13 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
             setVisibleHeightOfElement.indexOf(
               Math.max(...setVisibleHeightOfElement)
             );
-          this.ngZone.run(() => {
-            if (!MENU[indexCurrentElementIsReading]) {
-              this.menuService.updateCurrentMenuSelected('');
-            } else {
-              this.menuService.updateCurrentMenuSelected(
-                MENU[indexCurrentElementIsReading].name
-              );
-            }
-          });
+          if (!MENU[indexCurrentElementIsReading]) {
+            this.menuService.updateCurrentMenuSelected('');
+          } else {
+            this.menuService.updateCurrentMenuSelected(
+              MENU[indexCurrentElementIsReading].name
+            );
+          }
         });
     });
   }
@@ -150,10 +152,5 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
     ];
     this.seoService.setTitle('Tu Hoang - Portfolio');
     this.seoService.setMetaTags(seoData);
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
   }
 }

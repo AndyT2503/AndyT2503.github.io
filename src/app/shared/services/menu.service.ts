@@ -4,13 +4,13 @@ import { BehaviorSubject } from "rxjs";
   providedIn: 'root'
 })
 export class MenuService {
-  private currentMenuSelected = signal('')
+  private currentMenuSelected = new BehaviorSubject('')
 
   getCurrentMenuSelected() {
-    return this.currentMenuSelected.asReadonly();
+    return this.currentMenuSelected.asObservable();
   }
 
   updateCurrentMenuSelected(name: string) {
-    this.currentMenuSelected.update(() => name);
+    this.currentMenuSelected.next(name);
   }
 }

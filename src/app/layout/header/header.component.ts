@@ -1,17 +1,16 @@
-import { DOCUMENT, NgClass } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   NgZone,
-  OnDestroy,
   OnInit,
   Renderer2,
   ViewChild,
-  inject,
-  signal,
+  inject
 } from '@angular/core';
-import { Subject, fromEvent, takeUntil } from 'rxjs';
+import { fromEvent, takeUntil } from 'rxjs';
+import { DestroyService } from 'src/app/shared/services';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 
@@ -22,13 +21,14 @@ import { MenuComponent } from './components/menu/menu.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [LogoComponent, MenuComponent],
+  providers: [DestroyService]
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   @ViewChild('headerEle', { static: true })
   headerElement!: ElementRef<HTMLElement>;
   private readonly document = inject(DOCUMENT);
   private readonly ngZone = inject(NgZone);
-  private readonly destroyed$ = new Subject<void>();
+  private readonly destroyed$ = inject(DestroyService);
   private readonly renderer = inject(Renderer2);
   private currentPageOffset = window.scrollY;
   ngOnInit(): void {
@@ -55,10 +55,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.currentPageOffset = scroll;
         });
     });
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
   }
 }

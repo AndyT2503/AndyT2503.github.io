@@ -4,3 +4,4 @@ export * from './menu.service';
 export * from './seo.service';
 export * from './data.service';
 export * from './session-storage.service';
+export * from './destroy.service';
