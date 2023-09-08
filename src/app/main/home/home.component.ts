@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -7,17 +6,13 @@ import {
   NgZone,
   OnInit,
   ViewChild,
-  inject,
+  inject
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { fromEvent, startWith, takeUntil } from 'rxjs';
 import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { MENU } from 'src/app/shared/data';
-import {
-  DestroyService,
-  MenuService,
-  SeoService,
-} from 'src/app/shared/services';
+import { MenuService, SeoService } from 'src/app/shared/services';
+import { injectScrollEvent } from 'src/app/shared/utils';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { ExperienceComponent } from '../experience/experience.component';
@@ -39,15 +34,13 @@ import { BlogComponent } from './../blog/blog.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
 })
 export class HomeComponent implements AfterViewInit, OnInit {
-  private readonly document = inject(DOCUMENT);
   private readonly menuService = inject(MenuService);
   private readonly seoService = inject(SeoService);
   private readonly appConfig = injectAppConfig();
   private readonly ngZone = inject(NgZone);
-  private destroyed$ = inject(DestroyService);
+  private readonly scrollEvent$ = injectScrollEvent();
   @ViewChild('generalInfo', { read: ElementRef })
   generalInfoComponent!: ElementRef;
   @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
@@ -67,36 +60,33 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   private setupGetCurrentElementIsReading(): void {
     this.ngZone.runOutsideAngular(() => {
-      fromEvent(this.document, 'scroll')
-        .pipe(startWith(null), takeUntil(this.destroyed$))
-        .subscribe(() => {
-          const setElements = [
-            this.aboutComponent,
-            this.experienceComponent,
-            this.workComponent,
-            this.blogComponent,
-            this.contactComponent,
-            this.generalInfoComponent,
-          ];
-          const setVisibleHeightOfElement = setElements.map((item) =>
-            this.calculateVisibleHeightOfElement(
-              item.nativeElement.getBoundingClientRect().top,
-              item.nativeElement.getBoundingClientRect().height,
-              item.nativeElement.getBoundingClientRect().bottom
-            )
+      this.scrollEvent$.subscribe(() => {
+        const setElements = [
+          this.aboutComponent,
+          this.experienceComponent,
+          this.workComponent,
+          this.blogComponent,
+          this.contactComponent,
+          this.generalInfoComponent,
+        ];
+        const setVisibleHeightOfElement = setElements.map((item) =>
+          this.calculateVisibleHeightOfElement(
+            item.nativeElement.getBoundingClientRect().top,
+            item.nativeElement.getBoundingClientRect().height,
+            item.nativeElement.getBoundingClientRect().bottom
+          )
+        );
+        const indexCurrentElementIsReading = setVisibleHeightOfElement.indexOf(
+          Math.max(...setVisibleHeightOfElement)
+        );
+        if (!MENU[indexCurrentElementIsReading]) {
+          this.menuService.updateCurrentMenuSelected('');
+        } else {
+          this.menuService.updateCurrentMenuSelected(
+            MENU[indexCurrentElementIsReading].name
           );
-          const indexCurrentElementIsReading =
-            setVisibleHeightOfElement.indexOf(
-              Math.max(...setVisibleHeightOfElement)
-            );
-          if (!MENU[indexCurrentElementIsReading]) {
-            this.menuService.updateCurrentMenuSelected('');
-          } else {
-            this.menuService.updateCurrentMenuSelected(
-              MENU[indexCurrentElementIsReading].name
-            );
-          }
-        });
+        }
+      });
     });
   }
 

@@ -3,22 +3,20 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ElementRef,
   QueryList,
   Renderer2,
   ViewChildren,
-  effect,
-  inject,
+  inject
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { takeUntil } from 'rxjs';
 import { DrawerComponent } from 'src/app/shared/components';
 import { MENU } from 'src/app/shared/data';
 import {
   BreakPointService,
-  DestroyService,
-  MenuService,
+  MenuService
 } from 'src/app/shared/services';
 import { trackByIndex } from 'src/app/shared/utils';
 
@@ -36,13 +34,12 @@ import { trackByIndex } from 'src/app/shared/utils';
     NgFor,
     NgTemplateOutlet,
   ],
-  providers: [DestroyService],
 })
 export class MenuComponent implements AfterViewInit {
   @ViewChildren('menuItem') menuItems!: QueryList<ElementRef<HTMLLinkElement>>;
+  private readonly destroyRef = inject(DestroyRef);
   private readonly breakPointService = inject(BreakPointService);
   private readonly menuService = inject(MenuService);
-  private readonly destroyed$ = inject(DestroyService);
   private readonly renderer = inject(Renderer2);
   readonly isMobile = toSignal(this.breakPointService.isMobile$);
   readonly listMenu = MENU;
@@ -56,7 +53,7 @@ export class MenuComponent implements AfterViewInit {
   private checkActiveMenu(): void {
     this.menuService
       .getCurrentMenuSelected()
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((menu) => {
         this.menuItems.forEach((item) => {
           this.renderer.removeClass(item.nativeElement, 'active');

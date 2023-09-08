@@ -10,6 +10,7 @@ import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   EventEmitter,
   Input,
   OnDestroy,
@@ -19,10 +20,9 @@ import {
   ViewContainerRef,
   inject,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { takeUntil } from 'rxjs';
 import { ClickOutsideDirective } from '../../directives';
-import { DestroyService } from '../../services';
 
 const ANIMATE_TIMINGS = 200;
 @Component({
@@ -39,7 +39,6 @@ const ANIMATE_TIMINGS = 200;
     NgTemplateOutlet,
     NgIf,
   ],
-  providers: [DestroyService],
   animations: [
     trigger('slideInOut', [
       transition('void => right', [
@@ -96,7 +95,7 @@ export class DrawerComponent implements OnDestroy {
   drawerTemplate!: TemplateRef<void>;
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly overlay = inject(Overlay);
-  private readonly destroyed$ = inject(DestroyService);
+  private readonly destroyRef = inject(DestroyRef);
   private overlayRef?: OverlayRef | null;
   private portal?: TemplatePortal | null;
   private isVisible = false; //Checking whether drawer is actually visible to user
@@ -158,8 +157,8 @@ export class DrawerComponent implements OnDestroy {
       this.overlayRef.attach(this.portal);
       this.overlayRef
         .keydownEvents()
-        .pipe(takeUntil(this.destroyed$))
-        .subscribe((event: KeyboardEvent) => {
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((event) => {
           if (event.code === 'Escape' && this._isOpen) {
             this.close();
           }

@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,10 +6,9 @@ import {
   OnInit,
   Renderer2,
   ViewChild,
-  inject
+  inject,
 } from '@angular/core';
-import { fromEvent, takeUntil } from 'rxjs';
-import { DestroyService } from 'src/app/shared/services';
+import { injectScrollEvent } from 'src/app/shared/utils';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 
@@ -21,14 +19,12 @@ import { MenuComponent } from './components/menu/menu.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [LogoComponent, MenuComponent],
-  providers: [DestroyService]
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('headerEle', { static: true })
   headerElement!: ElementRef<HTMLElement>;
-  private readonly document = inject(DOCUMENT);
+  private readonly scrollEvent$ = injectScrollEvent();
   private readonly ngZone = inject(NgZone);
-  private readonly destroyed$ = inject(DestroyService);
   private readonly renderer = inject(Renderer2);
   private currentPageOffset = window.scrollY;
   ngOnInit(): void {
@@ -37,23 +33,21 @@ export class HeaderComponent implements OnInit {
 
   private detectScrollDownEvent(): void {
     this.ngZone.runOutsideAngular(() => {
-      fromEvent(this.document, 'scroll')
-        .pipe(takeUntil(this.destroyed$))
-        .subscribe(() => {
-          const scroll = window.scrollY;
-          if (scroll > this.currentPageOffset) {
-            this.renderer.addClass(
-              this.headerElement.nativeElement,
-              'hidden-header'
-            );
-          } else {
-            this.renderer.removeClass(
-              this.headerElement.nativeElement,
-              'hidden-header'
-            );
-          }
-          this.currentPageOffset = scroll;
-        });
+      this.scrollEvent$.subscribe(() => {
+        const scroll = window.scrollY;
+        if (scroll > this.currentPageOffset) {
+          this.renderer.addClass(
+            this.headerElement.nativeElement,
+            'hidden-header'
+          );
+        } else {
+          this.renderer.removeClass(
+            this.headerElement.nativeElement,
+            'hidden-header'
+          );
+        }
+        this.currentPageOffset = scroll;
+      });
     });
   }
 }
