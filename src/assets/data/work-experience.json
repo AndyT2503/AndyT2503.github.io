@@ -2,42 +2,45 @@
   {
     "companyName": "HCL Technology",
     "role": "Senior Software Engineer",
-    "time": "April 2023 - Present",
+    "time": "April 2023 - January 2024",
     "url": "https://www.hcltech.com/",
     "jobDetails": [
-      "Developing product by Angular"
+      "Joining Vehicle Diagnostic project as Senior Front-end Software Engineer",
+      "Restructuring and migrating front-end to use standalone component Angular v15",
+      "Optimizing rendering performance"
     ]
   },
   {
-    "companyName": "TagForm.com.my",
-    "role": "Middle Software Engineer",
+    "companyName": "Tag Form Sdn Bhd",
+    "role": "Software Engineer",
     "time": "March 2022 - March 2023",
     "url": "https://tagform.com.my/",
     "jobDetails": [
+      "Working with Angular, .Net Core and PostgeSQL, MySQL",
       "Developing Tracking System with Selenium, which can tracking performance of company websites and alert when they slowed",
-      "Developing and maintained code for Streaming Platform using Angular, .NET Core",
-      "Building Ngx-Danmaku, which is Angular library using for display flying comments on video"
+      "Developing and maintained code for Streaming Platform using Angular Universal, .NET Core",
+      "Building SSO System integrate with Google Authenticator"
     ]
   },
   {
     "companyName": "Smartlog",
     "role": "Part-time Business Analyst",
-    "time": "March 2022 - Present",
+    "time": "March 2022 - February 2023",
     "url": "https://gosmartlog.com/",
     "jobDetails": [
-      "Analysing business requirement from customer and work with technical team to develop product",
-      "Creating document workflow of feature with BPMN diagram"
+      "Analyzing business requirement from customer and work with technical team to develop product",
+      "Creating documentation for feature workflows using BPMN diagrams"
     ]
   },
   {
     "companyName": "Smartlog",
     "role": "Junior Software Engineer",
-    "time": "August 2020 - February 2022",
+    "time": "January 2020 - February 2022",
     "url": "https://gosmartlog.com/",
     "jobDetails": [
-      "Working with team to build logistic solutions",
-      "Developing product with Angular, .Net Core and PostgeSQL",
-      "Building Container Optimization Solution, which is the first re-use container platform in Vietnam",
+      "Joining projects that use Microservice",
+      "Developing Vietnam's first re-use container platform (COS) from the ground up, utilizing Angular, .NET Core, and PostgreSQL for optimal container optimization",
+      "Managing small developer team(3 members) to build COS ",
       "Training fresher and intern members to learn Angular and .NET Core"
     ]
   }
