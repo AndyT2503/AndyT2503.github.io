@@ -3,18 +3,18 @@
     <h4>Some Things I've Built</h4>
   </div>
   <div class="featured-projects">
-    <ng-container *ngFor="let item of listFeaturedProject(); let isOdd = odd; trackBy: trackByProjectName">
+    @for (item of listFeaturedProject(); track item.name; let isOdd = $odd) {
       <div class="project-item">
         <app-featured-project [projectData]="item" [position]="isOdd ? 'left' : 'right'"></app-featured-project>
       </div>
-    </ng-container>
+    }
   </div>
   <div class="other-projects">
     <h4>Other Noteworthy Projects</h4>
     <div class="list-other-project">
-      <ng-container *ngFor="let item of listOtherProject(); trackBy: trackByProjectName">
+      @for (item of listOtherProject(); track item.name) {
         <app-normal-project [projectData]="item"></app-normal-project>
-      </ng-container>
+      }
     </div>
   </div>
 </section>

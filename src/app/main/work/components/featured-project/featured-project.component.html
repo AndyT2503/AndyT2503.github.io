@@ -8,14 +8,14 @@
         ? 'reverse-project-img project-img'
         : ' project-img'
     "
-  >
+    >
     <img
       [src]="projectData.image"
       [ngClass]="isMobile() ? 'bg-image' : ''"
       alt=""
-    />
-  </div>
-  <div
+      />
+    </div>
+    <div
     [ngClass]="
       isMobile()
         ? ''
@@ -23,41 +23,42 @@
         ? 'reverse-project-detail project-detail'
         : 'project-detail'
     "
-  >
-    <h6>Featured Project</h6>
-    <h2>{{ projectData.name }}</h2>
-    <div [ngClass]="!isMobile() ? 'project-description' : ''">
-      <p>
-        {{ projectData.description }}
-      </p>
-    </div>
-    <ul>
-      <li *ngFor="let item of projectData.tech; trackBy: trackByIndex">
-        {{ item }}
-      </li>
-    </ul>
-    <div class="group-button">
-      <ng-container
-        *ngFor="let item of projectData.repoUrls; trackBy: trackByIndex"
       >
-        <div
-          nz-tooltip
-          [nzTooltipTitle]="item.tooltip"
-          class="button"
-          (click)="openLinkInNewTab(item.url)"
-        >
-          <i nz-icon nzType="github" nzTheme="outline"></i>
-        </div>
-      </ng-container>
-      <div
-        *ngIf="projectData.linkDemo"
-        nz-tooltip
-        [nzTooltipTitle]="projectData.linkDemo.tooltip"
-        class="button"
-        (click)="openLinkInNewTab(projectData.linkDemo.url)"
-      >
-        <i nz-icon nzType="form" nzTheme="outline"></i>
+      <h6>Featured Project</h6>
+      <h2>{{ projectData.name }}</h2>
+      <div [ngClass]="!isMobile() ? 'project-description' : ''">
+        <p>
+          {{ projectData.description }}
+        </p>
+      </div>
+      <ul>
+        @for (item of projectData.tech; track $index) {
+          <li>
+            {{ item }}
+          </li>
+        }
+      </ul>
+      <div class="group-button">
+        @for (item of projectData.repoUrls; track $index) {
+          <div
+            nz-tooltip
+            [nzTooltipTitle]="item.tooltip"
+            class="button"
+            (click)="openLinkInNewTab(item.url)"
+            >
+            <i nz-icon nzType="github" nzTheme="outline"></i>
+          </div>
+        }
+        @if (projectData.linkDemo) {
+          <div
+            nz-tooltip
+            [nzTooltipTitle]="projectData.linkDemo.tooltip"
+            class="button"
+            (click)="openLinkInNewTab(projectData.linkDemo.url)"
+            >
+            <i nz-icon nzType="form" nzTheme="outline"></i>
+          </div>
+        }
       </div>
     </div>
   </div>
-</div>

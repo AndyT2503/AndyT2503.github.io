@@ -4,22 +4,24 @@
   </div>
   <div class="content">
     <nz-tabset nzTabPosition="left">
-      <ng-container *ngFor="let item of listWorkExperience(); trackBy: trackByIndex">
+      @for (item of listWorkExperience(); track $index) {
         <nz-tab [nzTitle]="item.companyName">
           <div class="tab-content">
             <h3>
               {{ item.role }}
               <span
-                ><a [href]="item.url" target="_blank">@ {{ item.companyName }}</a></span
-              >
-            </h3>
-            <p class="time">{{ item.time }}</p>
-            <ul>
-              <li *ngFor="let detail of item.jobDetails; trackBy: trackByIndex">{{ detail }}</li>
-            </ul>
-          </div>
-        </nz-tab>
-      </ng-container>
-    </nz-tabset>
-  </div>
-</section>
+                ><a [href]="item.url" target="_blank">&#64; {{ item.companyName }}</a></span
+                >
+              </h3>
+              <p class="time">{{ item.time }}</p>
+              <ul>
+                @for (detail of item.jobDetails; track $index) {
+                  <li>{{ detail }}</li>
+                }
+              </ul>
+            </div>
+          </nz-tab>
+        }
+      </nz-tabset>
+    </div>
+  </section>

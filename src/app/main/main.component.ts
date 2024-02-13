@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -22,15 +22,14 @@ import { SessionStorageService } from '../shared/services';
   selector: 'app-main',
   standalone: true,
   imports: [
-    NgIf,
     NzIconModule,
     EmailComponent,
     FooterComponent,
     HeaderComponent,
     LoadingOpenComponent,
     SocialComponent,
-    RouterOutlet,
-  ],
+    RouterOutlet
+],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

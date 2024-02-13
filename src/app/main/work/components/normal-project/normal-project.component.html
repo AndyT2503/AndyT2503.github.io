@@ -3,7 +3,7 @@
     <div class="header">
       <i class="icon" nz-icon nzType="folder" nzTheme="outline"></i>
       <div class="button">
-        <ng-container *ngFor="let item of projectData.repoUrls; trackBy: trackByIndex">
+        @for (item of projectData.repoUrls; track $index) {
           <i
             nz-tooltip
             [nzTooltipTitle]="item.tooltip"
@@ -12,7 +12,7 @@
             nzType="github"
             nzTheme="outline"
           ></i>
-        </ng-container>
+        }
       </div>
     </div>
     <h2>{{ projectData.name }}</h2>
@@ -21,8 +21,8 @@
     </p>
   </div>
   <ul>
-    <ng-container *ngFor="let item of projectData.tech; trackBy: trackByIndex">
+    @for (item of projectData.tech; track $index) {
       <li>{{item}}</li>
-    </ng-container>
+    }
   </ul>
 </div>

@@ -6,7 +6,7 @@ import {
   OverlayRef,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -36,9 +36,8 @@ const ANIMATE_TIMINGS = 200;
     NzIconModule,
     OverlayModule,
     NgClass,
-    NgTemplateOutlet,
-    NgIf,
-  ],
+    NgTemplateOutlet
+],
   animations: [
     trigger('slideInOut', [
       transition('void => right', [

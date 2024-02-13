@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -8,17 +8,13 @@ import {
   QueryList,
   Renderer2,
   ViewChildren,
-  inject
+  inject,
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DrawerComponent } from 'src/app/shared/components';
 import { MENU } from 'src/app/shared/data';
-import {
-  BreakPointService,
-  MenuService
-} from 'src/app/shared/services';
-import { trackByIndex } from 'src/app/shared/utils';
+import { BreakPointService, MenuService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-menu',
@@ -26,14 +22,7 @@ import { trackByIndex } from 'src/app/shared/utils';
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    NgClass,
-    NgIf,
-    DrawerComponent,
-    NzIconModule,
-    NgFor,
-    NgTemplateOutlet,
-  ],
+  imports: [NgClass, DrawerComponent, NzIconModule, NgTemplateOutlet],
 })
 export class MenuComponent implements AfterViewInit {
   @ViewChildren('menuItem') menuItems!: QueryList<ElementRef<HTMLLinkElement>>;
@@ -43,7 +32,6 @@ export class MenuComponent implements AfterViewInit {
   private readonly renderer = inject(Renderer2);
   readonly isMobile = toSignal(this.breakPointService.isMobile$);
   readonly listMenu = MENU;
-  readonly trackByIndex = trackByIndex();
   isOpenDrawerMenu = false;
 
   ngAfterViewInit(): void {

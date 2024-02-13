@@ -1,14 +1,18 @@
 [
   {
-    "name": "Ngx-Danmaku",
-    "description": "Ngx-Danmaku is the Angular library to display flying comments on iframe element.",
-    "image": "assets/img/danmaku.png",
+    "name": "Angular Conduit Signal",
+    "description": "Medium.com clone (called Conduit) was built using Angular version 16 with Signal API.",
+    "image": "assets/img/realworld.png",
     "repoUrls": [
       {
-        "tooltip": "Ngx-Danmaku",
-        "url": "https://github.com/AndyT2503/ngx-danmanku"
+        "tooltip": "RealWorld Conduit",
+        "url": "https://github.com/AndyT2503/angular-conduit-signals"
       }
     ],
+    "linkDemo": {
+      "tooltip": "Demo RealWorld Conduit",
+      "url": "https://dev--taupe-pithivier-3c339a.netlify.app/#/"
+    },
     "tech": [
       "Angular",
       "Typescript"
@@ -36,19 +40,15 @@
     ]
   },
   {
-    "name": "Angular Conduit Signal",
-    "description": "Medium.com clone (called Conduit) was built using Angular version 16 with Signal API.",
-    "image": "assets/img/realworld.png",
+    "name": "Ngx-Danmaku",
+    "description": "Ngx-Danmaku is the Angular library to display flying comments on iframe element.",
+    "image": "assets/img/danmaku.png",
     "repoUrls": [
       {
-        "tooltip": "RealWorld Conduit",
-        "url": "https://github.com/AndyT2503/angular-conduit-signals"
+        "tooltip": "Ngx-Danmaku",
+        "url": "https://github.com/AndyT2503/ngx-danmanku"
       }
     ],
-    "linkDemo": {
-      "tooltip": "Demo RealWorld Conduit",
-      "url": "https://dev--taupe-pithivier-3c339a.netlify.app/#/"
-    },
     "tech": [
       "Angular",
       "Typescript"

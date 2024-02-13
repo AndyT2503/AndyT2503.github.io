@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +14,7 @@ import { DataService, SeoService } from 'src/app/shared/services';
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule, MarkdownModule],
+  imports: [MarkdownModule],
   templateUrl: './blog-detail.component.html',
   styleUrls: ['./blog-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

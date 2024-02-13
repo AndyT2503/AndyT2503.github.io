@@ -1,16 +1,20 @@
-<div class="menu" *ngIf="!isMobile()">
-  <ng-container *ngTemplateOutlet="menu"></ng-container>
-</div>
+@if (!isMobile()) {
+  <div class="menu">
+    <ng-container *ngTemplateOutlet="menu"></ng-container>
+  </div>
+}
 
-<div *ngIf="isMobile()">
-  <i
-    (click)="isOpenDrawerMenu = true"
-    class="hamburger-menu"
-    nz-icon
-    nzType="menu"
-    nzTheme="outline"
-  ></i>
-</div>
+@if (isMobile()) {
+  <div>
+    <i
+      (click)="isOpenDrawerMenu = true"
+      class="hamburger-menu"
+      nz-icon
+      nzType="menu"
+      nzTheme="outline"
+    ></i>
+  </div>
+}
 
 <app-drawer
   [(isOpen)]="isOpenDrawerMenu"
@@ -21,16 +25,16 @@
 
 <ng-template #menu>
   <ol [ngClass]="{ 'menu-desktop': !isMobile(), 'menu-mobile': isMobile() }">
-    <ng-container *ngFor="let item of listMenu; trackBy: trackByIndex">
+    @for (item of listMenu; track $index) {
       <li>
-        <a 
+        <a
           #menuItem
           (click)="onClickMenu()"
           [href]="item.link"
           >{{ item.name }}</a
-        >
-      </li>
-    </ng-container>
-    <button class="animation-btn" (click)="openResume()">Resume</button>
-  </ol>
-</ng-template>
+          >
+        </li>
+      }
+      <button class="animation-btn" (click)="openResume()">Resume</button>
+    </ol>
+  </ng-template>

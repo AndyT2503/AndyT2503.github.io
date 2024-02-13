@@ -88,7 +88,7 @@
   },
   {
     "name": "Flappy Bird",
-    "description": "The online version of Flappy Bird. Player can play and compare high scores with other players.",
+    "description": "The desktop application version of Flappy Bird. Player can play and compare high scores with other players.",
     "repoUrls": [
       {
         "tooltip": "Flappy Bird",

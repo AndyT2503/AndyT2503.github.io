@@ -4,14 +4,11 @@ import {
   Component,
   ElementRef,
   NgZone,
-  OnInit,
   ViewChild,
   inject
 } from '@angular/core';
-import { MetaDefinition } from '@angular/platform-browser';
-import { injectAppConfig } from 'src/app/shared/config/config.di';
 import { MENU } from 'src/app/shared/data';
-import { MenuService, SeoService } from 'src/app/shared/services';
+import { MenuService } from 'src/app/shared/services';
 import { injectScrollEvent } from 'src/app/shared/utils';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
@@ -35,10 +32,8 @@ import { BlogComponent } from './../blog/blog.component';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements AfterViewInit, OnInit {
+export class HomeComponent implements AfterViewInit {
   private readonly menuService = inject(MenuService);
-  private readonly seoService = inject(SeoService);
-  private readonly appConfig = injectAppConfig();
   private readonly ngZone = inject(NgZone);
   private readonly scrollEvent$ = injectScrollEvent();
   @ViewChild('generalInfo', { read: ElementRef })
@@ -49,10 +44,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
   @ViewChild('work', { read: ElementRef }) workComponent!: ElementRef;
   @ViewChild('blog', { read: ElementRef }) blogComponent!: ElementRef;
   @ViewChild('contact', { read: ElementRef }) contactComponent!: ElementRef;
-
-  ngOnInit(): void {
-    this.setupSeo();
-  }
 
   ngAfterViewInit(): void {
     this.setupGetCurrentElementIsReading();
@@ -111,36 +102,5 @@ export class HomeComponent implements AfterViewInit, OnInit {
       return bottom;
     }
     return window.innerHeight - top;
-  }
-
-  private setupSeo(): void {
-    const seoData: MetaDefinition[] = [
-      {
-        name: 'title',
-        content: 'Tu Hoang - Portfolio',
-      },
-      {
-        name: 'description',
-        content: `This is Tu Hoang's portfolio was built by Angular`,
-      },
-      {
-        property: 'og:title',
-        content: 'Tu Hoang - Portfolio',
-      },
-      {
-        property: 'og:type',
-        content: 'website',
-      },
-      {
-        property: 'og:url',
-        content: this.appConfig.appDomain,
-      },
-      {
-        property: 'og:description',
-        content: `This is Tu Hoang's portfolio was built by Angular`,
-      },
-    ];
-    this.seoService.setTitle('Tu Hoang - Portfolio');
-    this.seoService.setMetaTags(seoData);
   }
 }

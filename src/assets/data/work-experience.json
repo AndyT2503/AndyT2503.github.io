@@ -1,12 +1,22 @@
 [
   {
+    "companyName": "TecAlliance",
+    "role": "Frontend Engineer",
+    "time": "February 2024 - Current",
+    "url": "https://www.tecalliance.net/",
+    "jobDetails": [
+      "Maintaining products that using Angular v16",
+      "Upgrading all products to Angular version 17"
+    ]
+  },
+  {
     "companyName": "HCL Technology",
     "role": "Senior Software Engineer",
     "time": "April 2023 - January 2024",
     "url": "https://www.hcltech.com/",
     "jobDetails": [
       "Joining Vehicle Diagnostic project as Senior Front-end Software Engineer",
-      "Restructuring and migrating front-end to use standalone component Angular v15",
+      "Restructuring and migrating application to use standalone component Angular v15",
       "Optimizing rendering performance"
     ]
   },
@@ -39,8 +49,8 @@
     "url": "https://gosmartlog.com/",
     "jobDetails": [
       "Joining projects that use Microservice",
-      "Developing Vietnam's first re-use container platform (COS) from the ground up, utilizing Angular, .NET Core, and PostgreSQL for optimal container optimization",
-      "Managing small developer team(3 members) to build COS ",
+      "Developing Vietnam's first re-use container platform (COS) from the ground up, utilizing Angular, .NET Core, and PostgreSQL",
+      "Managing small developer team (3 members) to build COS ",
       "Training fresher and intern members to learn Angular and .NET Core"
     ]
   }
