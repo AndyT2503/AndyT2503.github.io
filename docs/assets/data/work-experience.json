@@ -5,8 +5,10 @@
     "time": "February 2024 - Current",
     "url": "https://www.tecalliance.net/",
     "jobDetails": [
-      "Maintaining products that using Angular v16",
-      "Upgrading all products to Angular version 17"
+      "Maintaining products that use Angular v16",
+      "Upgrading all products to Angular version 17",
+      "Building and maintaining end-to-end test automation with Cucumber and Playwright",
+      "Exploring the integration of Kiro AI into automation testing workflows"
     ]
   },
   {

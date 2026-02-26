@@ -26,5 +26,12 @@
     "type": "Angular",
     "date": "28 August 2023",
     "description": "Explore how conditional type is useful in Angular"
+  },
+  {
+    "id": 5,
+    "title": "Angular Signal Forms: Simpler, Faster, and More Reactive",
+    "type": "Angular",
+    "date": "25 February 2026",
+    "description": "Simplify Angular forms with powerful Signals API"
   }
 ]
