@@ -5,7 +5,7 @@ import {
   ElementRef,
   NgZone,
   ViewChild,
-  inject
+  inject,
 } from '@angular/core';
 import { MENU } from 'src/app/shared/data';
 import { MenuService } from 'src/app/shared/services';
@@ -16,6 +16,7 @@ import { ExperienceComponent } from '../experience/experience.component';
 import { GeneralInfoComponent } from '../general-info/general-info.component';
 import { WorkComponent } from '../work/work.component';
 import { BlogComponent } from './../blog/blog.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,7 @@ import { BlogComponent } from './../blog/blog.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements AfterViewInit {
+  private readonly location = inject(Location);
   private readonly menuService = inject(MenuService);
   private readonly ngZone = inject(NgZone);
   private readonly scrollEvent$ = injectScrollEvent();
@@ -64,18 +66,21 @@ export class HomeComponent implements AfterViewInit {
           this.calculateVisibleHeightOfElement(
             item.nativeElement.getBoundingClientRect().top,
             item.nativeElement.getBoundingClientRect().height,
-            item.nativeElement.getBoundingClientRect().bottom
-          )
+            item.nativeElement.getBoundingClientRect().bottom,
+          ),
         );
         const indexCurrentElementIsReading = setVisibleHeightOfElement.indexOf(
-          Math.max(...setVisibleHeightOfElement)
+          Math.max(...setVisibleHeightOfElement),
         );
-        if (!MENU[indexCurrentElementIsReading]) {
+        const path = this.location.path().split('#')[0];
+        const menu = MENU[indexCurrentElementIsReading];
+        if (!menu) {
           this.menuService.updateCurrentMenuSelected('');
+          this.location.replaceState(path);
         } else {
-          this.menuService.updateCurrentMenuSelected(
-            MENU[indexCurrentElementIsReading].name
-          );
+          this.menuService.updateCurrentMenuSelected(menu.name);
+          const path = this.location.path().split('#')[0];
+          this.location.replaceState(path + '#' + menu.fragment);
         }
       });
     });
@@ -87,7 +92,7 @@ export class HomeComponent implements AfterViewInit {
   private calculateVisibleHeightOfElement(
     top: number,
     height: number,
-    bottom: number
+    bottom: number,
   ): number {
     if (bottom < 0) {
       return -1;

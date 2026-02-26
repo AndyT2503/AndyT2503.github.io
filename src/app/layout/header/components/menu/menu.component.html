@@ -29,12 +29,11 @@
       <li>
         <a
           #menuItem
-          (click)="onClickMenu()"
-          [href]="item.link"
+          (click)="onClickMenu(item)"
           >{{ item.name }}</a
-          >
-        </li>
-      }
-      <button class="animation-btn" (click)="openResume()">Resume</button>
-    </ol>
-  </ng-template>
+        >
+      </li>
+    }
+    <button class="animation-btn" (click)="openResume()">Resume</button>
+  </ol>
+</ng-template>

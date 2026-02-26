@@ -9,6 +9,7 @@ import {
   RouterModule,
   provideRouter,
   withComponentInputBinding,
+  withInMemoryScrolling,
   withPreloading,
 } from '@angular/router';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
@@ -39,7 +40,11 @@ export class AppComponent {
             },
           ],
           withPreloading(PreloadAllModules),
-          withComponentInputBinding()
+          withComponentInputBinding(),
+          withInMemoryScrolling({
+            anchorScrolling: 'enabled',
+            scrollPositionRestoration: 'enabled',
+          }),
         ),
         importProvidersFrom(BrowserAnimationsModule, MarkdownModule.forRoot()),
         provideHttpClient(),

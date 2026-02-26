@@ -3,22 +3,22 @@ import { Menu } from '../models';
 export const MENU: ReadonlyArray<Menu> = [
   {
     name: 'About',
-    link: '#about',
+    fragment: 'about',
   },
   {
     name: 'Experience',
-    link: '#experience',
+    fragment: 'experience',
   },
   {
     name: 'Work',
-    link: '#work',
+    fragment: 'work',
   },
   {
     name: 'Blog',
-    link: '#blog',
+    fragment: 'blog',
   },
   {
     name: 'Contact',
-    link: '#contact',
+    fragment: 'contact',
   },
 ] as const;

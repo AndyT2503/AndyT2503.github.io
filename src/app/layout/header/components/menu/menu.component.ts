@@ -11,9 +11,11 @@ import {
   inject,
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DrawerComponent } from 'src/app/shared/components';
 import { MENU } from 'src/app/shared/data';
+import { Menu } from 'src/app/shared/models';
 import { BreakPointService, MenuService } from 'src/app/shared/services';
 
 @Component({
@@ -26,6 +28,7 @@ import { BreakPointService, MenuService } from 'src/app/shared/services';
 })
 export class MenuComponent implements AfterViewInit {
   @ViewChildren('menuItem') menuItems!: QueryList<ElementRef<HTMLLinkElement>>;
+  private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly breakPointService = inject(BreakPointService);
   private readonly menuService = inject(MenuService);
@@ -47,7 +50,7 @@ export class MenuComponent implements AfterViewInit {
           this.renderer.removeClass(item.nativeElement, 'active');
         });
         const activeMenu = this.menuItems.find(
-          (item) => item.nativeElement.innerText === menu
+          (item) => item.nativeElement.innerText === menu,
         );
         if (activeMenu) {
           this.renderer.addClass(activeMenu.nativeElement, 'active');
@@ -55,16 +58,17 @@ export class MenuComponent implements AfterViewInit {
       });
   }
 
-  onClickMenu(): void {
+  onClickMenu(menuItem: Menu): void {
     if (this.isMobile()) {
       this.isOpenDrawerMenu = false;
     }
+    this.router.navigate(['/'], { fragment: menuItem.fragment });
   }
 
   openResume(): void {
     window.open(
       'https://www.topcv.vn/xem-cv/UFRTAgIEAlQDBVRdX1BTA1MFBlFXV1MLAFJUAAcf99',
-      '_blank'
+      '_blank',
     );
   }
 }
