@@ -67,7 +67,7 @@ export class MenuComponent implements AfterViewInit {
 
   openResume(): void {
     window.open(
-      'https://www.topcv.vn/xem-cv/UFRTAgIEAlQDBVRdX1BTA1MFBlFXV1MLAFJUAAcf99',
+      'assets/cv/cv.pdf',
       '_blank',
     );
   }
