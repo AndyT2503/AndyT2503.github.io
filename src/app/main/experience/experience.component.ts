@@ -2,7 +2,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { DataService } from 'src/app/shared/services';
+import { DataService } from '@shared/services';
 
 @Component({
   selector: 'app-experience',

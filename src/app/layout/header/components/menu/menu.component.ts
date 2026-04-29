@@ -13,10 +13,10 @@ import {
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { DrawerComponent } from 'src/app/shared/components';
-import { MENU } from 'src/app/shared/data';
-import { Menu } from 'src/app/shared/models';
-import { BreakPointService, MenuService } from 'src/app/shared/services';
+import { DrawerComponent } from '@shared/components';
+import { MENU } from '@shared/data';
+import { Menu } from '@shared/models';
+import { BreakPointService, MenuService } from '@shared/services';
 
 @Component({
   selector: 'app-menu',

@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { ProjectData } from 'src/app/shared/models';
-import { BreakPointService } from 'src/app/shared/services';
+import { ProjectData } from '@shared/models';
+import { BreakPointService } from '@shared/services';
+import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'app-featured-project',
@@ -17,7 +17,7 @@ import { BreakPointService } from 'src/app/shared/services';
   styleUrls: ['./featured-project.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgClass, NzToolTipModule, NzIconModule],
+  imports: [NgClass, NzTooltipModule, NzIconModule],
 })
 export class FeaturedProjectComponent {
   @Input({ required: true }) projectData!: ProjectData;

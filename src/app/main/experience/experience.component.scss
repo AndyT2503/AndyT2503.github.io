@@ -9,7 +9,7 @@ section {
       font-family: var(--font-mono);
       font-size: var(--fs-heading);
       margin: 10px 0px 40px;
-      color: var(--default-color);
+      color: var(--default-color) !important;
       font-weight: 600;
 
       &::before {
@@ -37,14 +37,14 @@ section {
   }
 }
 
-nz-tabset {
+nz-tabs {
   color: var(--tertiary-color);
 }
 
 .tab-content {
   h3 {
     font-size: var(--fs-xxl);
-    color: var(--default-color);
+    color: var(--default-color) !important;
   }
 
   .time {

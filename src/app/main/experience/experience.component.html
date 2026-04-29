@@ -3,7 +3,7 @@
     <h4>Where I’ve Worked</h4>
   </div>
   <div class="content">
-    <nz-tabset nzTabPosition="left">
+    <nz-tabs nzTabPosition="left">
       @for (item of listWorkExperience(); track $index) {
         <nz-tab [nzTitle]="item.companyName">
           <div class="tab-content">
@@ -22,6 +22,6 @@
             </div>
           </nz-tab>
         }
-      </nz-tabset>
+      </nz-tabs>
     </div>
   </section>

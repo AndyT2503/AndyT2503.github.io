@@ -7,9 +7,9 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { MENU } from 'src/app/shared/data';
-import { MenuService } from 'src/app/shared/services';
-import { injectScrollEvent } from 'src/app/shared/utils';
+import { MENU } from '@shared/data';
+import { MenuService } from '@shared/services';
+import { injectScrollEvent } from '@shared/utils';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { ExperienceComponent } from '../experience/experience.component';

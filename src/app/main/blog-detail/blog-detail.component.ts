@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
-import { injectAppConfig } from 'src/app/shared/config/config.di';
-import { DataService, SeoService } from 'src/app/shared/services';
+import { injectAppConfig } from '@shared/config/config.di';
+import { DataService, SeoService } from '@shared/services';
 
 @Component({
   selector: 'app-blog-detail',

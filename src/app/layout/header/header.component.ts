@@ -8,7 +8,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { injectScrollEvent } from 'src/app/shared/utils';
+import { injectScrollEvent } from '@shared/utils';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 

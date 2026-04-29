@@ -4,7 +4,7 @@ import {
   Component, inject
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { DataService } from 'src/app/shared/services';
+import { DataService } from '@shared/services';
 import { BlogItemComponent } from './components/blog-item/blog-item.component';
 
 @Component({

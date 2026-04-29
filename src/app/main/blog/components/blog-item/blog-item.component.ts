@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 import { calculateReadingTime } from 'markdown-reading-time';
 import { MarkdownService } from 'ngx-markdown';
 import { map } from 'rxjs';
-import { Blog } from 'src/app/shared/models';
+import { Blog } from '@shared/models';
 
 @Component({
   selector: 'app-blog-item[blogItem]',

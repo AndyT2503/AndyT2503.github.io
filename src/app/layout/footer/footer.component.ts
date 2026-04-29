@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { injectAppConfig } from 'src/app/shared/config/config.di';
-import { GithubService } from 'src/app/shared/services';
+import { injectAppConfig } from '@shared/config/config.di';
+import { GithubService } from '@shared/services';
 
 @Component({
   selector: 'app-footer',
