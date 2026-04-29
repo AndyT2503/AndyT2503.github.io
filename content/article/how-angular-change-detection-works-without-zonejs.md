@@ -52,8 +52,9 @@ The main idea is simple: Angular should run Change Detection when Angular knows 
 
 ## Introduction to Zoneless in Angular
 
-You can enable zoneless Change Detection with `provideZonelessChangeDetection`.
+Zoneless is the default in Angular v21+ so you do not need to do anything to enable it. You should verify that `provideZoneChangeDetection` is not used anywhere to override the default configuration.
 
+If you are using Angular v20, enable zoneless change detection by adding `provideZonelessChangeDetection()` at bootstrap:
 ```ts
 import { provideZonelessChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -66,7 +67,7 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-This changes how Angular schedules Change Detection. From Angular core, `provideZonelessChangeDetection()` provides the zoneless scheduler and replaces `NgZone` with `NoopNgZone`:
+From Angular core, `provideZonelessChangeDetection()` provides the zoneless scheduler and replaces `NgZone` with `NoopNgZone`:
 
 ```ts
 {provide: ChangeDetectionScheduler, useExisting: ChangeDetectionSchedulerImpl},
