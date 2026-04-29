@@ -1,10 +1,10 @@
 # NewPortfolio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+Angular portfolio + blog, deployed to GitHub Pages.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm start` and open `http://localhost:4500/`.
 
 ## Code scaffolding
 
@@ -12,7 +12,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build`.
+
+- Output is written to `docs/` (GitHub Pages artifact).
+- Blog detail pages (`/blog/:slug`) are prerendered to static HTML for SEO.
+- Routes are generated from `content/article/*.md` into `src/prerender-routes.txt`.
 
 ## Running unit tests
 

@@ -76,6 +76,9 @@ export class BlogDetailComponent implements OnInit {
   }
 
   private scrollToTop(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
     window.scroll({
       top: 0,
       left: 0,

@@ -5,6 +5,7 @@ import {
   ElementRef,
   NgZone,
   ViewChild,
+  PLATFORM_ID,
   inject,
 } from '@angular/core';
 import { MENU } from '@shared/data';
@@ -16,7 +17,7 @@ import { ExperienceComponent } from '../experience/experience.component';
 import { GeneralInfoComponent } from '../general-info/general-info.component';
 import { WorkComponent } from '../work/work.component';
 import { BlogComponent } from './../blog/blog.component';
-import { Location } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -38,6 +39,7 @@ export class HomeComponent implements AfterViewInit {
   private readonly menuService = inject(MenuService);
   private readonly ngZone = inject(NgZone);
   private readonly scrollEvent$ = injectScrollEvent();
+  private readonly platformId = inject(PLATFORM_ID);
   @ViewChild('generalInfo', { read: ElementRef })
   generalInfoComponent!: ElementRef;
   @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
@@ -48,6 +50,9 @@ export class HomeComponent implements AfterViewInit {
   @ViewChild('contact', { read: ElementRef }) contactComponent!: ElementRef;
 
   ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.setupGetCurrentElementIsReading();
   }
 

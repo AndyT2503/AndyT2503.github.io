@@ -1,3 +1,11 @@
 {
-  "routes": {}
+  "routes": {
+    "/": {},
+    "/blog/angular-signal-forms-simpler-faster-and-more-reactive": {},
+    "/blog/deep-understanding-about-expression-has-changed-after-it-was-checked": {},
+    "/blog/fix-404-error-when-refreshing-github-page-with-custom-builder": {},
+    "/blog/how-angular-change-detection-works-without-zonejs": {},
+    "/blog/the-power-of-conditional-type-in-angular": {},
+    "/blog/what-is-ngzone-and-how-it-trigger-change-detection": {}
+  }
 }

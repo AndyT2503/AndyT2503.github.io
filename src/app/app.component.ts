@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import {
   CloseOutline,
@@ -13,8 +13,13 @@ import {
   MenuOutline,
   StarOutline,
 } from '@ant-design/icons-angular/icons';
-import { Component, importProvidersFrom } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
+import {
+  Component,
+  EnvironmentProviders,
+  Provider,
+  importProvidersFrom,
+} from '@angular/core';
+import { BootstrapContext, bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   PreloadAllModules,
@@ -52,8 +57,12 @@ const usedNzIcons = [
   imports: [RouterModule],
 })
 export class AppComponent {
-  static bootstrap(config: AppConfig) {
-    bootstrapApplication(this, {
+  static bootstrap(
+    config: AppConfig,
+    extraProviders: Array<Provider | EnvironmentProviders> = [],
+    context?: BootstrapContext,
+  ) {
+    return bootstrapApplication(this, {
       providers: [
         provideRouter(
           [
@@ -73,11 +82,12 @@ export class AppComponent {
           }),
         ),
         importProvidersFrom(BrowserAnimationsModule, MarkdownModule.forRoot()),
-        provideHttpClient(),
+        provideHttpClient(withFetch()),
         provideNzIcons(usedNzIcons),
         { provide: NZ_I18N, useValue: en_US },
         provideAppConfig(config),
+        ...extraProviders,
       ],
-    }).catch((err) => console.error(err));
+    }, context);
   }
 }
