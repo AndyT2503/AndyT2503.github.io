@@ -1,0 +1,235 @@
+markdown {
+  display: block;
+  max-width: 880px;
+  margin: 0 auto;
+  color: var(--light-slate);
+  font-size: var(--fs-md);
+  line-height: 1.8;
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--default-color);
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+
+  h1 {
+    position: relative;
+    margin: 0 0 32px;
+    padding-bottom: 18px;
+    font-size: clamp(30px, 5vw, 48px);
+    color: #ffffff;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 88px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary-color), #8ab4ff);
+    }
+  }
+
+  h2 {
+    margin: 48px 0 18px;
+    padding: 12px 0 12px 18px;
+    border-left: 4px solid var(--primary-color);
+    background: linear-gradient(90deg, rgba(80, 205, 181, 0.12), transparent);
+    font-size: var(--fs-heading-2);
+  }
+
+  h3 {
+    margin: 34px 0 12px;
+    font-size: var(--fs-xxl);
+
+    &::before {
+      content: "#";
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+  }
+
+  h4,
+  h5,
+  h6 {
+    margin: 28px 0 10px;
+  }
+
+  p {
+    margin: 14px 0;
+  }
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(80, 205, 181, 0.45);
+    transition: color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      color: #8ff7df;
+      border-color: currentColor;
+    }
+  }
+
+  strong {
+    color: var(--default-color);
+  }
+
+  ul,
+  ol {
+    margin: 18px 0 24px;
+    padding-left: 28px;
+  }
+
+  li {
+    margin: 8px 0;
+    padding-left: 4px;
+
+    &::marker {
+      color: var(--primary-color);
+    }
+  }
+
+  blockquote {
+    margin: 28px 0;
+    padding: 18px 22px;
+    color: var(--default-color);
+    background: rgba(17, 34, 64, 0.78);
+    border: 1px solid rgba(80, 205, 181, 0.22);
+    border-left: 5px solid var(--primary-color);
+    border-radius: 8px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  :not(pre) > code {
+    padding: 2px 7px;
+    color: #8ff7df;
+    background: rgba(80, 205, 181, 0.12);
+    border: 1px solid rgba(80, 205, 181, 0.18);
+    border-radius: 6px;
+    font-size: 0.9em;
+    white-space: nowrap;
+  }
+
+  pre {
+    position: relative;
+    margin: 22px 0 28px;
+    padding: 22px 24px;
+    overflow-x: auto;
+    color: #dbeafe;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 36px),
+      #0f213d;
+    border: 1px solid rgba(126, 136, 165, 0.25);
+    border-radius: 8px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+
+    &::before {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 10px;
+      margin-bottom: 16px;
+      background:
+        radial-gradient(circle at 5px 5px, #ff6b6b 0 4px, transparent 5px),
+        radial-gradient(circle at 20px 5px, #ffd166 0 4px, transparent 5px),
+        radial-gradient(circle at 35px 5px, #50cdb5 0 4px, transparent 5px);
+    }
+
+    code {
+      display: block;
+      min-width: max-content;
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      font-size: var(--fs-sm);
+      line-height: 1.75;
+      white-space: pre;
+    }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-height: 620px;
+    margin: 28px auto;
+    object-fit: contain;
+    border: 1px solid rgba(126, 136, 165, 0.25);
+    border-radius: 8px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+  }
+
+  table {
+    width: 100%;
+    margin: 28px 0;
+    border-collapse: collapse;
+    overflow: hidden;
+    border: 1px solid rgba(126, 136, 165, 0.28);
+    border-radius: 8px;
+  }
+
+  th,
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(126, 136, 165, 0.22);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    color: var(--default-color);
+    background: rgba(80, 205, 181, 0.12);
+  }
+
+  tr:nth-child(even) td {
+    background: rgba(17, 34, 64, 0.38);
+  }
+
+  hr {
+    margin: 42px 0;
+    border: 0;
+    border-top: 1px solid rgba(126, 136, 165, 0.25);
+  }
+
+  @media (max-width: 640px) {
+    font-size: var(--fs-sm);
+
+    h1 {
+      font-size: 32px;
+    }
+
+    h2 {
+      margin-top: 38px;
+      font-size: 24px;
+    }
+
+    pre {
+      margin-left: -8px;
+      margin-right: -8px;
+      padding: 18px;
+      border-radius: 6px;
+    }
+
+    :not(pre) > code {
+      white-space: normal;
+    }
+  }
+}

@@ -5,11 +5,10 @@
   "packageManager": "npm@10.8.2",
   "scripts": {
     "start": "ng serve --port 4500",
-    "build": "ng build",
+    "build": "ng run new-portfolio:build-generate-404-page",
     "watch": "ng build --watch --configuration development",
     "test": "vitest",
-    "clean": "rimraf node_modules package-lock.json",
-    "update-static-file": "rimraf docs/assets/config docs/assets/data docs/content && copyfiles --up 1 ./src/assets/** ./docs && copyfiles ./content/** ./docs"
+    "clean": "rimraf node_modules package-lock.json"
   },
   "dependencies": {
     "@angular/animations": "^21.2.0",

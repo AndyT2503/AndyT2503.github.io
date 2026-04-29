@@ -1,6 +1,18 @@
 import { registerLocaleData } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import en from '@angular/common/locales/en';
+import {
+  CloseOutline,
+  FacebookOutline,
+  FolderOutline,
+  ForkOutline,
+  FormOutline,
+  GithubOutline,
+  InstagramOutline,
+  LinkedinOutline,
+  MenuOutline,
+  StarOutline,
+} from '@ant-design/icons-angular/icons';
 import { Component, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,12 +24,26 @@ import {
   withInMemoryScrolling,
   withPreloading,
 } from '@angular/router';
+import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { MarkdownModule } from 'ngx-markdown';
 import { provideAppConfig } from './shared/config/config.di';
 import { AppConfig } from './shared/config/config.model';
 
 registerLocaleData(en);
+
+const usedNzIcons = [
+  CloseOutline,
+  FacebookOutline,
+  FolderOutline,
+  ForkOutline,
+  FormOutline,
+  GithubOutline,
+  InstagramOutline,
+  LinkedinOutline,
+  MenuOutline,
+  StarOutline,
+];
 
 @Component({
   selector: 'app-root',
@@ -48,6 +74,7 @@ export class AppComponent {
         ),
         importProvidersFrom(BrowserAnimationsModule, MarkdownModule.forRoot()),
         provideHttpClient(),
+        provideNzIcons(usedNzIcons),
         { provide: NZ_I18N, useValue: en_US },
         provideAppConfig(config),
       ],
