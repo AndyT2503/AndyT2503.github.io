@@ -9,17 +9,22 @@ const DATA_PATH = path.join(__dirname, '../src/assets/data/blog.json');
 function slugify(title) {
   return title
     .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-z0-9\s-]/g, '')
-      .trim()
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-');
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
 }
 
 function formatDate(dateStr) {
   const date = new Date(dateStr);
   return date.toISOString();
+}
+
+// 🔥 đảm bảo URL luôn có trailing slash
+function withSlash(url) {
+  return url.endsWith('/') ? url : url + '/';
 }
 
 // ===== Load data =====
@@ -28,15 +33,9 @@ const blogs = JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
 // load template index.html (Angular build output)
 const template = fs.readFileSync(path.join(DIST_PATH, 'index.html'), 'utf-8');
 
-// ===== SEO injector =====
+// ===== SEO injector (Blog) =====
 function injectSEO(html, seo) {
-  const {
-    title,
-    description,
-    url,
-    image,
-    date
-  } = seo;
+  const { title, description, url, image, date } = seo;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -80,7 +79,7 @@ ${JSON.stringify(jsonLd)}
   return html.replace('</head>', `${seoTags}</head>`);
 }
 
-// ===== 🏠 Inject SEO for homepage =====
+// ===== SEO injector (Homepage) =====
 function injectHomeSEO(html) {
   const seoTags = `
 <title>Tu Hoang - Portfolio</title>
@@ -127,12 +126,13 @@ fs.writeFileSync(path.join(DIST_PATH, 'index.html'), homeHtml);
 console.log('✅ Homepage SEO injected');
 
 // ===== Generate blog pages =====
-const urls = [`${DOMAIN}/`];
+const urls = [withSlash(`${DOMAIN}/`)];
 
 blogs.forEach(blog => {
   const slug = slugify(blog.title);
 
-  const url = `${DOMAIN}/blog/${slug}`;
+  // 🔥 FIX: luôn có trailing slash
+  const url = withSlash(`${DOMAIN}/blog/${slug}`);
   const image = `${DOMAIN}/content/images/${slug}/default.jpg`;
 
   const finalHtml = injectSEO(template, {
@@ -166,7 +166,7 @@ ${urls.map(url => `
 fs.writeFileSync(path.join(DIST_PATH, 'sitemap.xml'), sitemap);
 console.log('✅ sitemap.xml generated');
 
-// ===== Optional: copy index.html -> 404.html =====
+// ===== Copy index.html -> 404.html =====
 fs.copyFileSync(
   path.join(DIST_PATH, 'index.html'),
   path.join(DIST_PATH, '404.html')
