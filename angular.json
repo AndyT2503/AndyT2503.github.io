@@ -32,13 +32,8 @@
               "browser": ""
             },
             "browser": "src/main.ts",
-            "server": "src/main.server.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "prerender": {
-              "routesFile": "src/prerender-routes.txt",
-              "discoverRoutes": true
-            },
             "assets": [
               {
                 "glob": "**/*",

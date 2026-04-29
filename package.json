@@ -5,7 +5,7 @@
   "packageManager": "npm@10.8.2",
   "scripts": {
     "start": "ng serve --port 4500",
-    "build": "node scripts/generate-prerender-routes.mjs && ng run new-portfolio:build-generate-404-page",
+    "build": "ng run new-portfolio:build-generate-404-page",
     "postbuild": "node scripts/prerender-seo.js",
     "watch": "ng build --watch --configuration development",
     "test": "vitest",
@@ -19,9 +19,7 @@
     "@angular/core": "^21.2.0",
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
-    "@angular/platform-server": "^21.2.0",
     "@angular/router": "^21.2.0",
-    "@angular/ssr": "^21.2.8",
     "markdown-reading-time": "^0.1.1",
     "ng-zorro-antd": "^21.2.2",
     "ngx-markdown": "^21.2.0",

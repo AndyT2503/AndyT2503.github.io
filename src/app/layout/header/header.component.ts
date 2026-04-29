@@ -9,7 +9,6 @@ import {
   PLATFORM_ID,
   inject,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { injectScrollEvent } from '@shared/utils';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -28,12 +27,8 @@ export class HeaderComponent implements OnInit {
   private readonly scrollEvent$ = injectScrollEvent();
   private readonly ngZone = inject(NgZone);
   private readonly renderer = inject(Renderer2);
-  private readonly platformId = inject(PLATFORM_ID);
   private currentPageOffset = 0;
   ngOnInit(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
     this.currentPageOffset = window.scrollY;
     this.detectScrollDownEvent();
   }

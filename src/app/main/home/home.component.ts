@@ -39,7 +39,6 @@ export class HomeComponent implements AfterViewInit {
   private readonly menuService = inject(MenuService);
   private readonly ngZone = inject(NgZone);
   private readonly scrollEvent$ = injectScrollEvent();
-  private readonly platformId = inject(PLATFORM_ID);
   @ViewChild('generalInfo', { read: ElementRef })
   generalInfoComponent!: ElementRef;
   @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
@@ -50,9 +49,6 @@ export class HomeComponent implements AfterViewInit {
   @ViewChild('contact', { read: ElementRef }) contactComponent!: ElementRef;
 
   ngAfterViewInit(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
     this.setupGetCurrentElementIsReading();
   }
 
