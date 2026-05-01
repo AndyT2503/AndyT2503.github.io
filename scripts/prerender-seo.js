@@ -27,26 +27,6 @@ function withSlash(url) {
   return url.endsWith('/') ? url : url + '/';
 }
 
-const OLD_DOMAIN = 'andyt2503.github.io';
-
-function injectRedirect(html, redirectUrl) {
-  const redirectTags = `
-<meta http-equiv="refresh" content="0;url=${redirectUrl}" />
-<script>
-  const oldHost = ${JSON.stringify(OLD_DOMAIN)};
-  const current = window.location;
-  if (current.hostname === oldHost) {
-    const target = new URL(current.pathname + current.search + current.hash, ${JSON.stringify(withSlash(DOMAIN))}).href;
-    window.location.replace(target);
-  } else if (current.href !== ${JSON.stringify(redirectUrl)}) {
-    window.location.replace(${JSON.stringify(redirectUrl)});
-  }
-</script>
-`;
-
-  return html.replace('</head>', `${redirectTags}</head>`);
-}
-
 // ===== Load data =====
 const blogs = JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
 
@@ -97,7 +77,7 @@ ${JSON.stringify(jsonLd)}
   html = html.replace(/<meta name="description".*?>/, '');
 
   html = html.replace('</head>', `${seoTags}</head>`);
-  return injectRedirect(html, url);
+  return html;
 }
 
 // ===== SEO injector (Homepage) =====
@@ -139,7 +119,7 @@ ${JSON.stringify({
   html = html.replace(/<meta name="description".*?>/, '');
 
   html = html.replace('</head>', `${seoTags}</head>`);
-  return injectRedirect(html, withSlash(DOMAIN));
+  return html;
 }
 
 // ===== Inject homepage SEO =====
