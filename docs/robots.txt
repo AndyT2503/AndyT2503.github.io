@@ -4,7 +4,7 @@ Allow: /
 # Optional: block search spam
 Disallow: /*?s=
 
-Sitemap: https://andyt2503.github.io/sitemap.xml
+Sitemap: https://tuhoangdev.netlify.app/sitemap.xml
 
 
 # --- AI Bots (optional) ---
