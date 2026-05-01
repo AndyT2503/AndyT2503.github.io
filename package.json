@@ -5,7 +5,7 @@
   "packageManager": "npm@10.8.2",
   "scripts": {
     "start": "ng serve --port 4500",
-    "build": "ng run new-portfolio:build-generate-404-page",
+    "build": "npx ng run new-portfolio:build-generate-404-page",
     "postbuild": "node scripts/prerender-seo.js",
     "watch": "ng build --watch --configuration development",
     "test": "vitest",
