@@ -47,7 +47,7 @@ If you want to read multiple different state, you have to create lot of boilerpl
 Main idea of this solution is that I will create a utility function which take component-store and return a object that contain **selector** of all properties declared in component-store's state.
 
 ```
-function getSelectors<T extends ComponentStore<any>>(store: ComponentStore<T>) : StoreSelectors<T> {
+function getSelectors<TStore extends ComponentStore<any>>(store: TStore) : StoreSelectors<TStore> {
     //logic get selector
 }
 
