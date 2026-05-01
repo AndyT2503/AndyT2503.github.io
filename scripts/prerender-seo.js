@@ -166,7 +166,7 @@ ${urls.map(url => `
     <loc>${url}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>${url === 'https://andyt2503.github.io' ? '1.0' : '0.8'}</priority>
+    <priority>${url === 'https://andyt2503.github.io/' ? '1.0' : '0.8'}</priority>
   </url>
 `).join('')}
 
