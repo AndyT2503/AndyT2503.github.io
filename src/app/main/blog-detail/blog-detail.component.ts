@@ -1,15 +1,7 @@
-import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-  inject,
-} from '@angular/core';
-import { MetaDefinition } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
-import { injectAppConfig } from '@shared/config/config.di';
-import { DataService, SeoService } from '@shared/services';
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -20,58 +12,28 @@ import { DataService, SeoService } from '@shared/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogDetailComponent implements OnInit {
-  @Input() slug!: string
-  private readonly seoService = inject(SeoService);
+  @Input() slug!: string;
+
+  private readonly titleService = inject(Title);
   private readonly dataService = inject(DataService);
-  private readonly document = inject(DOCUMENT);
-  private readonly appConfig = injectAppConfig();
 
   ngOnInit(): void {
     this.scrollToTop();
+    this.setTitle();
   }
 
-  onMarkdownReady(): void {
-    this.setTitleAndMetaData();
-  }
-
-  private setTitleAndMetaData(): void {
-    const title = this.document.querySelector('h1')?.textContent;
-    if (!title) {
-      this.seoService.setTitle('Tu Hoang');
+  private setTitle(): void {
+    if (!this.slug || typeof window === 'undefined') {
+      this.titleService.setTitle('Tu Hoang');
       return;
     }
-    this.dataService.getBlogData().subscribe((listBlog) => {
-      const description =
-        listBlog.find((x) => x.slug === this.slug)?.description ||
-        'This is something I know about Angular';
-      this.seoService.setTitle(`Tu Hoang - ${title}`);
-      const seoData: MetaDefinition[] = [
-        {
-          name: 'title',
-          content: `Tu Hoang - ${title}`,
-        },
-        {
-          name: 'description',
-          content: description,
-        },
-        {
-          property: 'og:title',
-          content: `Tu Hoang - ${title}`,
-        },
-        {
-          property: 'og:type',
-          content: 'website',
-        },
-        {
-          property: 'og:url',
-          content: `${this.appConfig.appDomain}/blog/${this.slug}`,
-        },
-        {
-          property: 'og:description',
-          content: description,
-        },
-      ];
-      this.seoService.setMetaTags(seoData);
+
+    this.dataService.getBlogData().subscribe({
+      next: (blogs) => {
+        const blog = blogs.find((item) => item.slug === this.slug);
+        this.titleService.setTitle(blog ? `Tu Hoang - ${blog.title}` : 'Tu Hoang');
+      },
+      error: () => this.titleService.setTitle('Tu Hoang'),
     });
   }
 

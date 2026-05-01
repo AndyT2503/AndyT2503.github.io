@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DOMAIN = 'https://andyt2503.github.io';
+const DOMAIN = 'https://tuhoangdev.netlify.app';
 const DIST_PATH = path.join(__dirname, '../docs');
 const DATA_PATH = path.join(__dirname, '../src/assets/data/blog.json');
 
@@ -25,6 +25,26 @@ function formatDate(dateStr) {
 // 🔥 đảm bảo URL luôn có trailing slash
 function withSlash(url) {
   return url.endsWith('/') ? url : url + '/';
+}
+
+const OLD_DOMAIN = 'andyt2503.github.io';
+
+function injectRedirect(html, redirectUrl) {
+  const redirectTags = `
+<meta http-equiv="refresh" content="0;url=${redirectUrl}" />
+<script>
+  const oldHost = ${JSON.stringify(OLD_DOMAIN)};
+  const current = window.location;
+  if (current.hostname === oldHost) {
+    const target = new URL(current.pathname + current.search + current.hash, ${JSON.stringify(withSlash(DOMAIN))}).href;
+    window.location.replace(target);
+  } else if (current.href !== ${JSON.stringify(redirectUrl)}) {
+    window.location.replace(${JSON.stringify(redirectUrl)});
+  }
+</script>
+`;
+
+  return html.replace('</head>', `${redirectTags}</head>`);
 }
 
 // ===== Load data =====
@@ -76,29 +96,30 @@ ${JSON.stringify(jsonLd)}
   html = html.replace(/<title>.*<\/title>/, '');
   html = html.replace(/<meta name="description".*?>/, '');
 
-  return html.replace('</head>', `${seoTags}</head>`);
+  html = html.replace('</head>', `${seoTags}</head>`);
+  return injectRedirect(html, url);
 }
 
 // ===== SEO injector (Homepage) =====
 function injectHomeSEO(html) {
   const seoTags = `
-<title>Tu Hoang - Portfolio</title>
+<title>Tu Hoang</title>
 
 <meta name="description" content="Welcome to the personal website of Tu Hoang, a passionate software engineer specializing in Angular and .NET Core. Explore Tu's portfolio and achievements." />
 <meta name="keywords" content="Tu Hoang, AndyT, AndyT2503 software engineer, web developer, Angular, .NET Core, portfolio" />
-<meta name="author" content="Tu Hoang - Portfolio" />
+<meta name="author" content="Tu Hoang" />
 
-<link rel="canonical" href="${DOMAIN}/" />
+<link rel="canonical" href="${withSlash(DOMAIN)}" />
 
 <meta property="og:type" content="website" />
-<meta property="og:url" content="${DOMAIN}/" />
-<meta property="og:title" content="Tu Hoang - Portfolio" />
+<meta property="og:url" content="${withSlash(DOMAIN)}" />
+<meta property="og:title" content="Tu Hoang" />
 <meta property="og:description" content="Welcome to the personal website of Tu Hoang, a passionate software engineer specializing in Angular and .NET Core. Explore Tu's portfolio and achievements." />
 <meta property="og:image" content="${DOMAIN}/assets/img/avatar.jpg" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content="${DOMAIN}/" />
-<meta name="twitter:title" content="Tu Hoang - Portfolio" />
+<meta name="twitter:url" content="${withSlash(DOMAIN)}" />
+<meta name="twitter:title" content="Tu Hoang" />
 <meta name="twitter:description" content="Welcome to the personal website of Tu Hoang, a passionate software engineer specializing in Angular and .NET Core. Explore Tu's portfolio and achievements." />
 <meta name="twitter:image" content="${DOMAIN}/assets/img/avatar.jpg" />
 
@@ -117,7 +138,8 @@ ${JSON.stringify({
   html = html.replace(/<title>.*<\/title>/, '');
   html = html.replace(/<meta name="description".*?>/, '');
 
-  return html.replace('</head>', `${seoTags}</head>`);
+  html = html.replace('</head>', `${seoTags}</head>`);
+  return injectRedirect(html, withSlash(DOMAIN));
 }
 
 // ===== Inject homepage SEO =====
@@ -136,7 +158,7 @@ blogs.forEach(blog => {
   const image = `${DOMAIN}/content/images/${slug}/default.jpg`;
 
   const finalHtml = injectSEO(template, {
-    title: blog.title,
+    title: `Tu Hoang - ${blog.title}`,
     description: blog.description,
     url,
     image,
@@ -166,7 +188,7 @@ ${urls.map(url => `
     <loc>${url}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>${url === 'https://andyt2503.github.io/' ? '1.0' : '0.8'}</priority>
+    <priority>${url === withSlash(DOMAIN) ? '1.0' : '0.8'}</priority>
   </url>
 `).join('')}
 
