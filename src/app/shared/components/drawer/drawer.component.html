@@ -1,7 +1,8 @@
 <ng-template #drawerTemplate>
   @if (_isOpen) {
     <div
-      [@slideInOut]="position"
+      animate.enter="drawer-enter"
+      animate.leave="drawer-leave"
       (clickOutside)="onClickOutside()"
       class="drawer"
       [style.width]="_width"

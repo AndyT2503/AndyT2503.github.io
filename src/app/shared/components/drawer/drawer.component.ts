@@ -1,4 +1,3 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import {
   Overlay,
   OverlayConfig,
@@ -38,56 +37,6 @@ const ANIMATE_TIMINGS = 200;
     NgClass,
     NgTemplateOutlet
 ],
-  animations: [
-    trigger('slideInOut', [
-      transition('void => right', [
-        style({ transform: 'translateX(100%)' }),
-        animate(`${ANIMATE_TIMINGS}ms ease-in`),
-      ]),
-      transition('right => void', [
-        animate(
-          `${ANIMATE_TIMINGS}ms ease-in`,
-          style({ transform: 'translateX(100%)' })
-        ),
-      ]),
-      transition('void => left', [
-        style({ transform: 'translateX(-100%)' }),
-        animate(
-          `${ANIMATE_TIMINGS}ms ease-in`,
-          style({ transform: 'translateX(0%)' })
-        ),
-      ]),
-      transition('left => void', [
-        animate(
-          `${ANIMATE_TIMINGS}ms ease-in`,
-          style({ transform: 'translateX(-100%)' })
-        ),
-      ]),
-      transition('void => top', [
-        style({ transform: 'translateY(-100%)' }),
-        animate(
-          `${ANIMATE_TIMINGS}ms ease-in`,
-          style({ transform: 'translateY(0%)' })
-        ),
-      ]),
-      transition('top => void', [
-        animate(
-          `${ANIMATE_TIMINGS}ms ease-in`,
-          style({ transform: 'translateY(-100%)' })
-        ),
-      ]),
-      transition('void => bottom', [
-        style({ transform: 'translateY(100%)' }),
-        animate(`${ANIMATE_TIMINGS}ms ease-in`),
-      ]),
-      transition('bottom => void', [
-        animate(
-          `${ANIMATE_TIMINGS}ms ease-in`,
-          style({ transform: 'translateY(100%)' })
-        ),
-      ]),
-    ]),
-  ],
 })
 export class DrawerComponent implements OnDestroy {
   @ViewChild('drawerTemplate', { static: true })

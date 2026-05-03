@@ -1,19 +1,18 @@
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import {
+  PreloadAllModules,
   provideRouter,
   withComponentInputBinding,
   withInMemoryScrolling,
   withPreloading,
-  PreloadAllModules,
 } from '@angular/router';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MarkdownModule } from 'ngx-markdown';
-import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { provideNzIcons } from 'ng-zorro-antd/icon';
+import { MarkdownModule } from 'ngx-markdown';
 
-import en from '@angular/common/locales/en';
 import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
 
 import {
   CloseOutline,
@@ -29,7 +28,6 @@ import {
 } from '@ant-design/icons-angular/icons';
 
 import { provideAppConfig } from '@shared/config/config.di';
-import { AppConfig } from '@shared/config/config.model';
 import { environment } from '@shared/config/environment';
 
 registerLocaleData(en);
@@ -67,7 +65,7 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideHttpClient(withFetch()),
-    importProvidersFrom(BrowserAnimationsModule, MarkdownModule.forRoot()),
+    importProvidersFrom(MarkdownModule.forRoot()),
     provideNzIcons(usedNzIcons),
     { provide: NZ_I18N, useValue: en_US },
     provideAppConfig(environment),
