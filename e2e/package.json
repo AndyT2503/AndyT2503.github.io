@@ -1,0 +1,15 @@
+{
+  "name": "portfolio-e2e",
+  "private": true,
+  "scripts": {
+    "install": "playwright install",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:home": "playwright test tests/home/home.spec.ts",
+    "test:blog-detail": "playwright test tests/blog-detail/blog-detail.spec.ts",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0"
+  }
+}
