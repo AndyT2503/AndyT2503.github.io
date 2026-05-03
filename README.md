@@ -55,17 +55,7 @@ npm install
 npm test
 ```
 
-Or run from the root folder:
 
-```bash
-npm exec --prefix e2e test
-```
-
-## Clean
-
-```bash
-npm run clean
-```
 
 ## Notes
 
