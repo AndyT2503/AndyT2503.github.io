@@ -25,6 +25,9 @@
 - The E2E project must use its own `package.json`.
 - Use Playwright for end-to-end testing.
 - Keep E2E tests isolated from the main application test setup.
+- Organize E2E code by page: each page gets its own folder.
+- Inside each page folder, include a `selectors` file and a `spec` file.
+- Define selectors as an object, not an array.
 
 ## Additional guidance
 - Prefer tests that mimic real user interactions.

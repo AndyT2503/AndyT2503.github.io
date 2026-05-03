@@ -29,14 +29,15 @@
 - `docs`: build output after `npm run build`. The folder is not ignored in Git yet because GitHub Pages uses it; it may be ignored later.
 
 ## Blog guidance
-- Use `blog-instructions.md` for detailed blog writing rules.
+- Use `.github/blog.instructions.md` for detailed blog writing rules.
 - Store image assets in `content/images/{slug}`.
 - Follow the tone and structure of existing articles, especially `content/article/how-angular-change-detection-works-without-zonejs.md`.
 - Keep paragraphs concise and maintain readable flow.
 - When illustrating code, show only the needed excerpt and use comments for omitted parts.
+- Add new post metadata to `src/assets/data/blog.json` when creating a blog entry.
 
 ## Testing guidance
-- Use `testing-instructions.md` for unit and end-to-end testing rules.
+- Use `.github/testing.instructions.md` for unit and end-to-end testing rules.
 - Follow the repository’s preferred async and zoneless test patterns.
 
 ## Service notes
