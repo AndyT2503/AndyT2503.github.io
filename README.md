@@ -1,31 +1,80 @@
 # NewPortfolio
 
-Angular portfolio + blog, deployed to GitHub Pages.
+Angular portfolio + blog using Angular v21 with `ng-zorro-antd`, `ngx-markdown`, and SEO prerendering for blog pages. The project builds to the `docs/` folder and is ready for GitHub Pages deployment.
 
-## Development server
+## Project overview
 
-Run `npm start` and open `http://localhost:4500/`.
+- Standalone Angular v21 application with `@angular/router`, `@angular/cdk`, and `ng-zorro-antd`.
+- Blog posts are stored in `content/article/*.md` and rendered with `ngx-markdown`.
+- Static pages are generated into `docs/` for GitHub Pages and SEO-friendly blog routing.
+- Project development is assisted by GitHub Copilot for faster authoring and consistency.
 
-## Code scaffolding
+## Setup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Install dependencies:
+
+```bash
+npm install
+```
+
+## Run development server
+
+```bash
+npm start
+```
+
+Open `http://localhost:4500/` in your browser.
 
 ## Build
 
-Run `npm run build`.
+```bash
+npm run build
+```
 
-- Output is written to `docs/` (GitHub Pages artifact).
-- Blog detail pages (`/blog/:slug`) are prerendered to static HTML for SEO.
-- Routes are generated from `content/article/*.md` into `src/prerender-routes.txt`.
+- The build uses a custom builder to generate `404.html`.
+- `postbuild` runs `node scripts/prerender-seo.js` to prerender blog detail pages and generate `sitemap.xml`.
+- Output is written to `docs/`.
+- Blog metadata is loaded from `src/assets/data/blog.json`, and content Markdown files are stored in `content/article/*.md`.
+- Static blog pages are generated into `docs/blog/{slug}/index.html` during postbuild.
 
-## Running unit tests
+## Testing
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Unit tests
 
-## Running end-to-end tests
+```bash
+npm run test
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The project uses `vitest` for unit testing.
 
-## Further help
+### End-to-end tests
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+cd e2e
+npm install
+npm test
+```
+
+Or run from the root folder:
+
+```bash
+npm exec --prefix e2e test
+```
+
+## Clean
+
+```bash
+npm run clean
+```
+
+## Notes
+
+- `src/app`: main application source code, including layout, homepage, blog, and shared components.
+- `src/assets`: static assets used by the app.
+- `content/article`: blog posts written in Markdown.
+- `content/images`: blog images organized by slug.
+- `src/assets/data/blog.json`: blog metadata used by the prerender script.
+- `scripts/prerender-seo.js`: SEO prerender script executed after build to generate static blog pages, sitemap, and `404.html`.
+- `docs/`: production output and GitHub Pages artifact.
+- `e2e/`: Playwright configuration and tests for end-to-end coverage.
+- GitHub Copilot is used as a development assistant for code and docs.
