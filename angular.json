@@ -45,7 +45,8 @@
                 "input": "./content",
                 "output": "/content/"
               },
-              "src/robots.txt"
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/theme.less",

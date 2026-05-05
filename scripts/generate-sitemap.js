@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DOMAIN = 'https://tuhoangdev.netlify.app';
-const DIST_PATH = path.join(__dirname, '../docs');
+const SITEMAP_PATH = path.join(__dirname, '../src/sitemap.xml');
 const DATA_PATH = path.join(__dirname, '../src/assets/data/blog.json');
 
 // ===== Utils =====
@@ -21,12 +21,40 @@ function withSlash(url) {
   return url.endsWith('/') ? url : url + '/';
 }
 
+const MONTHS = {
+  January: 0,
+  February: 1,
+  March: 2,
+  April: 3,
+  May: 4,
+  June: 5,
+  July: 6,
+  August: 7,
+  September: 8,
+  October: 9,
+  November: 10,
+  December: 11
+};
+
+function parseBlogDate(dateStr) {
+  const [day, month, year] = dateStr.split(' ');
+
+  return new Date(Date.UTC(Number(year), MONTHS[month], Number(day)));
+}
+
 function formatDate(dateStr) {
-  return new Date(dateStr).toISOString();
+  return parseBlogDate(dateStr).toISOString().split('T')[0];
+}
+
+function getLatestDate(items) {
+  return items
+    .map(item => parseBlogDate(item.date))
+    .sort((a, b) => b.getTime() - a.getTime())[0];
 }
 
 // ===== Load =====
 const blogs = JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
+const latestBlogDate = getLatestDate(blogs);
 
 // ===== Build URLs =====
 const urls = [];
@@ -34,7 +62,7 @@ const urls = [];
 // homepage
 urls.push({
   loc: withSlash(DOMAIN),
-  lastmod: new Date().toISOString(),
+  lastmod: latestBlogDate.toISOString().split('T')[0],
   priority: '1.0'
 });
 
@@ -64,6 +92,6 @@ ${urls.map(u => `
 
 </urlset>`;
 
-fs.writeFileSync(path.join(DIST_PATH, 'sitemap.xml'), sitemap);
+fs.writeFileSync(SITEMAP_PATH, sitemap);
 
-console.log('🗺️ Sitemap generated');
+console.log('Sitemap generated at src/sitemap.xml');
