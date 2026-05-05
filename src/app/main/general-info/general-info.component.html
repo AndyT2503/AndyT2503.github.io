@@ -1,12 +1,49 @@
-<section>
-  <div>
-    <h3>Hi, my name is</h3>
-    <h2>Tu Hoang.</h2>
-    <p class="content">
-      I'm a software engineer. I have a deep passion for Angular and proficiency in .NET Core. Currently, I'm a Frontend
-      Engineer at
-      <a href="https://www.tecalliance.net/" target="_blank">TecAlliance</a>. My goal is always to create the best
-      products for users with the latest technology.
-    </p>
+<section id="intro" class="intro">
+  <div class="rt-container intro__container">
+    <div class="intro__grid">
+      <div class="intro__left">
+        <div class="intro__badge rt-glass rt-fade-up">
+          <app-lucide-icon name="sparkles" [size]="12" class="intro__badge-icon"></app-lucide-icon>
+          <span>Available for opportunities</span>
+        </div>
+
+        <h1 class="intro__title rt-fade-up">
+          Hi, I'm
+          <span class="intro__name">Tu Hoang</span>
+        </h1>
+
+        <h2 class="intro__subtitle rt-fade-up">
+          <span class="intro__subtitle-accent">Angular</span>
+          <span class="intro__subtitle-muted">Frontend Engineer</span>
+        </h2>
+
+        <p class="intro__desc rt-fade-up">
+          I specialize in building scalable, high-performance web applications using modern Angular architecture and advanced frontend patterns.
+        </p>
+
+        <div class="intro__cta rt-fade-up">
+          <button type="button" class="intro__btn intro__btn--primary" (click)="scrollToSection('projects')">
+            View Work
+          </button>
+          <button type="button" class="intro__btn intro__btn--secondary" (click)="scrollToSection('contact')">
+            Contact
+          </button>
+        </div>
+      </div>
+
+      <div class="intro__right">
+        <div class="intro__image-wrap rt-fade-up">
+          <div class="intro__glow"></div>
+          <div class="intro__image-card rt-glass">
+            <img ngSrc="assets/img/avatar.jpg" width="800" height="600" alt="avatar" class="intro__image" priority />
+            <div class="intro__image-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="intro__scroll" (click)="scrollToSection('about')">
+      <app-lucide-icon name="chevron-down" [size]="22"></app-lucide-icon>
+    </button>
   </div>
 </section>

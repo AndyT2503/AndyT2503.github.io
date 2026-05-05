@@ -11,25 +11,33 @@ export class DataService {
 
   getWorkExperienceData() {
     return this.httpClient.get<WorkExperience[]>(
-      `assets/data/work-experience.json?t=${new Date().getTime()}`
+      `assets/data/work-experience.json?t=${new Date().getTime()}`,
     );
   }
 
   getNormalProjectData() {
     return this.httpClient.get<ProjectData[]>(
-      `assets/data/normal-project.json?t=${new Date().getTime()}`
+      `assets/data/normal-project.json?t=${new Date().getTime()}`,
     );
   }
 
   getFeaturedProjectData() {
     return this.httpClient.get<ProjectData[]>(
-      `assets/data/featured-project.json?t=${new Date().getTime()}`
+      `assets/data/featured-project.json?t=${new Date().getTime()}`,
     );
   }
 
   getBlogData() {
     return this.httpClient
       .get<IBlog[]>(`assets/data/blog.json?t=${new Date().getTime()}`)
-      .pipe(map((res) => res.map((blog) => new Blog(blog))));
+      .pipe(
+        map((res) =>
+          res
+            .map((blog) => new Blog(blog))
+            .sort(
+              (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+            ),
+        ),
+      );
   }
 }

@@ -1,0 +1,73 @@
+:root {
+  --rt-bg-1: #1a0b2e;
+  --rt-bg-2: #2d1654;
+  --rt-text: #ffffff;
+  --rt-text-muted: #9ca3af;
+  --rt-border: rgba(255, 255, 255, 0.1);
+
+  --rt-accent-pink: #ff006e;
+  --rt-accent-orange: #fb5607;
+  --rt-accent-yellow: #ffbe0b;
+  --rt-accent-purple: #8338ec;
+  --rt-accent-blue: #3a86ff;
+}
+
+.rt-page {
+  min-height: 100vh;
+  background: radial-gradient(
+      700px 500px at 75% 10%,
+      rgba(255, 0, 110, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 500px at 20% 90%,
+      rgba(131, 56, 236, 0.2),
+      transparent 60%
+    ),
+    linear-gradient(135deg, var(--rt-bg-1), var(--rt-bg-2), var(--rt-bg-1));
+  color: var(--rt-text);
+}
+
+.rt-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rt-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--rt-border);
+  backdrop-filter: blur(14px);
+}
+
+.rt-fade-up {
+  animation: rtFadeUp 0.7s ease both;
+}
+
+.rt-fade-left {
+  animation: rtFadeLeft 0.7s ease both;
+}
+
+@keyframes rtFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rtFadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+

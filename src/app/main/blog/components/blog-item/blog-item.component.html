@@ -1,20 +1,21 @@
-<article class="article" (click)="showDetail()">
-  <span class="tag">
-    <span>{{ blogItem.type }}</span>
-  </span>
-  <a class="article-image" (click)="showDetail()">
-    <img
-      [alt]="blogItem.title"
-      src="content/images/{{ blogItem.slug }}/default.jpg"
-    />
-  </a>
-  <span class="footer">
-    <a class="title" (click)="showDetail()">{{
-      blogItem.title
-    }}</a>
-    <div class="meta-data">
-      <p class="date">{{ blogItem.date }}</p>
-      <p class="reading-time">{{ readingTime() }} min read</p>
+<a class="blog-card rt-glass" [routerLink]="['/blog', blogItem.slug]">
+  <div class="blog-card__tag">{{ blogItem.type }}</div>
+
+  <h3 class="blog-card__title">{{ blogItem.title }}</h3>
+
+  <p class="blog-card__desc">{{ blogItem.description }}</p>
+
+  <div class="blog-card__meta">
+    <div class="blog-card__meta-left">
+      <div class="blog-card__meta-item">
+        <app-lucide-icon name="calendar" [size]="12"></app-lucide-icon>
+        <span>{{ blogItem.date }}</span>
+      </div>
+      <div class="blog-card__meta-item">
+        <app-lucide-icon name="clock" [size]="12"></app-lucide-icon>
+        <span>{{ readingTime() }} min</span>
+      </div>
     </div>
-  </span>
-</article>
+    <app-lucide-icon name="arrow-right" [size]="14" class="blog-card__arrow"></app-lucide-icon>
+  </div>
+</a>

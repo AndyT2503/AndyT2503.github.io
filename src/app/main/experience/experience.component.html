@@ -1,27 +1,48 @@
-<section id="experience">
-  <div class="header">
-    <h4>Where I’ve Worked</h4>
-  </div>
-  <div class="content">
-    <nz-tabs nzTabPosition="left">
-      @for (item of listWorkExperience(); track $index) {
-        <nz-tab [nzTitle]="item.companyName">
-          <div class="tab-content">
-            <h3>
-              {{ item.role }}
-              <span
-                ><a [href]="item.url" target="_blank">&#64; {{ item.companyName }}</a></span
-                >
-              </h3>
-              <p class="time">{{ item.time }}</p>
-              <ul>
-                @for (detail of item.jobDetails; track $index) {
-                  <li>{{ detail }}</li>
+<section id="experience" class="experience">
+  <div class="rt-container experience__container">
+    <div class="experience__title rt-fade-left">
+      <span class="experience__eyebrow">Career Journey</span>
+      <h2 class="experience__heading">Experience</h2>
+    </div>
+
+    <div class="experience__timeline">
+      <div class="experience__line"></div>
+
+      <div class="experience__list">
+        @for (exp of listWorkExperience(); track exp.companyName) {
+          <div class="experience__item rt-fade-up">
+            <div class="experience__dot"></div>
+
+            <div class="experience__card rt-glass">
+              <div class="experience__card-head">
+                <div class="experience__head-left">
+                  <h3 class="experience__role">{{ exp.role }}</h3>
+                  <div class="experience__company">
+                    <app-lucide-icon name="briefcase" [size]="14"></app-lucide-icon>
+                    <h4>
+                      <a [href]="exp.url" target="_blank" rel="noopener noreferrer">{{ exp.companyName }}</a>
+                    </h4>
+                  </div>
+                </div>
+
+                <div class="experience__period">
+                  <app-lucide-icon name="calendar" [size]="12"></app-lucide-icon>
+                  <span>{{ exp.time }}</span>
+                </div>
+              </div>
+
+              <ul class="experience__details">
+                @for (detail of exp.jobDetails; track $index) {
+                  <li>
+                    <span class="experience__bullet">•</span>
+                    <span>{{ detail }}</span>
+                  </li>
                 }
               </ul>
             </div>
-          </nz-tab>
+          </div>
         }
-      </nz-tabs>
+      </div>
     </div>
-  </section>
+  </div>
+</section>

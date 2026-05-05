@@ -7,43 +7,16 @@ import {
   withInMemoryScrolling,
   withPreloading,
 } from '@angular/router';
-import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
-import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
-import {
-  CloseOutline,
-  FacebookOutline,
-  FolderOutline,
-  ForkOutline,
-  FormOutline,
-  GithubOutline,
-  InstagramOutline,
-  LinkedinOutline,
-  MenuOutline,
-  StarOutline,
-} from '@ant-design/icons-angular/icons';
 
 import { provideAppConfig } from '@shared/config/config.di';
 import { environment } from '@shared/config/environment';
 
 registerLocaleData(en);
-
-const usedNzIcons = [
-  CloseOutline,
-  FacebookOutline,
-  FolderOutline,
-  ForkOutline,
-  FormOutline,
-  GithubOutline,
-  InstagramOutline,
-  LinkedinOutline,
-  MenuOutline,
-  StarOutline,
-];
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -66,8 +39,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withFetch()),
     importProvidersFrom(MarkdownModule.forRoot()),
-    provideNzIcons(usedNzIcons),
-    { provide: NZ_I18N, useValue: en_US },
     provideAppConfig(environment),
   ],
 };

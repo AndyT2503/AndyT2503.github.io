@@ -49,7 +49,6 @@
               "src/sitemap.xml"
             ],
             "styles": [
-              "src/theme.less",
               "src/styles.scss"
             ]
           },

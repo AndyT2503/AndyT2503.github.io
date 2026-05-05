@@ -1,37 +1,64 @@
-<section id="about">
-  <div class="header">
-    <h4>About Me</h4>
-  </div>
-  <div class="content-layout">
-    <div class="content">
-      <p>
-        Hello! My name is Tu Hoang. I was born in 1999. I'm a software engineer based in Ho
-        Chi Minh city. I have experience working with .NET Core and
-        Angular. Currently, I work mainly with Angular.
-      </p>
-      <p>
-        Out of work, I really like traveling. Whenever I have spare times, I
-        will travel to somewhere. My goal is to travel all 63 provinces in
-        Vietnam and visit 5 continents.
-      </p>
-      <p>
-        Now, I'm a Front-end Developer at
-        <a href="https://www.tecalliance.net/" target="_blank">TecAlliance</a>.
-        In the future, I want to become the Angular Google Developer Expert (GDE).
-      </p>
-      <p>Here are a few technologies I've been working with recently:</p>
-      <ul>
-        <li>JavaScript (ES6+)</li>
-        <li>Angular</li>
-        <li>Ionic</li>
-        <li>.NET Core</li>
-        <li>NestJs</li>
-        <li>Typescript</li>
-      </ul>
+<section id="about" class="about">
+  <div class="rt-container about__container">
+    <div class="about__title rt-fade-left">
+      <span class="about__eyebrow">Get to know me</span>
+      <h2 class="about__heading">About Me</h2>
     </div>
-    <div class="image">
-      <div class="wrapper">
-        <img src="assets/img/avatar.jpg" alt="avatar" />
+
+    <div class="about__card rt-glass rt-fade-up">
+      <div class="about__card-head">
+        <div class="about__avatar">👨‍💻</div>
+        <div>
+          <h3 class="about__name">Tu Hoang</h3>
+          <div class="about__location">
+            <app-lucide-icon name="map-pin" [size]="14"></app-lucide-icon>
+            <span>Ho Chi Minh City, Vietnam</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about__copy">
+        <p>
+          I'm a Front-end Developer at <span class="about__accent-pink">TecAlliance</span>, focusing on building scalable and maintainable web
+          applications.
+        </p>
+        <p>
+          I’m especially interested in <span class="about__accent-pink">Angular</span> under the hood — how its core architecture works and why it
+          is designed the way it is, rather than just using it as a framework. Recently, I’ve also been exploring
+          <span class="about__accent-purple">AI-driven vibe coding</span>, where AI tools are used to speed up experimentation, prototyping, and
+          building features in a more flow-based and intuitive way.
+        </p>
+        <p>
+          I also actively contribute to the community as a <span class="about__accent-orange">moderator of Angular Vietnam</span>, a space where
+          developers can ask questions, share knowledge, and connect with each other. I support others in solving technical problems and help foster a
+          stronger Angular developer community in Vietnam.
+        </p>
+      </div>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__panel rt-glass rt-fade-up">
+        <h3 class="about__panel-title">
+          <span class="about__code-icon">&lt;/&gt;</span>
+          Tech Stack
+        </h3>
+        <div class="about__chips">
+          @for (tech of techs; track tech) {
+            <span class="about__chip">{{ tech }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="about__panel about__panel--wide rt-glass rt-fade-up">
+        <h3 class="about__panel-title">
+          <span class="about__sparkle">✨</span>
+          Hobbies
+        </h3>
+        <div class="about__hobbies">
+          @for (item of interests; track item.label) {
+            <div class="about__hobby">{{ item.label }}</div>
+          }
+        </div>
       </div>
     </div>
   </div>

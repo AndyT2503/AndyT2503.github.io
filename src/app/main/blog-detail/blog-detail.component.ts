@@ -4,15 +4,21 @@ import {
   Input,
   OnInit,
   inject,
+  signal,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
 import { DataService } from '../../shared/services/data.service';
+import { Blog } from '@shared/models';
+import { LucideIconComponent } from '@shared/components';
+import { calculateReadingTime } from 'markdown-reading-time';
+import { MarkdownService } from 'ngx-markdown';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [MarkdownModule],
+  imports: [MarkdownModule, LucideIconComponent],
   templateUrl: './blog-detail.component.html',
   styleUrls: ['./blog-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,10 +28,15 @@ export class BlogDetailComponent implements OnInit {
 
   private readonly titleService = inject(Title);
   private readonly dataService = inject(DataService);
+  private readonly markdownService = inject(MarkdownService);
+
+  readonly blog = signal<Blog | null>(null);
+  readonly readingTime = signal(0);
 
   ngOnInit(): void {
     this.scrollToTop();
     this.setTitle();
+    this.calculateReadTime();
   }
 
   private setTitle(): void {
@@ -39,6 +50,7 @@ export class BlogDetailComponent implements OnInit {
     this.dataService.getBlogData().subscribe({
       next: (blogs) => {
         const blog = blogs.find((item) => item.slug === this.slug);
+        this.blog.set(blog ?? null);
 
         if (blog) {
           this.titleService.setTitle(
@@ -50,6 +62,15 @@ export class BlogDetailComponent implements OnInit {
       },
       error: () => this.titleService.setTitle(defaultTitle),
     });
+  }
+
+  private calculateReadTime(): void {
+    if (!this.slug) return;
+
+    this.markdownService
+      .getSource(`content/article/${this.slug}.md`)
+      .pipe(map((content) => calculateReadingTime(content).minutes))
+      .subscribe((min) => this.readingTime.set(min));
   }
 
   private scrollToTop(): void {

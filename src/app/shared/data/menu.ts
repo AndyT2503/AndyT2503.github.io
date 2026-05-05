@@ -2,6 +2,10 @@ import { Menu } from '../models';
 
 export const MENU: ReadonlyArray<Menu> = [
   {
+    name: 'Intro',
+    fragment: 'intro',
+  },
+  {
     name: 'About',
     fragment: 'about',
   },
@@ -10,8 +14,8 @@ export const MENU: ReadonlyArray<Menu> = [
     fragment: 'experience',
   },
   {
-    name: 'Work',
-    fragment: 'work',
+    name: 'Projects',
+    fragment: 'projects',
   },
   {
     name: 'Blog',

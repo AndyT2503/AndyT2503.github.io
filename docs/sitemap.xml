@@ -1,56 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-                      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 
   <url>
     <loc>https://tuhoangdev.netlify.app/</loc>
-    <lastmod>2026-05-01T10:48:29.835Z</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://tuhoangdev.netlify.app/blog/deep-understanding-about-expression-has-changed-after-it-was-checked/</loc>
-    <lastmod>2026-05-01T10:48:29.835Z</lastmod>
+    <lastmod>2022-10-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://tuhoangdev.netlify.app/blog/what-is-ngzone-and-how-it-trigger-change-detection/</loc>
-    <lastmod>2026-05-01T10:48:29.835Z</lastmod>
+    <lastmod>2023-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://tuhoangdev.netlify.app/blog/fix-404-error-when-refreshing-github-page-with-custom-builder/</loc>
-    <lastmod>2026-05-01T10:48:29.835Z</lastmod>
+    <lastmod>2023-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://tuhoangdev.netlify.app/blog/the-power-of-conditional-type-in-angular/</loc>
-    <lastmod>2026-05-01T10:48:29.835Z</lastmod>
+    <lastmod>2023-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://tuhoangdev.netlify.app/blog/angular-signal-forms-simpler-faster-and-more-reactive/</loc>
-    <lastmod>2026-05-01T10:48:29.835Z</lastmod>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://tuhoangdev.netlify.app/blog/how-angular-change-detection-works-without-zonejs/</loc>
-    <lastmod>2026-05-01T10:48:29.835Z</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -1,4 +1,6 @@
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { LucideIconComponent } from '@shared/components';
 
 @Component({
   selector: 'app-general-info',
@@ -6,5 +8,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./general-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  imports: [LucideIconComponent, NgOptimizedImage],
 })
-export class GeneralInfoComponent {}
+export class GeneralInfoComponent {
+  scrollToSection(id: string): void {
+    const el = document.getElementById(id);
+    el?.scrollIntoView({ behavior: 'smooth' });
+  }
+}

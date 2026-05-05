@@ -2,22 +2,16 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  NgZone,
-  ViewChild,
-  PLATFORM_ID,
   inject,
+  NgZone,
 } from '@angular/core';
-import { MENU } from '@shared/data';
-import { MenuService } from '@shared/services';
-import { injectScrollEvent } from '@shared/utils';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { ExperienceComponent } from '../experience/experience.component';
 import { GeneralInfoComponent } from '../general-info/general-info.component';
 import { WorkComponent } from '../work/work.component';
 import { BlogComponent } from './../blog/blog.component';
-import { isPlatformBrowser, Location } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -35,78 +29,90 @@ import { isPlatformBrowser, Location } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements AfterViewInit {
-  private readonly location = inject(Location);
-  private readonly menuService = inject(MenuService);
-  private readonly ngZone = inject(NgZone);
-  private readonly scrollEvent$ = injectScrollEvent();
-  @ViewChild('generalInfo', { read: ElementRef })
-  generalInfoComponent!: ElementRef;
-  @ViewChild('about', { read: ElementRef }) aboutComponent!: ElementRef;
-  @ViewChild('experience', { read: ElementRef })
-  experienceComponent!: ElementRef;
-  @ViewChild('work', { read: ElementRef }) workComponent!: ElementRef;
-  @ViewChild('blog', { read: ElementRef }) blogComponent!: ElementRef;
-  @ViewChild('contact', { read: ElementRef }) contactComponent!: ElementRef;
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private ngZone = inject(NgZone);
+  private hasScrolled = false;
 
   ngAfterViewInit(): void {
-    this.setupGetCurrentElementIsReading();
+    this.handleInitialScroll();
+    this.handleScrollUpdateUrl();
   }
 
-  private setupGetCurrentElementIsReading(): void {
+  private handleInitialScroll(): void {
+    const fragment = this.route.snapshot.fragment || 'intro';
+
     this.ngZone.runOutsideAngular(() => {
-      this.scrollEvent$.subscribe(() => {
-        const setElements = [
-          this.aboutComponent,
-          this.experienceComponent,
-          this.workComponent,
-          this.blogComponent,
-          this.contactComponent,
-          this.generalInfoComponent,
-        ];
-        const setVisibleHeightOfElement = setElements.map((item) =>
-          this.calculateVisibleHeightOfElement(
-            item.nativeElement.getBoundingClientRect().top,
-            item.nativeElement.getBoundingClientRect().height,
-            item.nativeElement.getBoundingClientRect().bottom,
-          ),
-        );
-        const indexCurrentElementIsReading = setVisibleHeightOfElement.indexOf(
-          Math.max(...setVisibleHeightOfElement),
-        );
-        const path = this.location.path().split('#')[0];
-        const menu = MENU[indexCurrentElementIsReading];
-        if (!menu) {
-          this.menuService.updateCurrentMenuSelected('');
-          this.location.replaceState(path);
-        } else {
-          this.menuService.updateCurrentMenuSelected(menu.name);
-          const path = this.location.path().split('#')[0];
-          this.location.replaceState(path + '#' + menu.fragment);
+      const attemptScroll = () => {
+        if (this.hasScrolled) return;
+
+        const el = document.getElementById(fragment);
+
+        if (!el) {
+          requestAnimationFrame(attemptScroll);
+          return;
         }
-      });
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            window.scrollTo({
+              top: el.offsetTop,
+              behavior: 'auto',
+            });
+
+            this.hasScrolled = true;
+          });
+        });
+      };
+
+      setTimeout(() => {
+        requestAnimationFrame(attemptScroll);
+      }, 0);
     });
   }
 
-  /**
-   * return visible height of element if it is not visible, return -1
-   */
-  private calculateVisibleHeightOfElement(
-    top: number,
-    height: number,
-    bottom: number,
-  ): number {
-    if (bottom < 0) {
-      return -1;
-    }
-    if (top > window.innerHeight) {
-      return -1;
-    }
-    if (top < 0 && bottom >= window.innerHeight) {
-      return height;
-    }
-    if (top < 0 && bottom < window.innerHeight) {
-      return bottom;
-    }
-    return window.innerHeight - top;
+  private handleScrollUpdateUrl(): void {
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const sections = [
+          'intro',
+          'about',
+          'experience',
+          'projects',
+          'blog',
+          'contact',
+        ];
+
+        const scrollPos = window.scrollY + window.innerHeight / 3;
+
+        let current = 'intro';
+
+        for (const id of sections) {
+          const el = document.getElementById(id);
+          if (!el) continue;
+
+          if (el.offsetTop <= scrollPos) {
+            current = id;
+          }
+        }
+
+        const currentHash = this.route.snapshot.fragment;
+
+        if (currentHash !== current) {
+          this.router.navigate([], {
+            fragment: current,
+            replaceUrl: true,
+          });
+        }
+
+        ticking = false;
+      });
+    });
   }
 }

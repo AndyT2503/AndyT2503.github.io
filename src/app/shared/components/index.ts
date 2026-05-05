@@ -1,1 +1,1 @@
-export * from './drawer/drawer.component';
+export * from './lucide-icon/lucide-icon.component';

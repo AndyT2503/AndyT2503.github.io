@@ -1,8 +1,8 @@
 
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { DataService } from '@shared/services';
+import { LucideIconComponent } from '@shared/components';
 
 @Component({
   selector: 'app-experience',
@@ -10,7 +10,7 @@ import { DataService } from '@shared/services';
   styleUrls: ['./experience.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzTabsModule],
+  imports: [LucideIconComponent],
 })
 export class ExperienceComponent {
   readonly listWorkExperience = toSignal(

@@ -2,11 +2,13 @@
 @use "./styles/font";
 @use "./styles/font-size";
 @use "./styles/markdown";
+@use "./styles/react-theme";
 @use "@angular/cdk/overlay-prebuilt.css";
 
 body {
-  background-color: var(--base-color);
+  background: linear-gradient(135deg, var(--rt-bg-1), var(--rt-bg-2), var(--rt-bg-1));
   font-family: var(--font-sans);
+  color: var(--rt-text);
 }
 
 .animation-btn {
