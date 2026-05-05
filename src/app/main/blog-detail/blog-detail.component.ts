@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
 import { DataService } from '../../shared/services/data.service';
@@ -23,17 +29,26 @@ export class BlogDetailComponent implements OnInit {
   }
 
   private setTitle(): void {
+    const defaultTitle = 'Tu Hoang - Angular Software Engineer';
+
     if (!this.slug || typeof window === 'undefined') {
-      this.titleService.setTitle('Tu Hoang');
+      this.titleService.setTitle(defaultTitle);
       return;
     }
 
     this.dataService.getBlogData().subscribe({
       next: (blogs) => {
         const blog = blogs.find((item) => item.slug === this.slug);
-        this.titleService.setTitle(blog ? `Tu Hoang - ${blog.title}` : 'Tu Hoang');
+
+        if (blog) {
+          this.titleService.setTitle(
+            `${blog.title} | Angular & TypeScript Insights by Tu Hoang`,
+          );
+        } else {
+          this.titleService.setTitle(defaultTitle);
+        }
       },
-      error: () => this.titleService.setTitle('Tu Hoang'),
+      error: () => this.titleService.setTitle(defaultTitle),
     });
   }
 

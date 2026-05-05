@@ -26,7 +26,7 @@ describe('BlogDetailComponent', () => {
     fixture.componentInstance.ngOnInit();
     await fixture.whenStable();
 
-    expect(title.setTitle).toHaveBeenCalledWith('Tu Hoang');
+    expect(title.setTitle).toHaveBeenCalledWith('Tu Hoang - Angular Software Engineer');
     expect(scrollSpy).toHaveBeenCalled();
     scrollSpy.mockRestore();
   });
@@ -54,7 +54,7 @@ describe('BlogDetailComponent', () => {
     fixture.componentInstance.ngOnInit();
     await fixture.whenStable();
 
-    expect(title.setTitle).toHaveBeenCalledWith('Tu Hoang - Hello World');
+    expect(title.setTitle).toHaveBeenCalledWith('Hello World | Angular & TypeScript Insights by Tu Hoang');
   });
 
   it('falls back to default title when blog data fails', async () => {
@@ -76,6 +76,6 @@ describe('BlogDetailComponent', () => {
     fixture.componentInstance.ngOnInit();
     await fixture.whenStable();
 
-    expect(title.setTitle).toHaveBeenCalledWith('Tu Hoang');
+    expect(title.setTitle).toHaveBeenCalledWith('Tu Hoang - Angular Software Engineer');
   });
 });
