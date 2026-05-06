@@ -12,9 +12,10 @@
         "@schematics/angular:component": {
           "style": "scss",
           "changeDetection": "OnPush",
-          "skipTests": true,
           "standalone": true,
-          "skipImport": true
+          "skipImport": true,
+          "addTypeToClassName": true,
+          "type": "component"
         },
         "@schematics/angular:application": {
           "strict": true
@@ -27,10 +28,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": {
-              "base": "docs",
-              "browser": ""
-            },
+            "outputPath": "dist",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -50,7 +48,15 @@
             ],
             "styles": [
               "src/styles.scss"
-            ]
+            ],
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": []
+            },
+            "ssr": {
+              "entry": "src/server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -90,9 +96,6 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
-        },
-        "build-generate-404-page": {
-          "builder": "./builders:build-generate-404-page"
         }
       }
     }

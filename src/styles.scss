@@ -1,42 +1,11 @@
-@use "./styles/color";
 @use "./styles/font";
-@use "./styles/font-size";
 @use "./styles/markdown";
-@use "./styles/react-theme";
-@use "@angular/cdk/overlay-prebuilt.css";
+@use "./styles/theme";
+@use "./styles/tooltip";
+@use "./styles/scrollbar";
 
 body {
   background: linear-gradient(135deg, var(--rt-bg-1), var(--rt-bg-2), var(--rt-bg-1));
   font-family: var(--font-sans);
   color: var(--rt-text);
-}
-
-.animation-btn {
-  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-  &:hover {
-    outline: none;
-    box-shadow: 3px 3px 0 0 var(--primary-color);
-    transform: translate(-4px, -4px);
-  }
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--tertiary-color);
-  border-radius: 8px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--tertiary-color);
 }

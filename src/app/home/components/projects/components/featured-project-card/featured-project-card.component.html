@@ -1,0 +1,49 @@
+@let prj = project();
+<div class="projects__card">
+  <div class="projects__card-glow" [ngClass]="'is-' + gradient()"></div>
+
+  <div class="projects__card-inner rt-glass">
+    <div class="projects__preview">
+      <div
+        class="projects__preview-base"
+        [style.background-image]="'url(' + prj.image + ')'"
+      ></div>
+
+      <div class="projects__preview-hover">
+        @if (prj.repoUrls.length) {
+          @for (item of prj.repoUrls; track $index) {
+            <a
+              class="projects__icon-btn"
+              [href]="item.url"
+              target="_blank"
+              [appTooltip]="item.tooltip"
+            >
+              <app-lucide-icon name="github" [size]="16"></app-lucide-icon>
+            </a>
+          }
+        }
+        @if (prj.linkDemo?.url) {
+          <a
+            class="projects__icon-btn"
+            [href]="prj.linkDemo!.url"
+            target="_blank"
+            appTooltip="View Demo"
+          >
+            <app-lucide-icon name="external-link" [size]="16"></app-lucide-icon>
+          </a>
+        }
+      </div>
+    </div>
+
+    <div class="projects__body">
+      <h4 class="projects__name">{{ prj.name }}</h4>
+      <p class="projects__desc">{{ prj.description }}</p>
+
+      <div class="projects__tech">
+        @for (tech of prj.tech; track tech) {
+          <span class="projects__pill">{{ tech }}</span>
+        }
+      </div>
+    </div>
+  </div>
+</div>

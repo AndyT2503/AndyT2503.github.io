@@ -1,5 +1,3 @@
-# How Angular Change Detection Works without Zone.js
-
 ## Introduction
 
 Angular Change Detection is the process that keeps the UI in sync with component state. When a value changes in TypeScript, Angular must update the template. For example:

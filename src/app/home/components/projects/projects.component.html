@@ -1,0 +1,37 @@
+<div class="projects">
+  <div class="rt-container projects__container">
+    <div class="projects__title rt-fade-left">
+      <span class="projects__eyebrow">My Work</span>
+      <h2 class="projects__heading">Projects</h2>
+    </div>
+
+    <div class="projects__featured">
+      <div class="projects__featured-head">
+        <app-lucide-icon name="star" [size]="18" class="projects__star"></app-lucide-icon>
+        <h3>Featured Projects</h3>
+      </div>
+
+      <div class="projects__featured-grid">
+        @for (project of featuredProjects(); track project.name; let i = $index) {
+          <app-featured-project-card
+            [project]="project"
+            [gradient]="getGradientByIndex(i)"
+            class="rt-fade-up"
+          />
+        }
+      </div>
+    </div>
+
+    <div class="projects__other">
+      <h3 class="projects__other-title">Other Projects</h3>
+
+      <div class="projects__other-grid">
+        @for (project of normalProjects(); track project.name) {
+          <app-normal-project-card
+            [project]="project"
+          />
+        }
+      </div>
+    </div>
+  </div>
+</div>

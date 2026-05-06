@@ -1,0 +1,25 @@
+@let prj = project();
+
+<div class="projects__other-card">
+  <div class="projects__other-head">
+    <div class="projects__folder">📁</div>
+
+    <a
+      class="projects__other-github"
+      [href]="prj.repoUrls[0].url"
+      target="_blank"
+      [appTooltip]="prj.repoUrls[0].tooltip"
+    >
+      <app-lucide-icon name="github" [size]="16"></app-lucide-icon>
+    </a>
+  </div>
+
+  <h4 class="projects__other-name">{{ prj.name }}</h4>
+  <p class="projects__other-desc">{{ prj.description }}</p>
+
+  <div class="projects__other-tech">
+    @for (tech of prj.tech; track tech) {
+      <span>{{ tech }}</span>
+    }
+  </div>
+</div>

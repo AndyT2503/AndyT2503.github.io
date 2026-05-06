@@ -1,0 +1,13 @@
+<nav class="bottom-nav">
+  @for (item of navItems(); track item.id) {
+    <button
+      type="button"
+      class="bottom-nav__item"
+      [ngClass]="{ 'is-active': activeSection() === item.id }"
+      (click)="onClickNavItem.emit(item.id)"
+    >
+      <app-lucide-icon [name]="item.icon" [size]="18" />
+      <span>{{ item.label }}</span>
+    </button>
+  }
+</nav>

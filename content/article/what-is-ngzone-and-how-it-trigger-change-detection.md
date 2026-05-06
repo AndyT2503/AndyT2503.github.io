@@ -1,5 +1,3 @@
-# What is NgZone and How it trigger Change Detection In Angular
-
 Angular has a mechanism automatic detect state changed and update your view, it is Change Detection(CD). The secret behind CD is **NgZone**. In this article, we will explore about **NgZone** and how it work in Angular.
 
 According to Angular Document, Angular will automatically trigger CD whenever it think application state maybe changed. Typically, updates occur by one of following reasons:

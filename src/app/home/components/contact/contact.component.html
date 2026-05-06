@@ -1,0 +1,59 @@
+<div class="contact">
+  <div class="rt-container contact__container">
+    <div class="contact__title rt-fade-left">
+      <span class="contact__eyebrow">Let's Connect</span>
+      <h2 class="contact__heading">Get In Touch</h2>
+    </div>
+
+    <div class="contact__grid">
+      <div class="contact__left rt-fade-up">
+        <p class="contact__copy">
+          Have a question or want to collaborate? Feel free to reach out. I'm always open to discussing new projects,
+          creative ideas, or opportunities.
+        </p>
+
+        <a class="contact__cta" href="http://m.me/AndyTu.Hoang/" target="_blank" rel="noopener noreferrer">
+          <app-lucide-icon name="send" [size]="20"></app-lucide-icon>
+          <span>Send Message</span>
+        </a>
+
+        <div class="contact__email">
+          <app-lucide-icon name="mail" [size]="18"></app-lucide-icon>
+          <a [href]="'mailto:' + email">{{ email }}</a>
+        </div>
+
+        <div class="contact__social">
+          <p class="contact__social-label">Connect with me</p>
+          <div class="contact__social-list">
+            @for (social of socialLinks; track social.label) {
+              <a class="contact__social-item" [href]="social.href" target="_blank" rel="noopener noreferrer">
+                <span class="contact__social-glow" [style.background]="social.glow"></span>
+                <span class="contact__social-icon">
+                  <app-lucide-icon [name]="social.icon" [size]="20"></app-lucide-icon>
+                </span>
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="contact__right rt-fade-up">
+        <div class="contact__decor-glow"></div>
+        <div class="contact__decor-card rt-glass">
+          <div class="contact__bars">
+            <div class="contact__bar contact__bar--pink"></div>
+            <div class="contact__bar contact__bar--blue"></div>
+            <div class="contact__bar contact__bar--yellow"></div>
+          </div>
+
+          <div class="contact__quote">
+            <div class="contact__quote-icon">💬</div>
+            <p>
+              "Looking forward to connecting and exploring how we can work together on exciting projects."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

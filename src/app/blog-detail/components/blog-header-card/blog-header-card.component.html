@@ -1,0 +1,32 @@
+@let blogData = blog();
+
+<div class="post__header-card rt-glass">
+  <div class="post__header-inner">
+    <div class="post__meta">
+      <span class="post__tag">
+        <app-lucide-icon name="tag" [size]="14"></app-lucide-icon>
+        {{ blogData.type }}
+      </span>
+
+      <span class="post__meta-item">
+        <app-lucide-icon name="calendar" [size]="14"></app-lucide-icon>
+        {{ blogData.date }}
+      </span>
+
+      <span class="post__meta-item">
+        <app-lucide-icon name="clock" [size]="14"></app-lucide-icon>
+        {{ readingTime() }} min read
+      </span>
+    </div>
+
+    <h1 class="post__title">{{ blogData.title }}</h1>
+
+    <div class="post__author">
+      <div class="post__author-badge">👨‍💻</div>
+      <div>
+        <p class="post__author-label">Written by</p>
+        <p class="post__author-name">Tu Hoang</p>
+      </div>
+    </div>
+  </div>
+</div>

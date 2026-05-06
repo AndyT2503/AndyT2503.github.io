@@ -2,17 +2,24 @@ markdown {
   display: block;
   max-width: 880px;
   margin: 0 auto;
-  color: var(--light-slate);
-  font-size: var(--fs-md);
-  line-height: 1.8;
 
-  > *:first-child {
-    margin-top: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.78);
+
+  > * {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
-  > *:last-child {
-    margin-bottom: 0;
-  }
+  /* ======================
+     HEADINGS
+  ====================== */
 
   h1,
   h2,
@@ -20,216 +27,247 @@ markdown {
   h4,
   h5,
   h6 {
-    color: var(--default-color);
-    line-height: 1.25;
-    letter-spacing: 0;
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
   }
 
   h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin: 0 0 28px;
     position: relative;
-    margin: 0 0 32px;
-    padding-bottom: 18px;
-    font-size: clamp(30px, 5vw, 48px);
-    color: #ffffff;
+    padding-bottom: 14px;
 
     &::after {
       content: "";
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 88px;
-      height: 4px;
+      width: 72px;
+      height: 3px;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--primary-color), #8ab4ff);
+      background: linear-gradient(90deg, #ff006e, #8338ec);
     }
   }
 
   h2 {
-    margin: 48px 0 18px;
-    padding: 12px 0 12px 18px;
-    border-left: 4px solid var(--primary-color);
-    background: linear-gradient(90deg, rgba(80, 205, 181, 0.12), transparent);
-    font-size: var(--fs-heading-2);
+    font-size: 28px;
+    margin: 44px 0 16px;
+
+    background: linear-gradient(90deg, #ff006e, #fb5607);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   h3 {
-    margin: 34px 0 12px;
-    font-size: var(--fs-xxl);
-
-    &::before {
-      content: "#";
-      margin-right: 10px;
-      color: var(--primary-color);
-    }
+    font-size: 20px;
+    margin: 28px 0 12px;
   }
 
-  h4,
-  h5,
-  h6 {
-    margin: 28px 0 10px;
-  }
+  /* ======================
+     TEXT
+  ====================== */
 
   p {
     margin: 14px 0;
-  }
-
-  a {
-    color: var(--primary-color);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(80, 205, 181, 0.45);
-    transition: color 0.2s ease, border-color 0.2s ease;
-
-    &:hover {
-      color: #8ff7df;
-      border-color: currentColor;
-    }
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.75;
   }
 
   strong {
-    color: var(--default-color);
+    color: #fff;
   }
+
+  a {
+    color: #3a86ff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  /* ======================
+     LIST
+  ====================== */
 
   ul,
   ol {
-    margin: 18px 0 24px;
-    padding-left: 28px;
-  }
+    margin: 16px 0 22px;
+    padding-left: 22px;
 
-  li {
-    margin: 8px 0;
-    padding-left: 4px;
-
-    &::marker {
-      color: var(--primary-color);
+    li {
+      margin: 8px 0;
+      color: rgba(255, 255, 255, 0.75);
     }
   }
+
+  /* ======================
+     BLOCKQUOTE
+  ====================== */
 
   blockquote {
     margin: 28px 0;
-    padding: 18px 22px;
-    color: var(--default-color);
-    background: rgba(17, 34, 64, 0.78);
-    border: 1px solid rgba(80, 205, 181, 0.22);
-    border-left: 5px solid var(--primary-color);
-    border-radius: 8px;
+    padding: 18px 20px;
 
-    p {
-      margin: 0;
-    }
+    border-left: 3px solid #8338ec;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+
+    color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
   }
+
+  /* ======================
+     INLINE CODE
+  ====================== */
 
   :not(pre) > code {
-    padding: 2px 7px;
-    color: #8ff7df;
-    background: rgba(80, 205, 181, 0.12);
-    border: 1px solid rgba(80, 205, 181, 0.18);
+    padding: 2px 6px;
     border-radius: 6px;
+
+    background: rgba(255, 255, 255, 0.06);
+    color: #8ab4ff;
+
     font-size: 0.9em;
-    white-space: nowrap;
   }
+
+  /* ======================
+     CODE BLOCK
+  ====================== */
 
   pre {
     position: relative;
     margin: 22px 0 28px;
-    padding: 22px 24px;
+    padding: 0; // quan trọng: reset để header control control layout
     overflow-x: auto;
+
     color: #dbeafe;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 36px),
-      #0f213d;
-    border: 1px solid rgba(126, 136, 165, 0.25);
-    border-radius: 8px;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+    background: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+
+    /* ======================
+     HEADER MAC STYLE
+  ====================== */
 
     &::before {
       content: "";
       display: block;
-      width: 40px;
-      height: 10px;
-      margin-bottom: 16px;
-      background:
-        radial-gradient(circle at 5px 5px, #ff6b6b 0 4px, transparent 5px),
-        radial-gradient(circle at 20px 5px, #ffd166 0 4px, transparent 5px),
-        radial-gradient(circle at 35px 5px, #50cdb5 0 4px, transparent 5px);
+      height: 38px;
+      width: 100%;
+      background: #2d2d2d;
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px 14px 0 0;
+
+      /* mac dots */
+      background-image:
+        radial-gradient(circle at 16px 19px, #ff5f56 0 5px, transparent 6px),
+        radial-gradient(circle at 36px 19px, #ffbd2e 0 5px, transparent 6px),
+        radial-gradient(circle at 56px 19px, #27c93f 0 5px, transparent 6px), linear-gradient(#2d2d2d, #2d2d2d);
+
+      background-repeat: no-repeat;
     }
+
+    /* ======================
+     CODE CONTENT
+  ====================== */
 
     code {
       display: block;
-      min-width: max-content;
-      padding: 0;
-      color: inherit;
+      padding: 18px 22px;
+
+      font-size: 14px;
+      line-height: 1.65;
+      white-space: pre;
+
+      color: #d4d4d4;
       background: transparent;
       border: 0;
-      font-size: var(--fs-sm);
-      line-height: 1.75;
-      white-space: pre;
+    }
+
+    /* ======================
+     SCROLLBAR
+  ====================== */
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
     }
   }
 
+  /* ======================
+     IMAGE
+  ====================== */
+
   img {
-    display: block;
     width: 100%;
-    max-height: 620px;
-    margin: 28px auto;
-    object-fit: contain;
-    border: 1px solid rgba(126, 136, 165, 0.25);
-    border-radius: 8px;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+    margin: 24px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
+
+  /* ======================
+     TABLE
+  ====================== */
 
   table {
     width: 100%;
-    margin: 28px 0;
+    margin: 24px 0;
     border-collapse: collapse;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(126, 136, 165, 0.28);
-    border-radius: 8px;
-  }
 
-  th,
-  td {
-    padding: 12px 14px;
-    border-bottom: 1px solid rgba(126, 136, 165, 0.22);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  th {
-    color: var(--default-color);
-    background: rgba(80, 205, 181, 0.12);
-  }
-
-  tr:nth-child(even) td {
-    background: rgba(17, 34, 64, 0.38);
-  }
-
-  hr {
-    margin: 42px 0;
-    border: 0;
-    border-top: 1px solid rgba(126, 136, 165, 0.25);
-  }
-
-  @media (max-width: 640px) {
-    font-size: var(--fs-sm);
-
-    h1 {
-      font-size: 32px;
+    th,
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.75);
+      text-align: left;
     }
 
+    th {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+  }
+
+  /* ======================
+     HR
+  ====================== */
+
+  hr {
+    border: none;
+    height: 1px;
+    margin: 40px 0;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* ======================
+     RESPONSIVE
+  ====================== */
+
+  @media (max-width: 640px) {
+    font-size: 15px;
+
     h2 {
-      margin-top: 38px;
-      font-size: 24px;
+      font-size: 22px;
     }
 
     pre {
       margin-left: -8px;
       margin-right: -8px;
-      padding: 18px;
-      border-radius: 6px;
-    }
-
-    :not(pre) > code {
-      white-space: normal;
     }
   }
 }

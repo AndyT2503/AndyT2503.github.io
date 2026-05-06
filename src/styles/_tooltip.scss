@@ -1,0 +1,24 @@
+.app-tooltip {
+  position: absolute;
+  z-index: 9999;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 6px;
+  pointer-events: none;
+  white-space: nowrap;
+  transform: translateZ(0);
+  animation: tooltipFade 0.15s ease-in-out;
+}
+
+@keyframes tooltipFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

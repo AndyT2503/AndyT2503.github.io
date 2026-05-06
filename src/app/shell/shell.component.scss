@@ -1,0 +1,80 @@
+.layout__orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.layout__orb {
+  position: absolute;
+  width: 384px;
+  height: 384px;
+  border-radius: 999px;
+  filter: blur(120px);
+  opacity: 0.2;
+}
+
+.layout__orb--pink {
+  top: 0;
+  right: 25%;
+  background: linear-gradient(90deg, var(--rt-accent-pink), var(--rt-accent-orange));
+  animation: orbFloat1 20s ease-in-out infinite;
+}
+
+.layout__orb--blue {
+  bottom: 0;
+  left: 33%;
+  background: linear-gradient(90deg, var(--rt-accent-purple), var(--rt-accent-blue));
+  animation: orbFloat2 25s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(100px, -50px) scale(1.2);
+  }
+}
+
+@keyframes orbFloat2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-80px, 100px) scale(1.3);
+  }
+}
+
+.layout__home,
+.layout__detail {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.layout__content {
+  flex: 1;
+}
+
+.layout__content--home {
+  margin-left: 0;
+  padding-bottom: 64px;
+
+  @media (min-width: 1024px) {
+    margin-left: 256px;
+    padding-bottom: 0;
+  }
+}
+
+.layout__content--detail {
+  margin-left: 0;
+  padding-top: 64px;
+
+  @media (min-width: 1024px) {
+    margin-left: 288px;
+    padding-top: 0;
+  }
+}

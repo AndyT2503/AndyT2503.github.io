@@ -1,0 +1,31 @@
+@let exp = experience();
+
+<div class="experience__card rt-glass">
+  <div class="experience__card-head">
+    <div class="experience__head-left">
+      <h3 class="experience__role">{{ exp.role }}</h3>
+      <div class="experience__company">
+        <app-lucide-icon name="briefcase" [size]="14"></app-lucide-icon>
+        <h4>
+          <a [href]="exp.url" target="_blank" rel="noopener noreferrer"
+            >{{ exp.companyName }}</a
+          >
+        </h4>
+      </div>
+    </div>
+
+    <div class="experience__period">
+      <app-lucide-icon name="calendar" [size]="12"></app-lucide-icon>
+      <span>{{ exp.time }}</span>
+    </div>
+  </div>
+
+  <ul class="experience__details">
+    @for (detail of exp.jobDetails; track $index) {
+    <li>
+      <span class="experience__bullet">•</span>
+      <span>{{ detail }}</span>
+    </li>
+    }
+  </ul>
+</div>

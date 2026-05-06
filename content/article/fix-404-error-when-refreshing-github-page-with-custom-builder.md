@@ -1,5 +1,3 @@
-# Fix 404 error when refreshing Github Pages with Custom builder
-
 Back to the first time I deployed my Angular project to Github Pages, I just run `ng run build` and deployed the build artifacts to Github. Everything seem working ok. But then I got the issue that whenever I refresh my application, it return 404 Page. Obviously, I had to searching in the Google how to fix this issue. Fortunately, I found the way to fix this issue from `angular.io`. I just need to build the application and then add a 404 page, copy index.html into 404.html. Everything works perfectly. But now, when I want update my page, I have to build and copy again and again. I wondered if I can automatically generate 404.html file after run `ng run build`. And I found a solution that is using **Custom Angular CLI Builders**.  
 
 ## What is Angular CLI builders?

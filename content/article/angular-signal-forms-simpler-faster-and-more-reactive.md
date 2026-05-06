@@ -1,5 +1,3 @@
-# Angular Signal Forms: Simpler, Faster, and More Reactive
-
 Starting from Angular 17, Signals became a stable API and introduced a new way to build reactive applications in Angular alongside RxJS. After this release, Angular sequentially introduced new signal-based APIs such as `input`, `output`, and others, enabling developers to build fully signal-based applications.
 
 However, one of the most important parts of Angular — **Reactive Forms** — did not yet have a Signal-compatible API.

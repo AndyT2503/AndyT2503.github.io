@@ -1,0 +1,41 @@
+<aside class="sidebar">
+  <div>
+    <a class="sidebar__brand" routerLink="/">
+      <h1 class="sidebar__title">TU HOANG</h1>
+      <p class="sidebar__subtitle">Frontend Engineer</p>
+    </a>
+
+    <nav class="sidebar__nav">
+      @for (item of navItems(); track item.id) {
+        <button
+          type="button"
+          class="sidebar__item"
+          [ngClass]="{ 'is-active': activeSection() === item.id }"
+          (click)="onClickNavItem.emit(item.id)"
+        >
+          <app-lucide-icon [name]="item.icon" [size]="16" />
+          <span>{{ item.label }}</span>
+        </button>
+      }
+    </nav>
+  </div>
+
+  <div>
+    <a class="sidebar__resume" href="assets/cv/cv.pdf" target="_blank">
+      Download Resume
+    </a>
+
+    <div class="sidebar__social">
+      @for (item of socials; track item.href) {
+        <a
+          [href]="item.href"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="item.label"
+        >
+          <app-lucide-icon [name]="item.icon" [size]="16" />
+        </a>
+      }
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,23 @@
+@if (blog(); as blog) {
+  <div class="post">
+    <div class="post__container rt-container">
+      <div class="post__header rt-fade-up">
+        <div class="post__glow"></div>
+
+        <div class="post__thumbnail">
+          <img [src]="thumbnailUrl()" [alt]="blog.title" />
+          <div class="post__thumbnail-overlay"></div>
+        </div>
+        <app-blog-header-card [blog]="blog"></app-blog-header-card>
+      </div>
+
+      <article>
+        <markdown src="content/article/{{ slug() }}.md"></markdown>
+      </article>
+
+      <div class="post__footer rt-fade-up">
+        <div class="post__copyright">© 2026 Tu Hoang</div>
+      </div>
+    </div>
+  </div>
+}

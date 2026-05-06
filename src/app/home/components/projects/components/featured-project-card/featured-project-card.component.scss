@@ -1,0 +1,110 @@
+.projects__card {
+  position: relative;
+  height: 320px;
+}
+
+.projects__card-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  opacity: 0;
+  filter: blur(26px);
+  transition: opacity 0.35s ease;
+}
+
+.projects__card:hover .projects__card-glow {
+  opacity: 0.2;
+}
+
+.projects__card-glow.is-pink-orange {
+  background: linear-gradient(90deg, var(--rt-accent-pink), var(--rt-accent-orange));
+}
+
+.projects__card-glow.is-purple-blue {
+  background: linear-gradient(90deg, var(--rt-accent-purple), var(--rt-accent-blue));
+}
+
+.projects__card-glow.is-orange-yellow {
+  background: linear-gradient(90deg, var(--rt-accent-orange), var(--rt-accent-yellow));
+}
+
+.projects__card-inner {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects__preview {
+  position: relative;
+  height: 112px;
+}
+
+.projects__preview-base {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.projects__preview-hover {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: opacity 0.25s ease;
+}
+
+.projects__card-inner:hover .projects__preview-hover {
+  opacity: 1;
+}
+
+.projects__icon-btn {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+}
+
+.projects__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.projects__name {
+  margin: 0 0 8px;
+}
+
+.projects__desc {
+  margin: 0 0 16px;
+  color: rgba(156, 163, 175, 1);
+  flex: 1;
+  font-size: 14px;
+}
+
+.projects__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.projects__pill {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}

@@ -1,0 +1,24 @@
+<div class="layout rt-page">
+  <div class="layout__orbs" aria-hidden="true">
+    <div class="layout__orb layout__orb--pink"></div>
+    <div class="layout__orb layout__orb--blue"></div>
+  </div>
+
+  <div class="layout__home">
+    <app-side-nav
+      [navItems]="navItems"
+      [activeSection]="activeSection()"
+      (onClickNavItem)="scrollToSection($event)"
+    ></app-side-nav>
+
+    <main class="layout__content layout__content--home">
+      <router-outlet></router-outlet>
+    </main>
+
+    <app-bottom-nav
+      [navItems]="navItems"
+      [activeSection]="activeSection()"
+      (onClickNavItem)="scrollToSection($event)"
+    ></app-bottom-nav>
+  </div>
+</div>

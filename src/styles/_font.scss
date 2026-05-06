@@ -1,4 +1,54 @@
 :root {
-  --font-sans:"Calibre","Inter","San Francisco","SF Pro Text",-apple-system,system-ui,sans-serif;
-  --font-mono: "SF Mono","Fira Code","Fira Mono","Roboto Mono",monospace;
+  --font-sans:-apple-system,system-ui,sans-serif;
+}
+
+
+html {
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 500;
+  line-height: 1.4;
+  padding-bottom: 0.1em;
+}
+
+h2 {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 500;
+  line-height: 1.4;
+  padding-bottom: 0.1em;
+}
+
+h3 {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 500;
+  line-height: 1.4;
+  padding-bottom: 0.1em;
+}
+
+h4 {
+  font-size: 1rem; /* text-base */
+  font-weight: 500;
+  line-height: 1.4;
+  padding-bottom: 0.1em;
+}
+
+label {
+  font-size: 1rem; /* text-base */
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+button {
+  font-size: 1rem; /* text-base */
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+input {
+  font-size: 1rem; /* text-base */
+  font-weight: 400;
+  line-height: 1.5;
 }

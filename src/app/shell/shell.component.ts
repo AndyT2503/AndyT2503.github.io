@@ -1,0 +1,53 @@
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter, map } from 'rxjs';
+import { BottomNavComponent } from './components/bottom-nav/bottom-nav.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { LucideIconComponent, LucideIconName } from '@shared/components';
+import { NgClass } from '@angular/common';
+
+export type NavItem = {
+  id: string;
+  label: string;
+  icon: 'house' | 'user' | 'briefcase' | 'folder-git-2' | 'book-open' | 'send';
+};
+
+@Component({
+  selector: 'app-shell',
+  standalone: true,
+  imports: [RouterOutlet, SideNavComponent, BottomNavComponent],
+  templateUrl: './shell.component.html',
+  styleUrls: ['./shell.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ShellComponent {
+  private readonly router = inject(Router);
+
+  readonly activeSection = toSignal(
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      map(() => {
+        const url = this.router.url;
+        if (url.includes('/blog/')) return 'blog';
+
+        const hash = url.split('#')[1];
+        return hash;
+      }),
+    ),
+    { initialValue: 'intro' },
+  );
+
+  readonly navItems: NavItem[] = [
+    { id: 'intro', label: 'Intro', icon: 'house' },
+    { id: 'about', label: 'About', icon: 'user' },
+    { id: 'experience', label: 'Experience', icon: 'briefcase' },
+    { id: 'projects', label: 'Projects', icon: 'folder-git-2' },
+    { id: 'blog', label: 'Blog', icon: 'book-open' },
+    { id: 'contact', label: 'Contact', icon: 'send' },
+  ];
+
+  scrollToSection(id: string) {
+    this.router.navigate(['/'], { fragment: id });
+  }
+}

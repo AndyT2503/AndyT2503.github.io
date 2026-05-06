@@ -1,0 +1,48 @@
+@let blog = blogItem();
+
+<a
+  class="blog-card rt-glass"
+  [routerLink]="['/blog', blog.slug]"
+>
+  <div class="blog-card__thumb">
+    <img
+      class="blog-card__img"
+      [src]="thumbnailUrl()"
+      [alt]="blog.title"
+    />
+
+    <div class="blog-card__overlay"></div>
+
+    <div class="blog-card__tag">
+      {{ blog.type }}
+    </div>
+  </div>
+
+  <div class="blog-card__body">
+    <h3 class="blog-card__title">{{ blog.title }}</h3>
+
+    <p class="blog-card__desc">
+      {{ blog.description }}
+    </p>
+
+    <div class="blog-card__meta">
+      <div class="blog-card__meta-left">
+        <div class="blog-card__meta-item">
+          <app-lucide-icon name="calendar" [size]="12"></app-lucide-icon>
+          <span>{{ blog.date }}</span>
+        </div>
+
+        <div class="blog-card__meta-item">
+          <app-lucide-icon name="clock" [size]="12"></app-lucide-icon>
+          <span>{{ readingTime() }} min</span>
+        </div>
+      </div>
+
+      <app-lucide-icon
+        name="arrow-right"
+        [size]="14"
+        class="blog-card__arrow"
+      />
+    </div>
+  </div>
+</a>

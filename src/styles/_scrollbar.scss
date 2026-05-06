@@ -1,0 +1,30 @@
+/* ===== Scrollbar Base ===== */
+::-webkit-scrollbar {
+  width: 12px;
+  cursor: pointer;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2C2C2C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9F9F9F;
+  border-radius: 999px;
+  border: 2px solid #2C2C2C;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9F9F9F;
+}
+
+/* Active / drag */
+::-webkit-scrollbar-thumb:active {
+  background: #9F9F9F;
+}
+
+/* Corner */
+::-webkit-scrollbar-corner {
+  background: #2C2C2C;
+}

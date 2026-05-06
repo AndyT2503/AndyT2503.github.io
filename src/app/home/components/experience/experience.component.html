@@ -1,0 +1,22 @@
+<div class="experience">
+  <div class="rt-container experience__container">
+    <div class="experience__title rt-fade-left">
+      <span class="experience__eyebrow">Career Journey</span>
+      <h2 class="experience__heading">Experience</h2>
+    </div>
+
+    <div class="experience__timeline">
+      <div class="experience__line"></div>
+
+      <div class="experience__list">
+        @for (exp of listWorkExperience(); track exp.companyName) {
+          <div class="experience__item rt-fade-up">
+            <div class="experience__dot"></div>
+
+            <app-experience-card [experience]="exp" />
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

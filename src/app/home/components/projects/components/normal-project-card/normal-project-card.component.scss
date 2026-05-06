@@ -1,0 +1,51 @@
+.projects__other-card {
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 160px;
+}
+
+.projects__other-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.projects__folder {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255, 0, 110, 0.2), rgba(131, 56, 236, 0.2));
+}
+
+.projects__other-name {
+  margin: 0 0 8px;
+}
+
+.projects__other-desc {
+  margin: 0 0 16px;
+  color: rgba(156, 163, 175, 1);
+  flex: 1;
+  font-size: 14px;
+}
+
+.projects__other-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.projects__other-github {
+  color: rgba(156, 163, 175, 1);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--rt-accent-pink);
+  }
+}

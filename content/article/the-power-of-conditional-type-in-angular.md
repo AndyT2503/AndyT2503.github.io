@@ -1,5 +1,3 @@
-# The power of conditional type in Angular
-
 **Conditional Type** is the utility type of Typescript. It's really an intensive type. But do you know how to take the power of it in Angular?
 
 ## What is Conditional Type?
