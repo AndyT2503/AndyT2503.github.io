@@ -5,18 +5,16 @@ const angularAppEngine = new AngularAppEngine({
   allowedHosts: ['*'],
 });
 
-export async function netlifyAppEngineHandler(request: Request): Promise<Response> {
+export const netlifyAppEngineHandler = async (
+  request: Request,
+): Promise<Response> => {
   const context = getContext();
 
-  const url = new URL(request.url);
-
-  if (url.pathname.startsWith('/api')) {
-    return Response.json({ message: 'API route' });
-  }
-
   const result = await angularAppEngine.handle(request, context);
-
   return result || new Response('Not found', { status: 404 });
-}
+};
 
+/**
+ * The request handler used by the Angular CLI (dev-server and during build).
+ */
 export const reqHandler = createRequestHandler(netlifyAppEngineHandler);

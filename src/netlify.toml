@@ -1,12 +1,6 @@
 [build]
-  command = "npm run build"
-  publish = "dist/browser"
+  command="npm run build"
+  ignore="exit 1" ## always build, there might be changes in the plugin
 
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
-
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
+[[plugins]]
+  package="@netlify/angular-runtime"
