@@ -96,9 +96,6 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
-        },
-        "build-generate-404-page": {
-          "builder": "./builders:build-generate-404-page"
         }
       }
     }
