@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  PLATFORM_ID,
   inject,
   signal
 } from '@angular/core';
@@ -17,6 +18,7 @@ import {
 } from '../layout';
 import { StorageKey } from '../shared/const';
 import { SessionStorageService } from '../shared/services';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-main',
@@ -36,6 +38,7 @@ import { SessionStorageService } from '../shared/services';
 })
 export class MainComponent implements OnInit {
   private readonly storage = inject(SessionStorageService);
+  private platformId = inject(PLATFORM_ID);
   isOpen = signal(false);
 
   ngOnInit(): void {
@@ -43,6 +46,10 @@ export class MainComponent implements OnInit {
   }
 
   private showLoadingAnimation() {
+    if (isPlatformServer(this.platformId)) {
+      this.isOpen.set(true);
+      return;
+    }
     this.isOpen.set(!!this.storage.getItem(StorageKey.wasLoaded));
     if (!this.isOpen()) {
       setTimeout(() => {

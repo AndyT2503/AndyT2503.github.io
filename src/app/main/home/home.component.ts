@@ -1,12 +1,13 @@
+import { Location } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DOCUMENT,
   ElementRef,
+  inject,
   NgZone,
   ViewChild,
-  PLATFORM_ID,
-  inject,
 } from '@angular/core';
 import { MENU } from '@shared/data';
 import { MenuService } from '@shared/services';
@@ -17,7 +18,6 @@ import { ExperienceComponent } from '../experience/experience.component';
 import { GeneralInfoComponent } from '../general-info/general-info.component';
 import { WorkComponent } from '../work/work.component';
 import { BlogComponent } from './../blog/blog.component';
-import { isPlatformBrowser, Location } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -38,6 +38,8 @@ export class HomeComponent implements AfterViewInit {
   private readonly location = inject(Location);
   private readonly menuService = inject(MenuService);
   private readonly ngZone = inject(NgZone);
+  private readonly document = inject(DOCUMENT);
+
   private readonly scrollEvent$ = injectScrollEvent();
   @ViewChild('generalInfo', { read: ElementRef })
   generalInfoComponent!: ElementRef;
@@ -49,7 +51,35 @@ export class HomeComponent implements AfterViewInit {
   @ViewChild('contact', { read: ElementRef }) contactComponent!: ElementRef;
 
   ngAfterViewInit(): void {
+    this.injectJsonLd();
     this.setupGetCurrentElementIsReading();
+  }
+
+  private injectJsonLd() {
+    const existing = this.document.getElementById('json-ld');
+    if (existing) existing.remove();
+
+    const script = this.document.createElement('script');
+    script.id = 'json-ld';
+    script.type = 'application/ld+json';
+
+    script.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Tu Hoang',
+      alternateName: 'AndyT2503',
+      url: 'https://tuhoangdev.netlify.app',
+      image: 'https://tuhoangdev.netlify.app/assets/img/avatar.jpg',
+      jobTitle: 'Software Engineer',
+      knowsAbout: ['Angular', 'TypeScript', 'Web Development'],
+      sameAs: [
+        'https://github.com/AndyT2503',
+        'https://www.linkedin.com/in/tu-hoang-787951195/',
+        'https://www.facebook.com/AndyTu.Hoang/',
+      ],
+    });
+
+    this.document.head.appendChild(script);
   }
 
   private setupGetCurrentElementIsReading(): void {

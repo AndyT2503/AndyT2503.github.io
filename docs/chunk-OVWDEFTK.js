@@ -1,1 +1,0 @@
-import"./chunk-7CGTOI24.js";var t=[{path:"",loadComponent:()=>import("./chunk-FGDOAA7C.js").then(o=>o.HomeComponent)},{path:"blog/:slug",loadComponent:()=>import("./chunk-L7SWMA6V.js").then(o=>o.BlogDetailComponent)}];export{t as mainRoutes};

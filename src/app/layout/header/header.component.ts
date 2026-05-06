@@ -12,6 +12,7 @@ import {
 import { injectScrollEvent } from '@shared/utils';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,11 @@ export class HeaderComponent implements OnInit {
   private readonly ngZone = inject(NgZone);
   private readonly renderer = inject(Renderer2);
   private currentPageOffset = 0;
+  private platformId = inject(PLATFORM_ID);
   ngOnInit(): void {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
     this.currentPageOffset = window.scrollY;
     this.detectScrollDownEvent();
   }

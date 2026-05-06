@@ -29,6 +29,7 @@ import {
 
 import { provideAppConfig } from '@shared/config/config.di';
 import { environment } from '@shared/config/environment';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 registerLocaleData(en);
 
@@ -68,6 +69,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(MarkdownModule.forRoot()),
     provideNzIcons(usedNzIcons),
     { provide: NZ_I18N, useValue: en_US },
-    provideAppConfig(environment),
+    provideAppConfig(environment), provideClientHydration(withEventReplay()),
   ],
 };
