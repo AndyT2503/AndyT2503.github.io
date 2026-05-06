@@ -3,6 +3,7 @@ import { getContext } from '@netlify/angular-runtime/context.mjs';
 
 const angularAppEngine = new AngularAppEngine({
   allowedHosts: ['*'],
+  trustProxyHeaders: true,
 });
 
 export const netlifyAppEngineHandler = async (
