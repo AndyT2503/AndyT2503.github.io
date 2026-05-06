@@ -1,6 +1,7 @@
 [build]
-  command="npm run build"
-  ignore="exit 1" ## always build, there might be changes in the plugin
+  command = "npm run build"
+  publish = "dist/browser"
+  ignore = "exit 1"
 
 [[plugins]]
-  package="@netlify/angular-runtime"
+  package = "@netlify/angular-runtime"
