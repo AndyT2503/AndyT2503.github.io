@@ -2,14 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
 import { IBlog } from '@shared/models';
-import { injectAppConfig } from '@shared/config/config.di';
+import { injectEnvironment } from '@shared/providers';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
   private readonly document = inject(DOCUMENT);
-  private readonly domainUrl = injectAppConfig().domainUrl;
+  private readonly domainUrl = injectEnvironment().domainUrl;
 
   apply(blog: IBlog, slug: string): void {
     const fullTitle = this.buildTitle(blog);

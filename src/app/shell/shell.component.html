@@ -1,14 +1,10 @@
 <div class="layout rt-page">
-  <div class="layout__orbs" aria-hidden="true">
-    <div class="layout__orb layout__orb--pink"></div>
-    <div class="layout__orb layout__orb--blue"></div>
-  </div>
-
   <div class="layout__home">
+    <app-mobile-header></app-mobile-header>
     <app-side-nav
       [navItems]="navItems"
       [activeSection]="activeSection()"
-      (onClickNavItem)="scrollToSection($event)"
+      (onClickNavItem)="clickNavItem($event)"
     ></app-side-nav>
 
     <main class="layout__content layout__content--home">
@@ -18,7 +14,7 @@
     <app-bottom-nav
       [navItems]="navItems"
       [activeSection]="activeSection()"
-      (onClickNavItem)="scrollToSection($event)"
+      (onClickNavItem)="clickNavItem($event)"
     ></app-bottom-nav>
   </div>
 </div>

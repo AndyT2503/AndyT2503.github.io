@@ -12,8 +12,8 @@ import { MarkdownModule } from 'ngx-markdown';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
-import { provideAppConfig } from '@shared/config/config.di';
-import { environment } from '@shared/config/environment';
+import { provideEnvironment } from '@shared/providers';
+import { environment } from '@src/environments/environment';
 
 registerLocaleData(en);
 
@@ -42,6 +42,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withFetch()),
     importProvidersFrom(MarkdownModule.forRoot()),
-    provideAppConfig(environment),
+    provideEnvironment(environment),
   ],
 };

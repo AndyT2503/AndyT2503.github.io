@@ -4,8 +4,19 @@
 @use "./styles/tooltip";
 @use "./styles/scrollbar";
 
+// html {
+//   scroll-behavior: smooth;
+// }
+
 body {
-  background: linear-gradient(135deg, var(--rt-bg-1), var(--rt-bg-2), var(--rt-bg-1));
+  background:
+    radial-gradient(700px 500px at 75% 10%, rgba(255, 0, 110, 0.22), transparent 60%),
+    radial-gradient(700px 500px at 20% 90%, rgba(131, 56, 236, 0.2), transparent 60%),
+    linear-gradient(135deg, var(--rt-bg-1), var(--rt-bg-2), var(--rt-bg-1));
   font-family: var(--font-sans);
   color: var(--rt-text);
+
+  @media (max-width: 1023px) {
+    background: var(--rt-bg-1);
+  }
 }

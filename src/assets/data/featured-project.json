@@ -11,7 +11,7 @@
     ],
     "linkDemo": {
       "tooltip": "Demo RealWorld Conduit",
-      "url": "https://dev--taupe-pithivier-3c339a.netlify.app/#/"
+      "url": "https://ng-signal-conduit.netlify.app/"
     },
     "tech": [
       "Angular",

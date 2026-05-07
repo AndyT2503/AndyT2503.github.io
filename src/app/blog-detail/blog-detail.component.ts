@@ -14,6 +14,8 @@ import { Blog } from '@shared/models';
 import { DataService, SeoService } from '@shared/services';
 import { MarkdownModule } from 'ngx-markdown';
 import { BlogHeaderCardComponent } from './components/blog-header-card/blog-header-card.component';
+import { injectWindow } from '@shared/providers';
+import { MenuService } from '@shared/services/menu.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -28,7 +30,8 @@ export class BlogDetailComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly seoService = inject(SeoService);
   private readonly platformId = inject(PLATFORM_ID);
-
+  private readonly window = injectWindow();
+  private readonly menuService = inject(MenuService);
   readonly slug = input.required<string>();
   readonly blog = signal<Blog | null>(null);
 
@@ -37,13 +40,11 @@ export class BlogDetailComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.initPage();
-  }
-
-  private initPage(): void {
+    this.menuService.setActiveSection('blog');
     this.scrollToTop();
     this.loadBlog();
   }
+
 
   private loadBlog(): void {
     if (!this.slug()) {
@@ -76,7 +77,7 @@ export class BlogDetailComponent implements OnInit {
   private scrollToTop(): void {
     if (isPlatformServer(this.platformId)) return;
 
-    window.scroll({
+    this.window.scroll({
       top: 0,
       left: 0,
       behavior: 'smooth',

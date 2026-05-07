@@ -8,6 +8,7 @@ import {
   OnDestroy,
   Renderer2,
 } from '@angular/core';
+import { injectWindow } from '@shared/providers/window.di';
 
 @Directive({
   selector: '[appTooltip]',
@@ -16,6 +17,7 @@ import {
 export class TooltipDirective implements OnDestroy {
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
+  private readonly window = injectWindow();
 
   readonly text = input.required<string>({ alias: 'appTooltip' });
   readonly tooltipPosition = input<'top' | 'bottom' | 'left' | 'right'>('top');
@@ -56,8 +58,8 @@ export class TooltipDirective implements OnDestroy {
 
   private calculatePosition(hostPos: DOMRect) {
     const tooltip = this.tooltipEl!;
-    const scrollY = window.scrollY || window.pageYOffset;
-    const scrollX = window.scrollX || window.pageXOffset;
+    const scrollY = this.window.scrollY || this.window.pageYOffset;
+    const scrollX = this.window.scrollX || this.window.pageXOffset;
 
     const tooltipWidth = tooltip.offsetWidth;
     const tooltipHeight = tooltip.offsetHeight;

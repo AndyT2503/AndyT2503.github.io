@@ -1,11 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { filter, map } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DOCUMENT,
+  inject,
+} from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { injectWindow } from '@shared/providers';
+import { MenuService } from '@shared/services/menu.service';
 import { BottomNavComponent } from './components/bottom-nav/bottom-nav.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { LucideIconComponent, LucideIconName } from '@shared/components';
-import { NgClass } from '@angular/common';
+import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
 
 export type NavItem = {
   id: string;
@@ -16,27 +20,23 @@ export type NavItem = {
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [RouterOutlet, SideNavComponent, BottomNavComponent],
+  imports: [
+    RouterOutlet,
+    SideNavComponent,
+    BottomNavComponent,
+    MobileHeaderComponent,
+  ],
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShellComponent {
   private readonly router = inject(Router);
+  private readonly menuService = inject(MenuService);
+  private readonly document = inject(DOCUMENT);
+  private readonly window = injectWindow();
 
-  readonly activeSection = toSignal(
-    this.router.events.pipe(
-      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-      map(() => {
-        const url = this.router.url;
-        if (url.includes('/blog/')) return 'blog';
-
-        const hash = url.split('#')[1];
-        return hash;
-      }),
-    ),
-    { initialValue: 'intro' },
-  );
+  readonly activeSection = inject(MenuService).activeSection;
 
   readonly navItems: NavItem[] = [
     { id: 'intro', label: 'Intro', icon: 'house' },
@@ -47,7 +47,12 @@ export class ShellComponent {
     { id: 'contact', label: 'Contact', icon: 'send' },
   ];
 
-  scrollToSection(id: string) {
-    this.router.navigate(['/'], { fragment: id });
+  clickNavItem(id: string): void {
+    const isHome = !this.router.url.includes('blog/');
+    if (!isHome) {
+      this.router.navigate(['/'], { fragment: id });
+      return;
+    }
+    this.menuService.scrollToSection(id);
   }
 }

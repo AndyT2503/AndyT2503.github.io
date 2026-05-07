@@ -1,6 +1,13 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DOCUMENT,
+  inject,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import { LucideIconComponent } from '@shared/components';
+import { MenuService } from '@shared/services/menu.service';
 
 @Component({
   selector: 'app-general-info',
@@ -11,8 +18,9 @@ import { LucideIconComponent } from '@shared/components';
   imports: [LucideIconComponent, NgOptimizedImage],
 })
 export class GeneralInfoComponent {
+  private readonly menuService = inject(MenuService);
+
   scrollToSection(id: string): void {
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: 'smooth' });
+    this.menuService.scrollToSection(id);
   }
 }

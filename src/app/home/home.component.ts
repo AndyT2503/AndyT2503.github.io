@@ -1,20 +1,22 @@
+import { isPlatformServer } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   DOCUMENT,
   inject,
-  NgZone,
   PLATFORM_ID,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { injectWindow } from '@shared/providers';
+import { MenuService } from '@shared/services/menu.service';
 import { AboutComponent } from './components/about/about.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ExperienceComponent } from './components/experience/experience.component';
 import { GeneralInfoComponent } from './components/general-info/general-info.component';
 import { ProjectsComponent } from './components/projects/projects.component';
-import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -32,56 +34,39 @@ import { isPlatformServer } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements AfterViewInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly ngZone = inject(NgZone);
   private readonly document = inject(DOCUMENT);
+  private readonly menuService = inject(MenuService);
+  private readonly window = injectWindow();
+  private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
-  private hasScrolled = false;
 
   ngAfterViewInit(): void {
-    this.handleInitialScroll();
+    if (isPlatformServer(this.platformId)) return;
+    this.handleDefaultHash();
     this.handleScrollUpdateUrl();
   }
 
-  private handleInitialScroll(): void {
-    if (isPlatformServer(this.platformId)) return;
-    const fragment = this.route.snapshot.fragment || 'intro';
+  private handleDefaultHash(): void {
+    const isHome = this.window.location.pathname === '/';
+    const hasHash = !!this.window.location.hash;
 
-    this.ngZone.runOutsideAngular(() => {
-      const attemptScroll = () => {
-        if (this.hasScrolled) return;
+    if (isHome && !hasHash) {
+      this.menuService.setActiveSection('intro');
 
-        const el = this.document.getElementById(fragment);
-
-        if (!el) {
-          requestAnimationFrame(attemptScroll);
-          return;
-        }
-
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            window.scrollTo({
-              top: el.offsetTop,
-              behavior: 'auto',
-            });
-
-            this.hasScrolled = true;
-          });
-        });
-      };
-
-      setTimeout(() => {
-        requestAnimationFrame(attemptScroll);
-      }, 0);
-    });
+      this.window.history.replaceState(
+        null,
+        '',
+        `${this.window.location.pathname}#intro`,
+      );
+    }
   }
 
   private handleScrollUpdateUrl(): void {
     let ticking = false;
 
-    this.document.addEventListener('scroll', () => {
-      if (ticking) return;
+    const onScroll = () => {
+      if (ticking || this.menuService.isAutoScrolling()) return;
 
       ticking = true;
 
@@ -95,12 +80,15 @@ export class HomeComponent implements AfterViewInit {
           'contact',
         ];
 
-        const scrollPos = this.document.documentElement.scrollTop + this.document.documentElement.clientHeight / 3;
+        const scrollPos =
+          this.document.documentElement.scrollTop +
+          this.document.documentElement.clientHeight / 3;
 
         let current = 'intro';
 
         for (const id of sections) {
           const el = this.document.getElementById(id);
+
           if (!el) continue;
 
           if (el.offsetTop <= scrollPos) {
@@ -108,20 +96,32 @@ export class HomeComponent implements AfterViewInit {
           }
         }
 
-        const currentHash = this.route.snapshot.fragment;
         const isHome = !this.router.url.includes('/blog/');
 
-        if (!isHome) return;
+        if (!isHome) {
+          ticking = false;
+          return;
+        }
 
-        if (currentHash !== current) {
-          this.router.navigate([], {
-            fragment: current,
-            replaceUrl: true,
-          });
+        if (this.menuService.activeSection() !== current) {
+          this.menuService.setActiveSection(current);
+          history.replaceState(
+            null,
+            '',
+            `${this.document.location.pathname}#${current}`,
+          );
         }
 
         ticking = false;
       });
+    };
+
+    this.document.addEventListener('scroll', onScroll, {
+      passive: true,
+    });
+
+    this.destroyRef.onDestroy(() => {
+      this.document.removeEventListener('scroll', onScroll);
     });
   }
 }
