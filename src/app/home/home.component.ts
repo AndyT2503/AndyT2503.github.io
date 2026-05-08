@@ -15,7 +15,7 @@ import { AboutComponent } from './components/about/about.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ExperienceComponent } from './components/experience/experience.component';
-import { GeneralInfoComponent } from './components/general-info/general-info.component';
+import { IntroComponent } from './components/intro/intro.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SeoService } from '@shared/services/seo.service';
 
@@ -26,7 +26,7 @@ import { SeoService } from '@shared/services/seo.service';
     AboutComponent,
     ContactComponent,
     ExperienceComponent,
-    GeneralInfoComponent,
+    IntroComponent,
     ProjectsComponent,
     BlogComponent,
   ],

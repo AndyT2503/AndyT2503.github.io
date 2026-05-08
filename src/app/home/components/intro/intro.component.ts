@@ -2,23 +2,21 @@ import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  DOCUMENT,
-  inject,
+  inject
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { LucideIconComponent } from '@shared/components';
 import { injectEnvironment } from '@shared/providers';
 import { MenuService } from '@shared/services/menu.service';
 
 @Component({
-  selector: 'app-general-info',
-  templateUrl: './general-info.component.html',
-  styleUrls: ['./general-info.component.scss'],
+  selector: 'app-intro',
+  templateUrl: './intro.component.html',
+  styleUrls: ['./intro.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [LucideIconComponent, NgOptimizedImage],
 })
-export class GeneralInfoComponent {
+export class IntroComponent {
   private readonly menuService = inject(MenuService);
   readonly isOpenToWork = injectEnvironment().isOpenToWork;
 

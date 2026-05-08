@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   padding: 0 24px;
-  overflow: hidden;
 
   @media (min-width: 1024px) {
     padding: 0 48px;
@@ -53,12 +52,7 @@
 }
 
 .intro__name {
-  background: linear-gradient(
-    90deg,
-    var(--rt-accent-pink),
-    var(--rt-accent-orange),
-    var(--rt-accent-yellow)
-  );
+  background: linear-gradient(90deg, var(--rt-accent-pink), var(--rt-accent-orange), var(--rt-accent-yellow));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -110,7 +104,10 @@
   padding: 12px 24px;
   color: #fff;
   font-size: 14px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
     transform: translateY(-1px);
@@ -152,29 +149,29 @@
 .intro__glow {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 0, 110, 0.18),
-    rgba(131, 56, 236, 0.18),
-    rgba(58, 134, 255, 0.18)
-  );
+  background: linear-gradient(90deg, rgba(255, 0, 110, 0.18), rgba(131, 56, 236, 0.18), rgba(58, 134, 255, 0.18));
   filter: blur(40px);
   border-radius: 18px;
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
-.intro__image-wrap:hover .intro__glow {
-  opacity: 1;
+.intro__image-wrap:hover {
+  .intro__image-card {
+    transform: scale(1.02);
+  }
+  .intro__glow {
+    opacity: 1;
+  }
 }
 
 .intro__image-card {
   position: relative;
   border-radius: 18px;
-  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: linear-gradient(135deg, #1a0b2e, #2d1654);
   aspect-ratio: 4 / 3;
+  transition: transform 0.5s ease;
 }
 
 .intro__image {
@@ -182,6 +179,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 18px;
 }
 
 .intro__image-overlay {
