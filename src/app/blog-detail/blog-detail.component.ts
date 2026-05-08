@@ -71,7 +71,7 @@ export class BlogDetailComponent implements OnInit {
   }
 
   private applySeo(blog: Blog): void {
-    this.seoService.apply(blog, this.slug());
+    this.seoService.applyBlog(blog, this.slug());
   }
 
   private scrollToTop(): void {

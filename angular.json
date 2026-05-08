@@ -35,14 +35,11 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              },
-              {
-                "glob": "**/*",
                 "input": "./content",
-                "output": "/content/"
+                "output": "/content"
               },
+              "src/assets",
+              "src/favicon_icon",
               "src/robots.txt",
               "src/sitemap.xml"
             ],

@@ -4,10 +4,6 @@
 @use "./styles/tooltip";
 @use "./styles/scrollbar";
 
-// html {
-//   scroll-behavior: smooth;
-// }
-
 body {
   background:
     radial-gradient(700px 500px at 75% 10%, rgba(255, 0, 110, 0.22), transparent 60%),

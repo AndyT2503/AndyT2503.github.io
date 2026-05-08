@@ -1,6 +1,4 @@
-## Introduction
-
-Angular Change Detection is the process that keeps the UI in sync with component state. When a value changes in TypeScript, Angular must update the template. For example:
+**Angular Change Detection** is the process that keeps the UI in sync with component state. When a value changes in TypeScript, Angular must update the template. For example:
 
 ```html
 <h1>{{ title }}</h1>

@@ -1,4 +1,4 @@
-import { isPlatformServer } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -17,6 +17,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ExperienceComponent } from './components/experience/experience.component';
 import { GeneralInfoComponent } from './components/general-info/general-info.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { SeoService } from '@shared/services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -40,11 +41,14 @@ export class HomeComponent implements AfterViewInit {
   private readonly window = injectWindow();
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly seoService = inject(SeoService);
 
   ngAfterViewInit(): void {
-    if (isPlatformServer(this.platformId)) return;
-    this.handleDefaultHash();
-    this.handleScrollUpdateUrl();
+    this.seoService.applyHome();
+    if (isPlatformBrowser(this.platformId)) {
+      this.handleDefaultHash();
+      this.handleScrollUpdateUrl();
+    }
   }
 
   private handleDefaultHash(): void {
