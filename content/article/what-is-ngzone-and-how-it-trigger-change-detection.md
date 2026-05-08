@@ -41,7 +41,7 @@ function forkInnerZoneWithAngularBehavior(zone: NgZonePrivate) {
 }
 ```
 
-![zone hierarchy](content/images/what-is-ngzone-and-how-it-trigger-change-detection/default.jpg "zone hierarchy")
+![zone hierarchy](content/images/what-is-ngzone-and-how-it-trigger-change-detection/ngzone.jpg "zone hierarchy")
 
 ## How NgZone trigger Change Detection?
 
