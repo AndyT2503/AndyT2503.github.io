@@ -42,9 +42,10 @@
 }
 
 .layout__content {
-  margin-top: 60px;
+  margin-top: 84px;
   width: 100%;
   @media (min-width: 1024px) {
+    margin-top: 60px;
     width: calc(100vw - 256px);
   }
 }

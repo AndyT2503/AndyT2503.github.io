@@ -20,7 +20,7 @@
   },
   {
     "name": "E-commerce Shop",
-    "description": "E-commerce shop using Angular and .Net Core. Users can search, buy favorite products. Provide admin's management module, notification service that can send web notification or email notification.",
+    "description": "E-commerce shop built using Angular and .NET Core with admin management and notification services for web and email notifications.",
     "image": "assets/img/cellphones.png",
     "repoUrls": [
       {

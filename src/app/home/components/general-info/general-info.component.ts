@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { LucideIconComponent } from '@shared/components';
+import { injectEnvironment } from '@shared/providers';
 import { MenuService } from '@shared/services/menu.service';
 
 @Component({
@@ -19,6 +20,7 @@ import { MenuService } from '@shared/services/menu.service';
 })
 export class GeneralInfoComponent {
   private readonly menuService = inject(MenuService);
+  readonly isOpenToWork = injectEnvironment().isOpenToWork;
 
   scrollToSection(id: string): void {
     this.menuService.scrollToSection(id);

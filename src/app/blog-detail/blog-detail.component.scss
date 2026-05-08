@@ -1,9 +1,9 @@
 .post {
   min-height: 100vh;
-  padding: 80px 24px;
+  padding: 0 24px 80px;
 
   @media (max-width: 1124px) {
-    padding: 24px 12px 56px;
+    padding: 0 12px 56px;
   }
 }
 

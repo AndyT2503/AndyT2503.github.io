@@ -1,6 +1,14 @@
 .projects__card {
   position: relative;
   height: 320px;
+
+  @media (max-width: 1123px) {
+    height: 397px;
+  }
+
+  @media (max-width: 767px) {
+    height: 308px;
+  }
 }
 
 .projects__card-glow {

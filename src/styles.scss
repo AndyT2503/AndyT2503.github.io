@@ -11,8 +11,4 @@ body {
     linear-gradient(135deg, var(--rt-bg-1), var(--rt-bg-2), var(--rt-bg-1));
   font-family: var(--font-sans);
   color: var(--rt-text);
-
-  @media (max-width: 1023px) {
-    background: var(--rt-bg-1);
-  }
 }

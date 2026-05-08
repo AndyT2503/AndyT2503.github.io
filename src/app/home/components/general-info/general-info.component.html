@@ -2,14 +2,16 @@
   <div class="rt-container intro__container">
     <div class="intro__grid">
       <div class="intro__left">
-        <div class="intro__badge rt-glass rt-fade-up">
-          <app-lucide-icon
-            name="sparkles"
-            [size]="12"
-            class="intro__badge-icon"
-          ></app-lucide-icon>
-          <span>Available for opportunities</span>
-        </div>
+        @if (isOpenToWork) {
+          <div class="intro__badge rt-glass rt-fade-up">
+            <app-lucide-icon
+              name="sparkles"
+              [size]="12"
+              class="intro__badge-icon"
+            ></app-lucide-icon>
+            <span>Available for opportunities</span>
+          </div>
+        }
 
         <h1 class="intro__title rt-fade-up">
           Hi, I'm

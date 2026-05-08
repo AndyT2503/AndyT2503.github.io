@@ -5,6 +5,7 @@ export interface IEnvironment {
   sourceControlApi: string;
   sourceControlUrl: string;
   domainUrl: string;
+  isOpenToWork: boolean;
 }
 
 export const [injectEnvironment, provideEnvironment] =
