@@ -1,53 +1,161 @@
-# NewPortfolio
+# Tu Hoang Portfolio
 
-Angular portfolio + blog using Angular v21 with `ng-zorro-antd`, `ngx-markdown`, and SEO prerendering for blog pages. The project builds to the `docs/` folder and is ready for GitHub Pages deployment.
+A personal portfolio and technical blog built with Angular v21, focusing on performance, modern reactivity, and SEO best practices.
 
-## Project overview
+🌐 Live site: https://tuhoangdev.netlify.app  
+📦 Repository: Public on GitHub
 
-- Standalone Angular v21 application with `@angular/router`, `@angular/cdk`, and `ng-zorro-antd`.
-- Blog posts are stored in `content/article/*.md` and rendered with `ngx-markdown`.
-- Static pages are generated into `docs/` for GitHub Pages and SEO-friendly blog routing.
-- Project development is assisted by GitHub Copilot for faster authoring and consistency.
+---
 
-## Setup
+## Overview
 
-Install dependencies:
+This project serves as both:
+
+- A **personal portfolio** showcasing experience, projects, and background
+- A **technical blog** where I share knowledge about Angular and TypeScript
+
+The application is built with a modern Angular stack using **zoneless change detection**, **Signals**, and **SSR deployment on Netlify**.
+
+---
+
+## Features
+
+### Core
+- Angular v21 standalone application
+- Zoneless change detection (no Zone.js)
+- Signal-based reactivity
+- Fully responsive custom UI (no UI libraries)
+
+### Blog System
+- Markdown-based blog (`content/article/*.md`)
+- Dynamic rendering using `ngx-markdown`
+- Blog metadata managed via JSON
+
+### SEO Optimization
+- Server-side rendering with `@angular/ssr` + `@netlify/angular-runtime`
+- Dynamic SEO via `SeoService`
+- Meta tags (title, description, keywords)
+- Open Graph support
+- JSON-LD structured data
+- Auto-generated `sitemap.xml`
+
+### Deployment Strategy
+- Primary: Netlify (SSR)
+- Secondary: GitHub Pages (redirect only)
+
+---
+
+## Tech Stack
+
+- **Framework:** Angular v21
+- **Rendering:** SSR (`@angular/ssr`, `@netlify/angular-runtime`)
+- **Reactivity:** Angular Signals
+- **Styling:** Pure CSS (no frameworks)
+- **Content:** Markdown + JSON
+- **Tooling:** GitHub Copilot (development assistance)
+- **Design:** Figma AI-assisted
+
+---
+
+## Project Structure
+
+```
+📁 src/
+├── 📁 app/
+│   ├── 📁 shell/              # Layout (header, footer, sidebar)
+│   ├── 📁 home/               # Home page
+│   ├── 📁 blog-detail/        # Blog detail page
+│   ├── 📁 shared/             # Shared (components, services, directives, models, config)
+|   └── 📁 environments/
+|       └── 📄 environment.ts  # Environment config
+│
+├── 📁 assets/
+│   └── 📁 data/               # JSON data (blog, experience, projects)
+│   
+└── 📁 styles/                 # Global styles
+   
+📁 content/   
+├── 📁 article/                # Blog posts
+└── 📁 images/                 # Blog images
+   
+📁 scripts/   
+└── 📄 generate-sitemap.js     # Generate sitemap.xml (run before build when adding/removing blog posts)
+   
+📁 docs/   
+└── 📄 index.html              # Redirect GitHub Pages → tuhoangdev.netlify.app
+   
+📁 e2e/                        # Playwright end-to-end tests
+```
+
+---
+
+
+## Content Management
+
+### Blog Posts
+- Stored in: `content/article`
+- Format: Markdown
+- Naming: `slug.md`
+
+### Blog Images
+- Stored in: `content/images`
+- Each blog has its own folder:
+  `content/images/{slug}/`
+
+### Metadata
+- Stored in: `src/assets/data/blog.json`
+
+---
+
+## Development
+
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-## Run development server
+### Run development server:
 
 ```bash
 npm start
 ```
 
-Open `http://localhost:4500/` in your browser.
+### App runs at:
 
-## Build
+http://localhost:4500/
+
+---
+
+## Build & SEO
+
+### Build the project:
 
 ```bash
 npm run build
 ```
 
-- The build uses a custom builder to generate `404.html`.
-- `postbuild` runs `node scripts/prerender-seo.js` to prerender blog detail pages and generate `sitemap.xml`.
-- Output is written to `docs/`.
-- Blog metadata is loaded from `src/assets/data/blog.json`, and content Markdown files are stored in `content/article/*.md`.
-- Static blog pages are generated into `docs/blog/{slug}/index.html` during postbuild.
+### Sitemap generation
+
+- Run `generate-sitemap.js` **before build** when run before build when adding or removing blog posts.
+- The script generates `sitemap.xml` into `src/`.
+- During build, Angular will copy `sitemap.xml` into the output folder (`dist/`).
+
+> Note: You do not need to regenerate the sitemap on every build—only when blog content changes.
+
+---
 
 ## Testing
 
-### Unit tests
+### Unit Tests
 
 ```bash
 npm run test
 ```
 
-The project uses `vitest` for unit testing.
+Using `vitest`.
 
-### End-to-end tests
+### End-to-End Tests
 
 ```bash
 cd e2e
@@ -55,16 +163,42 @@ npm install
 npm test
 ```
 
+Using `Playwright`.
 
+---
+
+## Deployment
+
+### Netlify (Primary)
+
+- SSR powered by `@netlify/angular-runtime`
+- Main domain: https://tuhoangdev.netlify.app
+
+### GitHub Pages (Legacy)
+
+- `docs/index.html` contains a redirect script
+- Redirects traffic to the main Netlify site
+
+---
 
 ## Notes
 
-- `src/app`: main application source code, including layout, homepage, blog, and shared components.
-- `src/assets`: static assets used by the app.
-- `content/article`: blog posts written in Markdown.
-- `content/images`: blog images organized by slug.
-- `src/assets/data/blog.json`: blog metadata used by the prerender script.
-- `scripts/prerender-seo.js`: SEO prerender script executed after build to generate static blog pages, sitemap, and `404.html`.
-- `docs/`: production output and GitHub Pages artifact.
-- `e2e/`: Playwright configuration and tests for end-to-end coverage.
-- GitHub Copilot is used as a development assistant for code and docs.
+- No external state management library is used
+- No UI framework is used (fully custom styling)
+- SEO is handled centrally via `SeoService`
+- Environment config is located at: `src/environments/environment.ts`
+
+---
+
+## Author
+
+**Tu Hoang**
+
+- Portfolio: https://tuhoangdev.netlify.app
+- Focus: Angular, TypeScript, performance optimization, modern frontend architecture
+
+---
+
+## License
+
+This project is for personal use and portfolio demonstration.
