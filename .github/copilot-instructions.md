@@ -31,7 +31,7 @@
 - `src/styles`: global style configuration before it is tied to a component.
 - `content/images`: blog images stored in folders named after each blog slug.
 - `content/article`: blog content written in Markdown files named with the slug, such as `slug.md`.
-- `scripts`: helper scripts for the system. Currently `generate-sitemap.js` generates `sitemap.xml`. Use it before building the project to update the sitemap.
+- `scripts`: helper scripts for the system. Currently, `generate-sitemap.js` generates the sitemap.xml. Run it before building the project when blog posts are added or removed.
 - `docs`: contain index.html that have redirect script to redirect andyt2503.github.io to tuhoangdev.netlify.app.
 
 ## Blog guidance
