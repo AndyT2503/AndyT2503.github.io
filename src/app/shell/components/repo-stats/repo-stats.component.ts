@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, HostListener, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { LucideIconComponent } from '@shared/components';
-import { injectEnvironment } from '@shared/providers';
+import { injectEnvironment, injectWindow } from '@shared/providers';
 import { GithubService } from '@shared/services';
 
 @Component({
@@ -16,7 +16,8 @@ export class RepoStatsComponent implements OnInit {
   private readonly githubService = inject(GithubService);
   private readonly repoName = this.environment.repoName;
   private readonly sourceControlUrl = this.environment.sourceControlUrl;
-
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly window = injectWindow();
   readonly isVisible = signal(false);
   readonly isDesktopExpanded = signal(false);
   readonly isMobileExpanded = signal(false);
@@ -44,7 +45,9 @@ export class RepoStatsComponent implements OnInit {
 
   @HostListener('window:scroll')
   handleScroll() {
-    this.isVisible.set(window.scrollY > 300);
+    if (isPlatformBrowser(this.platformId)) {
+      this.isVisible.set(this.window.scrollY > 300);
+    }
   }
 
   expandDesktop() {
