@@ -1,0 +1,282 @@
+.repo {
+  position: fixed;
+  z-index: 40;
+  color: var(--rt-text);
+  text-decoration: none;
+  font-size: 0.875rem;
+
+  &--desktop {
+    bottom: 32px;
+    right: 32px;
+    display: none;
+
+    @media (min-width: 1024px) {
+      display: block;
+    }
+  }
+
+  &--mobile {
+    bottom: 80px;
+    right: 16px;
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &__glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(90deg, var(--rt-accent-pink), var(--rt-accent-orange));
+    opacity: 0;
+    filter: blur(20px);
+    transition: 0.3s;
+  }
+
+  &:hover &__glow {
+    opacity: 0.3;
+  }
+
+  &__pill {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 10px 14px;
+    transition: 0.3s;
+  }
+
+  &:hover &__pill {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--rt-accent-pink), var(--rt-accent-orange));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    app-lucide-icon {
+      font-size: 10px;
+    }
+
+    &.small {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  &__stats {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+
+    app-lucide-icon {
+      font-size: 10px;
+    }
+
+    app-lucide-icon[name="star"] {
+      color: var(--rt-accent-yellow);
+    }
+
+    app-lucide-icon[name="gitFork"] {
+      color: var(--rt-accent-blue);
+    }
+  }
+
+  &__expand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+
+    app-lucide-icon {
+      font-size: 10px;
+    }
+
+    .divider {
+      width: 1px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__fab {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  &__fab-inner {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rt-accent-pink), var(--rt-accent-orange));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--rt-text);
+
+    app-lucide-icon {
+      font-size: 10px;
+    }
+  }
+
+  &__pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--rt-accent-pink), var(--rt-accent-orange));
+    opacity: 0.2;
+    animation: ping 1.5s infinite;
+  }
+
+  @keyframes ping {
+    0% {
+      transform: scale(1);
+      opacity: 0.2;
+    }
+    100% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  &__card {
+    width: 230px;
+    margin-left: -236px;
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+
+  &__close {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.2s ease;
+    color: var(--rt-text);
+    span {
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__stats-box {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 12px;
+  }
+
+  &__box {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    app-lucide-icon {
+      font-size: 10px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    small {
+      font-size: 10px;
+      color: #aaa;
+    }
+  }
+
+  &__icon-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    app-lucide-icon {
+      font-size: 10px;
+    }
+
+    &.star-icon {
+      background: linear-gradient(135deg, rgba(255, 190, 11, 0.2), rgba(251, 86, 7, 0.2));
+      border: 1px solid var(--rt-accent-yellow);
+    }
+
+    &.fork-icon {
+      background: linear-gradient(135deg, rgba(58, 134, 255, 0.2), rgba(131, 56, 236, 0.2));
+      border: 1px solid var(--rt-accent-blue);
+    }
+  }
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, var(--rt-accent-pink), var(--rt-accent-orange));
+    font-size: 0.875rem;
+    text-decoration: none;
+    color: var(--rt-text);
+
+    app-lucide-icon {
+      font-size: 10px;
+    }
+  }
+}

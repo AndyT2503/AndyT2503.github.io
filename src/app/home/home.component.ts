@@ -1,4 +1,4 @@
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -6,18 +6,18 @@ import {
   DestroyRef,
   DOCUMENT,
   inject,
-  PLATFORM_ID,
+  PLATFORM_ID
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { injectWindow } from '@shared/providers';
 import { MenuService } from '@shared/services/menu.service';
+import { SeoService } from '@shared/services/seo.service';
 import { AboutComponent } from './components/about/about.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ExperienceComponent } from './components/experience/experience.component';
 import { IntroComponent } from './components/intro/intro.component';
 import { ProjectsComponent } from './components/projects/projects.component';
-import { SeoService } from '@shared/services/seo.service';
 
 @Component({
   selector: 'app-home',

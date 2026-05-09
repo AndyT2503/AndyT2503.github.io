@@ -1,0 +1,100 @@
+@let repoInfo = repo();
+@if (isVisible() && repoInfo) {
+  <!-- DESKTOP -->
+  <a
+    class="repo repo--desktop"
+    [href]="repoInfo.url"
+    target="_blank"
+    (mouseenter)="expandDesktop()"
+    (mouseleave)="collapseDesktop()"
+  >
+    <div class="repo__glow"></div>
+
+    <div class="repo__pill">
+      <div class="repo__content">
+        <!-- icon -->
+        <div class="repo__icon">
+          <app-lucide-icon name="github" [size]="16"></app-lucide-icon>
+        </div>
+
+        <!-- stats -->
+        <div class="repo__stats">
+          <div class="repo__stat">
+            <app-lucide-icon name="star" [size]="14"></app-lucide-icon>
+            <span>{{ repoInfo.stars }}</span>
+          </div>
+
+          <div class="repo__stat">
+            <app-lucide-icon name="gitFork" [size]="14"></app-lucide-icon>
+            <span>{{ repoInfo.forks }}</span>
+          </div>
+        </div>
+
+        <!-- expand -->
+        @if (isDesktopExpanded()) {
+          <div class="repo__expand">
+            <div class="divider"></div>
+            <span>View Code</span>
+            <app-lucide-icon name="external-link" [size]="14"></app-lucide-icon>
+          </div>
+        }
+      </div>
+    </div>
+  </a>
+
+  <!-- MOBILE -->
+  <div class="repo repo--mobile">
+    <!-- collapsed -->
+    @if (!isMobileExpanded()) {
+      <button class="repo__fab" (click)="toggleMobile()">
+        <div class="repo__fab-inner">
+          <app-lucide-icon name="github" [size]="20"></app-lucide-icon>
+        </div>
+        <div class="repo__pulse"></div>
+      </button>
+    }
+
+    <!-- expanded -->
+    @if (isMobileExpanded()) {
+      <div class="repo__card">
+        <div class="repo__header">
+          <div class="repo__title">
+            <div class="repo__icon small">
+              <app-lucide-icon name="github" [size]="16"></app-lucide-icon>
+            </div>
+            <span>Portfolio</span>
+          </div>
+
+          <button class="repo__close" (click)="closeMobile()">✕</button>
+        </div>
+
+        <div class="repo__stats-box">
+          <div class="repo__box">
+            <div class="repo__icon-box star-icon">
+              <app-lucide-icon name="star" [size]="14"></app-lucide-icon>
+            </div>
+            <div>
+              <p>{{ repoInfo.stars }}</p>
+              <small>Stars</small>
+            </div>
+          </div>
+
+          <div class="repo__box">
+            <div class="repo__icon-box fork-icon">
+              <app-lucide-icon name="gitFork" [size]="14"></app-lucide-icon>
+            </div>
+            <div>
+              <p>{{ repoInfo.forks }}</p>
+              <small>Forks</small>
+            </div>
+          </div>
+        </div>
+
+        <a class="repo__cta" [href]="repo()!.url" target="_blank">
+          View Source Code
+          <app-lucide-icon name="external-link" [size]="14"></app-lucide-icon>
+        </a>
+      </div>
+    }
+  </div>
+}

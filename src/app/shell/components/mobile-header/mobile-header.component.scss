@@ -49,7 +49,7 @@
   transition:
     background 0.2s ease,
     color 0.2s ease;
-  color: white;
+  color: var(--rt-text);
   background: linear-gradient(to right, var(--rt-accent-pink), var(--rt-accent-orange));
   &:hover {
     box-shadow: 0 0 24px rgba(255, 0, 110, 0.35);
