@@ -137,7 +137,7 @@ npm run build
 
 ### Sitemap generation
 
-- Run `generate-sitemap.js` **before build** when run before build when adding or removing blog posts.
+- Run `generate-sitemap.js` **before build** when adding or removing blog posts.
 - The script generates `sitemap.xml` into `src/`.
 - During build, Angular will copy `sitemap.xml` into the output folder (`dist/`).
 
