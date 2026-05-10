@@ -7,6 +7,7 @@
     "test:headed": "playwright test --headed",
     "test:home": "playwright test tests/home/home.spec.ts",
     "test:blog-detail": "playwright test tests/blog-detail/blog-detail.spec.ts",
+    "test:mobile-home": "playwright test tests/mobile-home/mobile-home.spec.ts",
     "report": "playwright show-report"
   },
   "devDependencies": {

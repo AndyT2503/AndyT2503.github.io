@@ -6,18 +6,31 @@ test.describe('Blog detail page', () => {
     await page.goto('/');
   });
 
-  test('should navigate to blog detail when the first blog item is clicked', async ({ page }) => {
-    const firstBlogItem = page.locator(SELECTORS.blogItem).first();
-    await firstBlogItem.click();
+  test('navigates to blog detail when a blog card is clicked', async ({
+    page,
+  }) => {
+    await page.locator(SELECTORS.firstBlogCard).first().click();
+
     await expect(page).toHaveURL(/\/blog\/[\w-]+$/);
-    await expect(page).toHaveTitle(/Tu Hoang -/);
-    await expect(page.locator(SELECTORS.blogContent)).toBeVisible();
+    await expect(page).toHaveTitle(/Angular & TypeScript Insights by Tu Hoang/);
+    await expect(page.locator(SELECTORS.post)).toBeVisible();
+    await expect(page.locator(SELECTORS.postTitle)).toBeVisible();
+    await expect(page.locator(SELECTORS.postThumbnail)).toBeVisible();
+    await expect(page.locator(SELECTORS.blogArticle)).toBeVisible();
   });
 
-  test('should render blog detail page from a deep link', async ({ page }) => {
+  test('renders blog detail page from a deep link', async ({ page }) => {
     await page.goto(SELECTORS.deepLinkUrl);
-    await expect(page).toHaveURL(/\/blog\/how-angular-change-detection-works-without-zonejs$/);
-    await expect(page).toHaveTitle(/Tu Hoang -/);
-    await expect(page.locator(SELECTORS.blogContent)).toBeVisible();
+
+    await expect(page).toHaveURL(
+      /\/blog\/how-angular-change-detection-works-without-zonejs$/,
+    );
+    await expect(page.locator(SELECTORS.postTitle)).toHaveText(
+      SELECTORS.deepLinkTitle,
+    );
+    await expect(page).toHaveTitle(
+      `${SELECTORS.deepLinkTitle} | Angular & TypeScript Insights by Tu Hoang`,
+    );
+    await expect(page.locator(SELECTORS.blogArticle)).toContainText('Angular');
   });
 });

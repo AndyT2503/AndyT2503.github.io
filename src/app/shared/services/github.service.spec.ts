@@ -3,7 +3,7 @@ import { provideHttpClientTesting, HttpTestingController } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 
 import { GithubService } from './github.service';
-import { provideAppConfig } from '../config/config.di';
+import { provideEnvironment } from '@shared/providers';
 
 describe('GithubService', () => {
   beforeEach(() => {
@@ -12,10 +12,12 @@ describe('GithubService', () => {
         GithubService,
         provideHttpClient(),
         provideHttpClientTesting(),
-        provideAppConfig({
+        provideEnvironment({
           repoName: 'repo',
           sourceControlApi: 'https://api.example.com/repos/',
           sourceControlUrl: 'https://example.com/',
+          domainUrl: 'https://example.com',
+          isOpenToWork: true,
         }),
       ],
     });

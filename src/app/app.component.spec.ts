@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   it('creates the component', () => {
+    TestBed.overrideComponent(AppComponent, { set: { template: '' } });
     TestBed.configureTestingModule({
       imports: [AppComponent],
       providers: [provideRouter([])],

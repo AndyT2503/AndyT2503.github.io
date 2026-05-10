@@ -1,7 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 
 export default defineConfig({
   testDir: './tests',
+  outputDir: join(tmpdir(), 'portfolio-e2e-test-results'),
   timeout: 30000,
   expect: {
     timeout: 10000,
@@ -9,7 +12,7 @@ export default defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: 'http://localhost:4500',
-    headless: true,
+    headless: false,
     viewport: { width: 1280, height: 720 },
     actionTimeout: 10000,
     ignoreHTTPSErrors: true,
@@ -17,6 +20,9 @@ export default defineConfig({
   webServer: {
     command: 'npm start --silent',
     cwd: '../',
+    env: {
+      CI: 'true',
+    },
     url: 'http://localhost:4500',
     reuseExistingServer: true,
     timeout: 120000,

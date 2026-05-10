@@ -1,22 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { MobileHeaderComponent } from './mobile-header.component';
 
 describe('MobileHeaderComponent', () => {
-  let component: MobileHeaderComponent;
-  let fixture: ComponentFixture<MobileHeaderComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  it('renders brand and resume link', async () => {
+    TestBed.configureTestingModule({
       imports: [MobileHeaderComponent],
-    }).compileComponents();
+      providers: [provideRouter([])],
+    });
 
-    fixture = TestBed.createComponent(MobileHeaderComponent);
-    component = fixture.componentInstance;
+    const fixture = TestBed.createComponent(MobileHeaderComponent);
     await fixture.whenStable();
-  });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    const text = fixture.nativeElement.textContent as string;
+    const resume = fixture.nativeElement.querySelector(
+      '.mobile-header__resume',
+    ) as HTMLAnchorElement;
+    expect(text).toContain('TU HOANG');
+    expect(text).toContain('Frontend Engineer');
+    expect(resume.getAttribute('href')).toBe('assets/cv/cv.pdf');
   });
 });

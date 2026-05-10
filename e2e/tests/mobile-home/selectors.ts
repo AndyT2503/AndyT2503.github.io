@@ -1,0 +1,16 @@
+export const SELECTORS = {
+  mobileHeader: '.mobile-header',
+  mobileLogo: '.mobile-header__logo',
+  mobileResumeLink: '.mobile-header__resume',
+  introSection: 'section#intro',
+  blogSection: 'section#blog',
+  contactSection: 'section#contact',
+  bottomBlogButton: '.bottom-nav__item:has-text("Blog")',
+  bottomContactButton: '.bottom-nav__item:has-text("Contact")',
+  blogCards: 'app-blog-item .blog-card',
+  repoStatsMobile: '.repo.repo--mobile',
+  repoStatsFab: '.repo--mobile .repo__fab',
+  repoStatsCard: '.repo--mobile .repo__card',
+  repoStatsCloseButton: '.repo--mobile .repo__close',
+  repoStatsCta: '.repo--mobile .repo__cta',
+};
