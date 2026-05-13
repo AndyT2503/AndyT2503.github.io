@@ -7,8 +7,11 @@
   <div class="blog-card__thumb">
     <img
       class="blog-card__img"
-      [src]="thumbnailUrl()"
+      [ngSrc]="thumbnailUrl()"
+      ngSrcset="480w, 720w, 960w"
+      sizes="(min-width: 1124px) 30vw, (min-width: 768px) 45vw, 90vw"
       [alt]="blog.title"
+      fill
     />
 
     <div class="blog-card__overlay"></div>
@@ -34,7 +37,7 @@
 
         <div class="blog-card__meta-item">
           <app-lucide-icon name="clock" [size]="12"></app-lucide-icon>
-          <span>{{ readingTime() }} min</span>
+          <span>{{ blog.readingTime }} min</span>
         </div>
       </div>
 

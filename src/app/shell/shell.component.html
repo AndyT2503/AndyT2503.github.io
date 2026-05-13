@@ -16,6 +16,8 @@
       [activeSection]="activeSection()"
       (onClickNavItem)="clickNavItem($event)"
     ></app-bottom-nav>
-    <app-repo-stats />
+    @defer (on timer(2s)) {
+      <app-repo-stats />
+    }
   </div>
 </div>

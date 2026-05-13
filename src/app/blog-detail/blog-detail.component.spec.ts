@@ -61,6 +61,7 @@ describe('BlogDetailComponent', () => {
       type: 'post',
       date: '2026-01-01',
       description: 'Description',
+      readingTime: 5,
     });
     const { fixture, seoService, router } = setup('hello-world', [blog]);
 
@@ -83,6 +84,7 @@ describe('BlogDetailComponent', () => {
         type: 'post',
         date: '2026-01-01',
         description: 'Description',
+        readingTime: 5,
       }),
     ]);
 

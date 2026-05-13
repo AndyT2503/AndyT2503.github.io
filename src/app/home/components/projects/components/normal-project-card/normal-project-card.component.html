@@ -9,6 +9,7 @@
       [href]="prj.repoUrls[0].url"
       target="_blank"
       [appTooltip]="prj.repoUrls[0].tooltip"
+      [attr.aria-label]="'View source code for ' + prj.name"
     >
       <app-lucide-icon name="github" [size]="16"></app-lucide-icon>
     </a>

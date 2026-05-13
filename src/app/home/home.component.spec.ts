@@ -33,6 +33,7 @@ describe('HomeComponent', () => {
         { provide: PLATFORM_ID, useValue: 'browser' },
       ],
     });
+    await TestBed.compileComponents();
 
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.componentInstance.ngAfterViewInit();
@@ -81,6 +82,7 @@ describe('HomeComponent', () => {
         { provide: PLATFORM_ID, useValue: 'browser' },
       ],
     });
+    await TestBed.compileComponents();
 
     const fixture = TestBed.createComponent(HomeComponent);
     const getElementByIdSpy = vi

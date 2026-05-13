@@ -35,15 +35,22 @@
 .rt-glass {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--rt-border);
-  backdrop-filter: blur(14px);
+
+  @media (min-width: 1024px) {
+    backdrop-filter: blur(14px);
+  }
 }
 
 .rt-fade-up {
-  animation: rtFadeUp 0.7s ease both;
+  @media (min-width: 1024px) {
+    animation: rtFadeUp 0.7s ease both;
+  }
 }
 
 .rt-fade-left {
-  animation: rtFadeLeft 0.7s ease both;
+  @media (min-width: 1024px) {
+    animation: rtFadeLeft 0.7s ease both;
+  }
 }
 
 @keyframes rtFadeUp {

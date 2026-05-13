@@ -20,6 +20,7 @@ describe('ShellComponent', () => {
         { provide: MenuService, useValue: menuService },
       ],
     });
+    await TestBed.compileComponents();
 
     const fixture = TestBed.createComponent(ShellComponent);
     fixture.componentInstance.clickNavItem('projects');
@@ -46,6 +47,7 @@ describe('ShellComponent', () => {
         { provide: MenuService, useValue: menuService },
       ],
     });
+    await TestBed.compileComponents();
 
     const fixture = TestBed.createComponent(ShellComponent);
     fixture.componentInstance.clickNavItem('contact');

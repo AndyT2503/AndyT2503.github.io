@@ -1,45 +1,42 @@
 import {
+  IMAGE_LOADER,
+  ImageLoaderConfig,
+  NgOptimizedImage,
+} from '@angular/common';
+import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  inject,
   input,
-  Input,
-  OnInit,
-  signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { calculateReadingTime } from 'markdown-reading-time';
-import { MarkdownService } from 'ngx-markdown';
-import { map } from 'rxjs';
 import { Blog } from '@shared/models';
 import { LucideIconComponent } from '@shared/components';
 
 @Component({
   selector: 'app-blog-item',
   standalone: true,
-  imports: [RouterLink, LucideIconComponent],
+  imports: [RouterLink, LucideIconComponent, NgOptimizedImage],
   templateUrl: './blog-item.component.html',
   styleUrls: ['./blog-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: IMAGE_LOADER,
+      useValue: (config: ImageLoaderConfig) => {
+        if (config.width) {
+          return config.src.replace(/default(?:-\d+)?\.jpg$/, `default-${config.width}.jpg`);
+        }
+        return config.src;
+      },
+    },
+  ],
 })
-export class BlogItemComponent implements OnInit {
-  private readonly markDownService = inject(MarkdownService);
-
+export class BlogItemComponent {
   readonly blogItem = input.required<Blog>();
-  readonly readingTime = signal(0);
 
   readonly thumbnailUrl = computed(() => {
     const slug = this.blogItem().slug;
     return `content/images/${slug}/default.jpg`;
   });
-
-  ngOnInit(): void {
-    this.markDownService
-      .getSource(`content/article/${this.blogItem().slug}.md`)
-      .pipe(map((content) => calculateReadingTime(content).minutes))
-      .subscribe((min) => {
-        this.readingTime.set(min);
-      });
-  }
 }

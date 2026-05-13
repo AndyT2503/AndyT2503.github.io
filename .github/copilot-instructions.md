@@ -31,17 +31,16 @@
 - `src/styles`: global style configuration before it is tied to a component.
 - `content/images`: blog images stored in folders named after each blog slug.
 - `content/article`: blog content written in Markdown files named with the slug, such as `slug.md`.
-- `scripts`: helper scripts for the system. Currently, `generate-sitemap.js` generates the sitemap.xml. Run it before building the project when blog posts are added or removed.
+- `scripts`: helper scripts for the system. `generate-sitemap.js` generates sitemap.xml, `generate-blog-thumbnails.js` creates blog responsive image variants, and `update-blog-reading-time.js` updates blog reading time metadata.
 - `docs`: contain index.html that have redirect script to redirect andyt2503.github.io to tuhoangdev.netlify.app.
 
 ## Blog guidance
 
-- Use `.github/blog.instructions.md` for detailed blog writing rules.
-- Store image assets in `content/images/{slug}`.
-- Follow the tone and structure of existing articles, especially `content/article/how-angular-change-detection-works-without-zonejs.md`.
-- Keep paragraphs concise and maintain readable flow.
-- When illustrating code, show only the needed excerpt and use comments for omitted parts.
+- See `.github/blog.instructions.md` for detailed blog writing, image, and content rules.
 - Add new post metadata to `src/assets/data/blog.json` when creating a blog entry.
+- Run `npm run update-blog-reading-time` after adding or editing Markdown articles.
+- Run `npm run generate-blog-thumbnails` after adding or changing blog thumbnail images.
+- Run `npm run generate-sitemap` before building when blog posts are added or removed.
 
 ## Testing guidance
 

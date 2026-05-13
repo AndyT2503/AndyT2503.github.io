@@ -4,6 +4,7 @@ import {
   Component,
   OnInit,
   PLATFORM_ID,
+  ViewEncapsulation,
   computed,
   inject,
   input,
@@ -22,8 +23,13 @@ import { MenuService } from '@shared/services/menu.service';
   standalone: true,
   imports: [MarkdownModule, BlogHeaderCardComponent],
   templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.scss'],
+  styleUrls: [
+    './blog-detail.component.scss',
+    './blog-detail.markdown.scss',
+    './blog-detail.markdown-blocks.scss',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class BlogDetailComponent implements OnInit {
   private readonly dataService = inject(DataService);

@@ -29,8 +29,11 @@
 - Avoid unnecessary repetition.
 
 ## Image guidance
-- Put images in `content/images/{slug}`.
-- Reference images with their slug-specific folder.
+- All images for a blog post must be stored in `content/images/{slug}/`.
+- The blog thumbnail must be named `default.jpg` in that folder.
+- Running `npm run generate-blog-thumbnails` creates responsive variants (`default-480.jpg`, `default-720.jpg`, `default-960.jpg`) used by blog cards on the home page.
+- Other images used within the article (diagrams, screenshots, etc.) are also stored in the same folder.
+- In Markdown, reference images using the path `content/images/{slug}/filename.png`.
 - Use simple, clear artwork or screenshots that help explain the blog point.
 
 ## Example for long code excerpts

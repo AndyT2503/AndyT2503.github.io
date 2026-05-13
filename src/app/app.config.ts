@@ -1,12 +1,14 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import {
-  PreloadAllModules,
   provideRouter,
   withComponentInputBinding,
   withInMemoryScrolling,
-  withPreloading,
 } from '@angular/router';
+import {
+  provideClientHydration,
+  withIncrementalHydration,
+} from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { registerLocaleData } from '@angular/common';
@@ -34,13 +36,13 @@ export const appConfig: ApplicationConfig = {
             ),
         },
       ],
-      withPreloading(PreloadAllModules),
       withComponentInputBinding(),
       withInMemoryScrolling({
         anchorScrolling: 'enabled',
       }),
     ),
     provideHttpClient(withFetch()),
+    provideClientHydration(withIncrementalHydration()),
     importProvidersFrom(MarkdownModule.forRoot()),
     provideEnvironment(environment),
   ],

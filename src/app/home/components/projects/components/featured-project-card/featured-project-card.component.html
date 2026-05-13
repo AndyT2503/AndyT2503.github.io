@@ -17,6 +17,7 @@
               [href]="item.url"
               target="_blank"
               [appTooltip]="item.tooltip"
+              [attr.aria-label]="item.tooltip + ' - ' + prj.name"
             >
               <app-lucide-icon name="github" [size]="16"></app-lucide-icon>
             </a>
@@ -28,6 +29,7 @@
             [href]="prj.linkDemo!.url"
             target="_blank"
             appTooltip="View Demo"
+            [attr.aria-label]="'View demo for ' + prj.name"
           >
             <app-lucide-icon name="external-link" [size]="16"></app-lucide-icon>
           </a>

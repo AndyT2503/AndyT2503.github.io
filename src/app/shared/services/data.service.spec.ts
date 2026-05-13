@@ -64,7 +64,14 @@ describe('DataService', () => {
     const req = httpMock.expectOne('assets/data/blog.json?t=0');
     expect(req.request.method).toBe('GET');
     const payload: IBlog[] = [
-      { id: 1, title: 'Hello World', type: 'post', date: '2026-01-01', description: 'd' },
+      {
+        id: 1,
+        title: 'Hello World',
+        type: 'post',
+        date: '2026-01-01',
+        description: 'd',
+        readingTime: 5,
+      },
     ];
     req.flush(payload);
 

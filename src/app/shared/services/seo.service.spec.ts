@@ -65,6 +65,7 @@ describe('SeoService', () => {
       type: 'post',
       date: '2026-01-01',
       description: 'Description',
+      readingTime: 5,
     });
 
     service.applyBlog(blog, 'hello-world');

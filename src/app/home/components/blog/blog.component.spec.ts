@@ -7,7 +7,16 @@ import { Blog } from '@shared/models';
 
 describe('BlogComponent', () => {
   it('exposes blog list as a signal', async () => {
-    const blogs = [new Blog({ id: 1, title: 'T', type: 'post', date: '2026-01-01', description: 'd' })];
+    const blogs = [
+      new Blog({
+        id: 1,
+        title: 'T',
+        type: 'post',
+        date: '2026-01-01',
+        description: 'd',
+        readingTime: 1,
+      }),
+    ];
 
     TestBed.overrideComponent(BlogComponent, { set: { template: '' } });
     TestBed.configureTestingModule({

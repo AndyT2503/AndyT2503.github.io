@@ -51,10 +51,12 @@
           <div class="intro__glow"></div>
           <div class="intro__image-card rt-glass">
             <img
-              ngSrc="assets/img/avatar.jpg"
-              width="800"
-              height="600"
-              alt="avatar"
+              ngSrc="assets/img/avatar-480.webp"
+              ngSrcset="346w, 480w"
+              sizes="(min-width: 1024px) 35vw, 85vw"
+              width="480"
+              height="360"
+              alt="Tu Hoang"
               class="intro__image"
               priority
             />
@@ -67,6 +69,7 @@
     <button
       type="button"
       class="intro__scroll"
+      aria-label="Scroll to about section"
       (click)="scrollToSection('about')"
     >
       <app-lucide-icon name="chevron-down" [size]="22"></app-lucide-icon>

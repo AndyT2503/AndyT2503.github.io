@@ -4,41 +4,47 @@
     "title": "Deep understanding about Expression has changed after it was checked",
     "type": "Angular",
     "date": "27 October 2022",
-    "description": "Understand why Angular throws ExpressionChangedAfterItHasBeenCheckedError, how change detection validates component state."
+    "description": "Understand why Angular throws ExpressionChangedAfterItHasBeenCheckedError, how change detection validates component state.",
+    "readingTime": 4
   },
   {
     "id": 2,
     "title": "What is NgZone and How it trigger Change Detection",
     "type": "Angular",
     "date": "25 February 2023",
-    "description": "Learn how NgZone works in Angular, how asynchronous tasks trigger change detection, and how Zone.js integrates with Angular’s rendering lifecycle."
+    "description": "Learn how NgZone works in Angular, how asynchronous tasks trigger change detection, and how Zone.js integrates with Angular’s rendering lifecycle.",
+    "readingTime": 8
   },
   {
     "id": 3,
     "title": "Fix 404 error when refreshing Github Page with Custom Builder",
     "type": "Angular",
     "date": "28 March 2023",
-    "description": "Learn how to create a custom Angular CLI builder and deploy Angular applications on GitHub Pages without refresh 404 routing issues."
+    "description": "Learn how to create a custom Angular CLI builder and deploy Angular applications on GitHub Pages without refresh 404 routing issues.",
+    "readingTime": 6
   },
   {
     "id": 4,
     "title": "The Power of Conditional Type in Angular",
     "type": "Angular",
     "date": "28 August 2023",
-    "description": "Explore how TypeScript conditional types improve type safety, reusable APIs, and advanced utility patterns in modern Angular applications."
+    "description": "Explore how TypeScript conditional types improve type safety, reusable APIs, and advanced utility patterns in modern Angular applications.",
+    "readingTime": 4
   },
   {
     "id": 5,
     "title": "Angular Signal Forms: Simpler, Faster, and More Reactive",
     "type": "Angular",
     "date": "25 February 2026",
-    "description": "Discover how Angular Signal Forms simplify reactive form management with fine-grained reactivity, improved performance, and a cleaner developer experience."
+    "description": "Discover how Angular Signal Forms simplify reactive form management with fine-grained reactivity, improved performance, and a cleaner developer experience.",
+    "readingTime": 7
   },
   {
     "id": 6,
     "title": "How Angular Change Detection works without Zone.js",
     "type": "Angular",
     "date": "29 April 2026",
-    "description": "Understand how Angular change detection works without Zone.js, including zoneless rendering, Signals-based reactivity, manual triggers, and performance optimizations."
+    "description": "Understand how Angular change detection works without Zone.js, including zoneless rendering, Signals-based reactivity, manual triggers, and performance optimizations.",
+    "readingTime": 6
   }
 ]

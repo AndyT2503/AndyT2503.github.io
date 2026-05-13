@@ -11,7 +11,7 @@ export default defineConfig({
   },
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://localhost:4500',
+    baseURL: 'http://localhost:4200',
     headless: false,
     viewport: { width: 1280, height: 720 },
     actionTimeout: 10000,
@@ -23,7 +23,7 @@ export default defineConfig({
     env: {
       CI: 'true',
     },
-    url: 'http://localhost:4500',
+    url: 'http://localhost:4200',
     reuseExistingServer: true,
     timeout: 120000,
   },

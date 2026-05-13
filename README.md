@@ -30,6 +30,8 @@ The application is built with a modern Angular stack using **zoneless change det
 - Markdown-based blog (`content/article/*.md`)
 - Dynamic rendering using `ngx-markdown`
 - Blog metadata managed via JSON
+- Precomputed reading time in `src/assets/data/blog.json`
+- Responsive blog thumbnails generated from `content/images/{slug}/default.jpg`
 
 ### SEO Optimization
 - Server-side rendering with `@angular/ssr` + `@netlify/angular-runtime`
@@ -79,7 +81,9 @@ The application is built with a modern Angular stack using **zoneless change det
 └── 📁 images/                 # Blog images
    
 📁 scripts/   
-└── 📄 generate-sitemap.js     # Generate sitemap.xml (run before build when adding/removing blog posts)
+├── 📄 generate-sitemap.js              # Generate sitemap.xml
+├── 📄 generate-blog-thumbnails.js      # Generate blog responsive image variants
+└── 📄 update-blog-reading-time.js      # Update blog readingTime metadata
    
 📁 docs/   
 └── 📄 index.html              # Redirect GitHub Pages → tuhoangdev.netlify.app
@@ -101,9 +105,13 @@ The application is built with a modern Angular stack using **zoneless change det
 - Stored in: `content/images`
 - Each blog has its own folder:
   `content/images/{slug}/`
+- Thumbnail source: `content/images/{slug}/default.jpg`
+- Responsive thumbnail variants are generated as `default-480.jpg`, `default-720.jpg`, and `default-960.jpg` (used by blog cards on the home page)
+- All images used within blog articles must be stored in the same folder (e.g. `content/images/{slug}/diagram.png`)
 
 ### Metadata
 - Stored in: `src/assets/data/blog.json`
+- Includes `readingTime`, which is generated from the matching Markdown article.
 
 ---
 
@@ -142,6 +150,18 @@ npm run build
 - During build, Angular will copy `sitemap.xml` into the output folder (`dist/`).
 
 > Note: You do not need to regenerate the sitemap on every build—only when blog content changes.
+
+### Blog performance scripts
+
+Run these after adding or changing blog content:
+
+```bash
+npm run update-blog-reading-time
+npm run generate-blog-thumbnails
+```
+
+- `update-blog-reading-time` reads `content/article/{slug}.md` and updates `readingTime` in `src/assets/data/blog.json`.
+- `generate-blog-thumbnails` reads each `content/images/{slug}/default.jpg` and writes responsive thumbnail variants used by the home page blog cards.
 
 ---
 
