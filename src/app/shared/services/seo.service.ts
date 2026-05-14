@@ -225,7 +225,7 @@ export class SeoService {
   }
 
   private buildBlogUrl(slug: string): string {
-    return `${this.domainUrl}/blog/${slug}`;
+    return `${this.domainUrl}/blog/${slug}/`;
   }
 
   private buildBlogImage(slug: string): string {
