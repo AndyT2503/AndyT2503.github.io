@@ -50,6 +50,7 @@ export class ShellComponent {
   clickNavItem(id: string): void {
     const isHome = !this.router.url.includes('blog/');
     if (!isHome) {
+      this.menuService.setActiveSection(id);
       this.router.navigate(['/'], { fragment: id });
       return;
     }

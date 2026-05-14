@@ -6,7 +6,7 @@ import {
   DestroyRef,
   DOCUMENT,
   inject,
-  PLATFORM_ID
+  PLATFORM_ID,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { injectWindow } from '@shared/providers';
@@ -46,24 +46,32 @@ export class HomeComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.seoService.applyHome();
     if (isPlatformBrowser(this.platformId)) {
-      this.handleDefaultHash();
-      this.handleScrollUpdateUrl();
+      this.handleInitialFragment();
     }
   }
 
-  private handleDefaultHash(): void {
-    const isHome = this.window.location.pathname === '/';
-    const hasHash = !!this.window.location.hash;
+  private handleInitialFragment(): void {
+    const fragment = this.getHashFragment();
 
-    if (isHome && !hasHash) {
-      this.menuService.setActiveSection('intro');
+    // Double rAF ensures child components are fully rendered in DOM
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (fragment && fragment !== 'intro') {
+          this.menuService.scrollToSection(fragment);
+        } else {
+          this.menuService.setActiveSection('intro');
+          this.window.history.replaceState(null, '', '/#intro');
+        }
 
-      this.window.history.replaceState(
-        null,
-        '',
-        `${this.window.location.pathname}#intro`,
-      );
-    }
+        // Start listening to scroll only after initial navigation settles
+        setTimeout(() => this.handleScrollUpdateUrl(), 1500);
+      });
+    });
+  }
+
+  private getHashFragment(): string {
+    const hash = this.window.location.hash;
+    return hash ? hash.substring(1) : '';
   }
 
   private handleScrollUpdateUrl(): void {
@@ -75,57 +83,54 @@ export class HomeComponent implements AfterViewInit {
       ticking = true;
 
       requestAnimationFrame(() => {
-        const sections = [
-          'intro',
-          'about',
-          'experience',
-          'projects',
-          'blog',
-          'contact',
-        ];
-
-        const scrollPos =
-          this.document.documentElement.scrollTop +
-          this.document.documentElement.clientHeight / 3;
-
-        let current = 'intro';
-
-        for (const id of sections) {
-          const el = this.document.getElementById(id);
-
-          if (!el) continue;
-
-          if (el.offsetTop <= scrollPos) {
-            current = id;
-          }
-        }
-
         const isHome = !this.router.url.includes('/blog/');
-
         if (!isHome) {
           ticking = false;
           return;
         }
 
-        if (this.menuService.activeSection() !== current) {
+        const current = this.detectCurrentSection();
+
+        if (current && this.menuService.activeSection() !== current) {
           this.menuService.setActiveSection(current);
-          history.replaceState(
-            null,
-            '',
-            `${this.document.location.pathname}#${current}`,
-          );
+          this.window.history.replaceState(null, '', `/#${current}`);
         }
 
         ticking = false;
       });
     };
 
-    this.document.addEventListener('scroll', onScroll, {
-      passive: true,
-    });
+    this.document.addEventListener('scroll', onScroll, { passive: true });
 
     this.destroyRef.onDestroy(() => {
       this.document.removeEventListener('scroll', onScroll);
     });
+  }
+
+  private detectCurrentSection(): string {
+    const sections = [
+      'intro',
+      'about',
+      'experience',
+      'projects',
+      'blog',
+      'contact',
+    ];
+
+    const scrollPos =
+      this.document.documentElement.scrollTop +
+      this.document.documentElement.clientHeight / 3;
+
+    let current = 'intro';
+
+    for (const id of sections) {
+      const el = this.document.getElementById(id);
+      if (!el) continue;
+      if (el.offsetTop <= scrollPos) {
+        current = id;
+      }
+    }
+
+    return current;
   }
 }

@@ -1,7 +1,6 @@
-import { DOCUMENT } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { MenuService } from '@shared/services/menu.service';
@@ -17,6 +16,7 @@ describe('HomeComponent', () => {
       activeSection: vi.fn(() => ''),
       isAutoScrolling: vi.fn(() => false),
       setActiveSection: vi.fn(),
+      scrollToSection: vi.fn(),
     };
     const seoService = { applyHome: vi.fn() };
     const replaceState = vi
@@ -28,6 +28,7 @@ describe('HomeComponent', () => {
       imports: [HomeComponent],
       providers: [
         { provide: Router, useValue: { url: '/' } },
+        { provide: ActivatedRoute, useValue: { snapshot: { fragment: null } } },
         { provide: MenuService, useValue: menuService },
         { provide: SeoService, useValue: seoService },
         { provide: PLATFORM_ID, useValue: 'browser' },
@@ -42,6 +43,35 @@ describe('HomeComponent', () => {
     expect(seoService.applyHome).toHaveBeenCalled();
     expect(menuService.setActiveSection).toHaveBeenCalledWith('intro');
     expect(replaceState).toHaveBeenCalledWith(null, '', '/#intro');
+  });
+
+  it('scrolls to fragment section on init', async () => {
+    const menuService = {
+      activeSection: vi.fn(() => ''),
+      isAutoScrolling: vi.fn(() => false),
+      setActiveSection: vi.fn(),
+      scrollToSection: vi.fn(),
+    };
+    const seoService = { applyHome: vi.fn() };
+
+    TestBed.overrideComponent(HomeComponent, { set: { template: '' } });
+    TestBed.configureTestingModule({
+      imports: [HomeComponent],
+      providers: [
+        { provide: Router, useValue: { url: '/' } },
+        { provide: ActivatedRoute, useValue: { snapshot: { fragment: 'projects' } } },
+        { provide: MenuService, useValue: menuService },
+        { provide: SeoService, useValue: seoService },
+        { provide: PLATFORM_ID, useValue: 'browser' },
+      ],
+    });
+    await TestBed.compileComponents();
+
+    const fixture = TestBed.createComponent(HomeComponent);
+    fixture.componentInstance.ngAfterViewInit();
+    await fixture.whenStable();
+
+    expect(menuService.scrollToSection).toHaveBeenCalledWith('projects');
   });
 
   it('updates the active section and URL on scroll', async () => {
@@ -61,6 +91,7 @@ describe('HomeComponent', () => {
       activeSection: vi.fn(() => 'intro'),
       isAutoScrolling: vi.fn(() => false),
       setActiveSection: vi.fn(),
+      scrollToSection: vi.fn(),
     };
     const replaceState = vi
       .spyOn(window.history, 'replaceState')
@@ -77,6 +108,7 @@ describe('HomeComponent', () => {
       imports: [HomeComponent],
       providers: [
         { provide: Router, useValue: { url: '/' } },
+        { provide: ActivatedRoute, useValue: { snapshot: { fragment: null } } },
         { provide: MenuService, useValue: menuService },
         { provide: SeoService, useValue: { applyHome: vi.fn() } },
         { provide: PLATFORM_ID, useValue: 'browser' },

@@ -17,29 +17,51 @@ export class MenuService {
   }
 
   scrollToSection(id: string): void {
-    const el = this.document.getElementById(id);
-
-    if (!el) return;
-
     this.setActiveSection(id);
-
-    this.window.history.replaceState(
-      null,
-      '',
-      `${this.window.location.pathname}#${id}`,
-    );
-
+    this.window.history.replaceState(null, '', `/#${id}`);
     this.isAutoScrollingSignal.set(true);
-
-    this.window.scrollTo({
-      top: id === 'intro' ? 0 : el.offsetTop,
-      behavior: 'smooth',
-    });
-
     clearTimeout(this.autoScrollTimeout);
 
-    this.autoScrollTimeout = setTimeout(() => {
+    if (id === 'intro') {
+      this.window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.autoScrollTimeout = setTimeout(() => {
+        this.isAutoScrollingSignal.set(false);
+      }, 1200);
+      return;
+    }
+
+    // Scroll with retries to handle layout shifts from async content
+    this.scrollWithRetry(id, 0);
+  }
+
+  private scrollWithRetry(id: string, attempt: number): void {
+    const el = this.document.getElementById(id);
+    if (!el) {
       this.isAutoScrollingSignal.set(false);
-    }, 1200);
+      return;
+    }
+
+    const targetTop = el.getBoundingClientRect().top + this.window.scrollY;
+    this.window.scrollTo({ top: targetTop, behavior: 'smooth' });
+
+    // Retry scroll after content may have shifted layout
+    if (attempt < 3) {
+      setTimeout(() => {
+        const newTop = el.getBoundingClientRect().top + this.window.scrollY;
+        const currentScroll = this.window.scrollY;
+        // If position changed significantly, scroll again
+        if (Math.abs(newTop - currentScroll) > 50) {
+          this.scrollWithRetry(id, attempt + 1);
+        } else {
+          this.autoScrollTimeout = setTimeout(() => {
+            this.isAutoScrollingSignal.set(false);
+          }, 500);
+        }
+      }, 600);
+    } else {
+      this.autoScrollTimeout = setTimeout(() => {
+        this.isAutoScrollingSignal.set(false);
+      }, 500);
+    }
   }
 }

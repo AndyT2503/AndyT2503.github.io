@@ -1,9 +1,10 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import {
+  PreloadAllModules,
   provideRouter,
   withComponentInputBinding,
-  withInMemoryScrolling,
+  withPreloading,
 } from '@angular/router';
 import {
   provideClientHydration,
@@ -37,9 +38,7 @@ export const appConfig: ApplicationConfig = {
         },
       ],
       withComponentInputBinding(),
-      withInMemoryScrolling({
-        anchorScrolling: 'enabled',
-      }),
+      withPreloading(PreloadAllModules)
     ),
     provideHttpClient(withFetch()),
     provideClientHydration(withIncrementalHydration()),

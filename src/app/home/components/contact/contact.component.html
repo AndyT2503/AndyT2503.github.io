@@ -26,7 +26,7 @@
           <p class="contact__social-label">Connect with me</p>
           <div class="contact__social-list">
             @for (social of socialLinks; track social.label) {
-              <a class="contact__social-item" [href]="social.href" target="_blank" rel="noopener noreferrer">
+              <a class="contact__social-item" [attr.aria-label]="social.label" [href]="social.href" target="_blank" rel="noopener noreferrer">
                 <span class="contact__social-glow" [style.background]="social.glow"></span>
                 <span class="contact__social-icon">
                   <app-lucide-icon [name]="social.icon" [size]="20"></app-lucide-icon>
