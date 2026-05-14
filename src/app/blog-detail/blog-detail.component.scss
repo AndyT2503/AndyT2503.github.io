@@ -23,10 +23,6 @@
     border-radius: 24px;
     object-fit: contain;
     border: 1px solid rgba(255, 255, 255, 0.1);
-
-    @media (max-width: 1023px) {
-      aspect-ratio: 16 / 10;
-    }
   }
 }
 
