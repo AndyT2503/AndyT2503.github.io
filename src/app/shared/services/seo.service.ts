@@ -13,7 +13,7 @@ export class SeoService {
 
   applyHome(): void {
     const title = 'Tu Hoang - Angular Software Engineer';
-    const url = `${this.domainUrl}/`;
+    const url = `${this.domainUrl}`;
     const image = `${this.domainUrl}/assets/img/avatar.jpg`;
 
     this.setTitle(title);
@@ -225,7 +225,7 @@ export class SeoService {
   }
 
   private buildBlogUrl(slug: string): string {
-    return `${this.domainUrl}/blog/${slug}/`;
+    return `${this.domainUrl}/blog/${slug}`;
   }
 
   private buildBlogImage(slug: string): string {

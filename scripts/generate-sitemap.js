@@ -17,10 +17,6 @@ function slugify(title) {
     .replace(/-+/g, '-');
 }
 
-function withSlash(url) {
-  return url.endsWith('/') ? url : url + '/';
-}
-
 const MONTHS = {
   January: 0,
   February: 1,
@@ -61,7 +57,7 @@ const urls = [];
 
 // homepage
 urls.push({
-  loc: withSlash(DOMAIN),
+  loc: DOMAIN,
   lastmod: latestBlogDate.toISOString().split('T')[0],
   priority: '1.0'
 });
@@ -71,7 +67,7 @@ blogs.forEach(blog => {
   const slug = slugify(blog.title);
 
   urls.push({
-    loc: withSlash(`${DOMAIN}/blog/${slug}`),
+    loc: `${DOMAIN}/blog/${slug}`,
     lastmod: formatDate(blog.date),
     priority: '0.8'
   });
