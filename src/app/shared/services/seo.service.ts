@@ -19,13 +19,13 @@ export class SeoService {
     this.setTitle(title);
     this.setMetaTags({
       description:
-        'Personal website of Tu Hoang (AndyT2503), a Software Engineer specializing in Angular and TypeScript. Sharing insights, experiences, and articles about Angular and modern web development.',
+        'Tu Hoang (AndyT2503) is a Software Engineer specializing in Angular and TypeScript. On TuHoangDev, he shares insights, articles, and personal experiences about modern web development.',
       keywords:
         'Tu Hoang, AndyT2503, tuhoangdev, Angular developer, TypeScript developer, Frontend Engineer, Angular blog, web development',
       ogType: 'website',
       ogTitle: title,
       ogDescription:
-        'Personal website of Tu Hoang (AndyT2503), sharing Angular and TypeScript knowledge, insights, and experiences in modern web development.',
+        'Tu Hoang (AndyT2503) is a Software Engineer specializing in Angular and TypeScript. On TuHoangDev, he shares insights, articles, and personal experiences about modern web development.',
       ogImage: image,
       ogUrl: url,
       twitterCard: 'summary_large_image',
@@ -39,7 +39,7 @@ export class SeoService {
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Tu Hoang',
-      alternateName: 'AndyT2503',
+      alternateName: ['TuHoangDev', 'AndyT2503', 'tuhoangdev'],
       url,
       image,
       jobTitle: 'Software Engineer',
@@ -65,8 +65,7 @@ export class SeoService {
     this.setTitle(fullTitle);
     this.setMetaTags({
       description: blog.description,
-      keywords:
-        'Angular, TypeScript, Tu Hoang, AndyT2503, tuhoangdev',
+      keywords: 'Angular, TypeScript, Tu Hoang, AndyT2503, tuhoangdev',
       ogType: 'article',
       ogTitle: fullTitle,
       ogDescription: blog.description,
@@ -183,15 +182,11 @@ export class SeoService {
     return {
       '@type': 'Person',
       name: 'Tu Hoang',
-      alternateName: 'AndyT2503',
+      alternateName: ['TuHoangDev', 'AndyT2503', 'tuhoangdev'],
       url: this.domainUrl,
       image: `${this.domainUrl}/assets/img/avatar.jpg`,
       jobTitle: 'Software Engineer',
-      knowsAbout: [
-        'Angular',
-        'TypeScript',
-        'Web Development',
-      ],
+      knowsAbout: ['Angular', 'TypeScript', 'Web Development'],
       sameAs: [
         'https://github.com/AndyT2503',
         'https://www.linkedin.com/in/tu-hoang-787951195/',
