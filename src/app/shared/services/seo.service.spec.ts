@@ -47,13 +47,13 @@ describe('SeoService', () => {
     ).toBe('website');
     expect(
       document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
-    ).toBe(`${domainUrl}/`);
+    ).toBe(`${domainUrl}`);
 
     const jsonLd = JSON.parse(
       document.querySelector('#json-ld')?.textContent ?? '{}',
     );
     expect(jsonLd['@type']).toBe('Person');
-    expect(jsonLd.url).toBe(`${domainUrl}/`);
+    expect(jsonLd.url).toBe(`${domainUrl}`);
   });
 
   it('applies blog title, canonical URL, social meta tags, and JSON-LD', () => {

@@ -1,14 +1,20 @@
 import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { MenuService } from '@shared/services/menu.service';
 import { SeoService } from '@shared/services/seo.service';
 
 describe('HomeComponent', () => {
+  beforeEach(() => {
+    window.history.replaceState(null, '', '/');
+  });
+
   afterEach(() => {
+    vi.useRealTimers();
     vi.restoreAllMocks();
+    window.history.replaceState(null, '', '/');
   });
 
   it('applies home SEO and defaults the home hash to intro', async () => {
@@ -22,13 +28,18 @@ describe('HomeComponent', () => {
     const replaceState = vi
       .spyOn(window.history, 'replaceState')
       .mockImplementation(() => {});
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation(
+      (callback: FrameRequestCallback) => {
+        callback(0);
+        return 1;
+      },
+    );
 
     TestBed.overrideComponent(HomeComponent, { set: { template: '' } });
     TestBed.configureTestingModule({
       imports: [HomeComponent],
       providers: [
         { provide: Router, useValue: { url: '/' } },
-        { provide: ActivatedRoute, useValue: { snapshot: { fragment: null } } },
         { provide: MenuService, useValue: menuService },
         { provide: SeoService, useValue: seoService },
         { provide: PLATFORM_ID, useValue: 'browser' },
@@ -46,6 +57,7 @@ describe('HomeComponent', () => {
   });
 
   it('scrolls to fragment section on init', async () => {
+    window.history.replaceState(null, '', '/#projects');
     const menuService = {
       activeSection: vi.fn(() => ''),
       isAutoScrolling: vi.fn(() => false),
@@ -53,13 +65,18 @@ describe('HomeComponent', () => {
       scrollToSection: vi.fn(),
     };
     const seoService = { applyHome: vi.fn() };
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation(
+      (callback: FrameRequestCallback) => {
+        callback(0);
+        return 1;
+      },
+    );
 
     TestBed.overrideComponent(HomeComponent, { set: { template: '' } });
     TestBed.configureTestingModule({
       imports: [HomeComponent],
       providers: [
         { provide: Router, useValue: { url: '/' } },
-        { provide: ActivatedRoute, useValue: { snapshot: { fragment: 'projects' } } },
         { provide: MenuService, useValue: menuService },
         { provide: SeoService, useValue: seoService },
         { provide: PLATFORM_ID, useValue: 'browser' },
@@ -108,13 +125,13 @@ describe('HomeComponent', () => {
       imports: [HomeComponent],
       providers: [
         { provide: Router, useValue: { url: '/' } },
-        { provide: ActivatedRoute, useValue: { snapshot: { fragment: null } } },
         { provide: MenuService, useValue: menuService },
         { provide: SeoService, useValue: { applyHome: vi.fn() } },
         { provide: PLATFORM_ID, useValue: 'browser' },
       ],
     });
     await TestBed.compileComponents();
+    vi.useFakeTimers();
 
     const fixture = TestBed.createComponent(HomeComponent);
     const getElementByIdSpy = vi
@@ -131,6 +148,7 @@ describe('HomeComponent', () => {
         return { offsetTop: offsets[id] } as HTMLElement;
       });
     fixture.componentInstance.ngAfterViewInit();
+    vi.advanceTimersByTime(1500);
     listeners.get('scroll')?.(new Event('scroll'));
     await fixture.whenStable();
 

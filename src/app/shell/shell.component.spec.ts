@@ -9,6 +9,7 @@ describe('ShellComponent', () => {
   it('scrolls to the selected section when already on the home page', async () => {
     const menuService = {
       activeSection: signal('intro').asReadonly(),
+      setActiveSection: vi.fn(),
       scrollToSection: vi.fn(),
     };
 
@@ -36,6 +37,7 @@ describe('ShellComponent', () => {
     };
     const menuService = {
       activeSection: signal('blog').asReadonly(),
+      setActiveSection: vi.fn(),
       scrollToSection: vi.fn(),
     };
 
@@ -53,6 +55,7 @@ describe('ShellComponent', () => {
     fixture.componentInstance.clickNavItem('contact');
     await fixture.whenStable();
 
+    expect(menuService.setActiveSection).toHaveBeenCalledWith('contact');
     expect(router.navigate).toHaveBeenCalledWith(['/'], { fragment: 'contact' });
     expect(menuService.scrollToSection).not.toHaveBeenCalled();
   });

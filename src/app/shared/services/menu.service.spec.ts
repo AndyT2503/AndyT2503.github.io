@@ -25,7 +25,10 @@ describe('MenuService', () => {
   it('scrolls to a section and clears auto scrolling after the delay', () => {
     const section = document.createElement('section');
     section.id = 'projects';
-    Object.defineProperty(section, 'offsetTop', { value: 480 });
+    vi.spyOn(section, 'getBoundingClientRect').mockReturnValue({
+      top: 480,
+    } as DOMRect);
+    vi.spyOn(window, 'scrollY', 'get').mockReturnValue(0);
     document.body.appendChild(section);
     const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
     const replaceState = vi
@@ -45,7 +48,7 @@ describe('MenuService', () => {
       behavior: 'smooth',
     });
 
-    vi.advanceTimersByTime(1200);
+    vi.advanceTimersByTime(2300);
 
     expect(service.isAutoScrolling()).toBe(false);
     section.remove();
@@ -68,7 +71,8 @@ describe('MenuService', () => {
     const service = TestBed.inject(MenuService);
     service.scrollToSection('missing');
 
-    expect(service.activeSection()).toBe('');
+    expect(service.activeSection()).toBe('missing');
+    expect(service.isAutoScrolling()).toBe(false);
     expect(scrollTo).not.toHaveBeenCalled();
   });
 });
