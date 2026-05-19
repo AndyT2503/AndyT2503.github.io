@@ -1,7 +1,7 @@
 [
   {
     "name": "Nx Angular Tic Tac Toe Game",
-    "description": "Explore how to use Nx-Workspace in real project.",
+    "description": "A Tic Tac Toe game built with an Nx workspace to demonstrate scalable monorepo architecture in a real-world setup.",
     "repoUrls": [
       {
         "tooltip": "Tic Tac Toe Game",
@@ -15,10 +15,10 @@
   },
   {
     "name": "RealWorld Conduit Standalone API",
-    "description": "Using Angular v14 w/ Standalone API to built Medium clone (Conduit)",
+    "description": "A Medium.com clone (Conduit) built with Angular v14 using the Standalone API approach.",
     "repoUrls": [
       {
-        "tooltip": "RealWorld Conduit Standalone Component",
+        "tooltip": "Conduit Standalone API",
         "url": "https://github.com/AndyT2503/angular-conduit"
       }
     ],
@@ -29,7 +29,7 @@
   },
   {
     "name": "Giphy Clone",
-    "description": "The Cloning Giphy Page integrate with Giphy public API. This app will show Trending GIFs, GIF's detail.",
+    "description": "A clone of the Giphy website integrated with the Giphy public API, featuring trending GIFs and detailed GIF views.",
     "repoUrls": [
       {
         "tooltip": "Giphy Clone",
@@ -38,28 +38,28 @@
     ],
     "tech": [
       "Angular",
-      "Ng-zorro",
+      "Ng-Zorro",
       "Akita"
     ]
   },
   {
-    "name": "NestJs Conduit API",
-    "description": "Realworld Conduit API was built by NestJS + PostgreSQL + Onion Architecture",
+    "name": "NestJS Conduit API",
+    "description": "A RealWorld Conduit API built with NestJS and PostgreSQL, following Onion Architecture for better maintainability and separation of concerns.",
     "repoUrls": [
       {
-        "tooltip": "NestJs Conduit API",
+        "tooltip": "NestJS Conduit API",
         "url": "https://github.com/AndyT2503/nestjs-conduit-onion-architecture"
       }
     ],
     "tech": [
-      "NestJs",
+      "NestJS",
       "PostgreSQL",
       "TypeORM"
     ]
   },
   {
     "name": "Next Conduit",
-    "description": "Conduit was built by NextJS. This is project that I use to learn ReactJs and NextJS",
+    "description": "A Conduit (Medium clone) application built with Next.js as a learning project for React and Next.js.",
     "repoUrls": [
       {
         "tooltip": "Next Conduit",
@@ -67,28 +67,28 @@
       }
     ],
     "tech": [
-      "Next",
-      "ReactJs"
+      "Next.js",
+      "React"
     ]
   },
   {
-    "name": "Django Product Manager",
-    "description": "System product management using Django.",
+    "name": "Django Product Management",
+    "description": "A product management system built with Django, supporting dynamic interactions using JavaScript and AJAX.",
     "repoUrls": [
       {
-        "tooltip": "Django Product Manager",
+        "tooltip": "Django Product Management",
         "url": "https://github.com/AndyT2503/django-product-manager"
       }
     ],
     "tech": [
       "Django",
-      "Javascript",
-      "Ajax"
+      "JavaScript",
+      "AJAX"
     ]
   },
   {
     "name": "Flappy Bird",
-    "description": "The desktop application version of Flappy Bird.",
+    "description": "A desktop version of the Flappy Bird game built using C# and WinForms.",
     "repoUrls": [
       {
         "tooltip": "Flappy Bird",
@@ -97,7 +97,7 @@
     ],
     "tech": [
       "C#",
-      "Winform"
+      "WinForms"
     ]
   }
 ]

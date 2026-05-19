@@ -1,7 +1,7 @@
 [
   {
     "name": "Angular Conduit Signal",
-    "description": "Medium.com clone (called Conduit) was built using Angular version 16 with Signal API.",
+    "description": "A Medium.com clone (Conduit) built with Angular v16 using the Signal API.",
     "image": "assets/img/realworld.png",
     "repoUrls": [
       {
@@ -15,12 +15,12 @@
     },
     "tech": [
       "Angular",
-      "Typescript"
+      "TypeScript"
     ]
   },
   {
     "name": "E-commerce Shop",
-    "description": "E-commerce shop built using Angular and .NET Core with admin management and notification services for web and email notifications.",
+    "description": "An e-commerce platform built with Angular and .NET Core. The backend is designed using the Mediator pattern and CQRS for better separation of concerns and scalability.",
     "image": "assets/img/cellphones.png",
     "repoUrls": [
       {
@@ -41,7 +41,7 @@
   },
   {
     "name": "Ngx-Danmaku",
-    "description": "Ngx-Danmaku is the Angular library to display flying comments on iframe element.",
+    "description": "An Angular library for displaying flying comments (danmaku) on iframe elements.",
     "image": "assets/img/danmaku.png",
     "repoUrls": [
       {
@@ -51,7 +51,7 @@
     ],
     "tech": [
       "Angular",
-      "Typescript"
+      "TypeScript"
     ]
   }
 ]
