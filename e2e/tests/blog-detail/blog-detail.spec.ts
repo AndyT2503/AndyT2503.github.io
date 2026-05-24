@@ -33,4 +33,38 @@ test.describe('Blog detail page', () => {
     );
     await expect(page.locator(SELECTORS.blogArticle)).toContainText('Angular');
   });
+
+  test('renders related articles deterministically (newest first)', async ({
+    page,
+  }) => {
+    await page.goto(SELECTORS.deepLinkUrl);
+
+    await expect(page.locator(SELECTORS.relatedSection)).toBeVisible();
+    await expect(page.locator(SELECTORS.relatedHeading)).toHaveText(
+      'Related Articles',
+    );
+
+    await expect(page.locator(SELECTORS.relatedCards)).toHaveCount(2);
+    await expect(page.locator(SELECTORS.relatedCardTitles)).toHaveText(
+      SELECTORS.deepLinkRelatedTitles,
+    );
+  });
+
+  test('navigates to a related blog when a related card is clicked', async ({
+    page,
+  }) => {
+    await page.goto(SELECTORS.deepLinkUrl);
+
+    const firstRelatedTitle = SELECTORS.deepLinkRelatedTitles[0];
+    await page.locator(SELECTORS.relatedCards).first().click();
+
+    await expect(page).toHaveURL(/\/blog\/[\w-]+$/);
+    await expect(page.locator(SELECTORS.postTitle)).toHaveText(
+      firstRelatedTitle,
+    );
+    await expect(page).toHaveTitle(
+      `${firstRelatedTitle} | Angular & TypeScript Insights by Tu Hoang`,
+    );
+    await expect(page.locator(SELECTORS.blogArticle)).toBeVisible();
+  });
 });

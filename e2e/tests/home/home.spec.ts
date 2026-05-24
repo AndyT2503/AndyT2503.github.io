@@ -18,7 +18,7 @@ test.describe('Home page', () => {
     await page.waitForLoadState('networkidle');
   });
 
-  test('loads the portfolio landing sections', async ({ page }) => {
+  test('should render landing sections and desktop sidebar', async ({ page }) => {
     await expect(page).toHaveURL(/\/#intro$/);
     await expect(page.locator(SELECTORS.introSection)).toBeVisible();
     await expect(page.locator(SELECTORS.introTitle)).toContainText('Tu Hoang');
@@ -27,6 +27,9 @@ test.describe('Home page', () => {
     );
     await expect(page.locator(SELECTORS.blogSection)).toBeVisible();
     await expect(page.locator(SELECTORS.contactSection)).toBeVisible();
+    await expect(page.locator(SELECTORS.projectsSection)).toBeVisible();
+    await expect(page.locator(SELECTORS.experienceSection)).toBeVisible();
+    await expect(page.locator(SELECTORS.sideBar)).toBeVisible();
   });
 
   test('scrolls to sections from primary actions and navigation', async ({

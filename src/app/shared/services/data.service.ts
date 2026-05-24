@@ -40,4 +40,39 @@ export class DataService {
         ),
       );
   }
+
+  getBlogDataBySlug(slug: string) {
+    return this.httpClient
+      .get<IBlog[]>(`assets/data/blog.json?t=${new Date().getTime()}`)
+      .pipe(
+        map((res) => res.map((blog) => new Blog(blog))),
+        map((blogs) => {
+          const blog = blogs.find((blog) => blog.slug === slug);
+          if (!blog) {
+            throw new Error(`Blog with slug "${slug}" not found`);
+          }
+          return blog;
+        }),
+      );
+  }
+
+  getRelatedBlogs(slug: string) {
+    return this.getBlogData().pipe(
+      map((blogs) => {
+        const currentBlog = blogs.find((blog) => blog.slug === slug);
+        if (!currentBlog) {
+          throw new Error(`Blog with slug "${slug}" not found`);
+        }
+
+        return currentBlog.relatedBlogs
+          .map((relatedId) => blogs.find((item) => item.id === relatedId)!)
+          .sort((a, b) => {
+            const dateDiff =
+              new Date(b.date).getTime() - new Date(a.date).getTime();
+            if (dateDiff !== 0) return dateDiff;
+            return a.slug.localeCompare(b.slug);
+          });
+      }),
+    );
+  }
 }

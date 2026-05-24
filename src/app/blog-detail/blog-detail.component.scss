@@ -1,9 +1,9 @@
 .post {
   min-height: 100vh;
-  padding: 0 24px 80px;
+  padding: 0 24px 24px;
 
   @media (max-width: 1124px) {
-    padding: 0 12px 56px;
+    padding: 0 12px 24px;
   }
 }
 
@@ -39,9 +39,30 @@
   }
 }
 
+.related-posts {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+  margin-bottom: 24px;
+
+  @media (max-width: 1023px) {
+    padding-top: 18px;
+    margin-bottom: 18px;
+  }
+}
+
+.post__footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+  color: rgba(255, 255, 255, 0.6);
+
+  @media (max-width: 1023px) {
+    padding-top: 18px;
+  }
+}
+
 article {
   margin-top: 24px;
-
+  margin-bottom: 24px;
   @media (max-width: 1023px) {
     margin-bottom: 18px;
   }

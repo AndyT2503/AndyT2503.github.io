@@ -1,0 +1,6 @@
+<h2>Related Articles</h2>
+<div class="blog__grid">
+  @for (item of listBlog(); track item.id) {
+    <app-blog-item class="blog__item" [blogItem]="item"></app-blog-item>
+  }
+</div>

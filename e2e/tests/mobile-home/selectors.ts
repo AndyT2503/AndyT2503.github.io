@@ -5,6 +5,7 @@ export const SELECTORS = {
   introSection: 'section#intro',
   blogSection: 'section#blog',
   contactSection: 'section#contact',
+  bottomNav: '.bottom-nav',
   bottomBlogButton: '.bottom-nav__item:has-text("Blog")',
   bottomContactButton: '.bottom-nav__item:has-text("Contact")',
   blogCards: 'app-blog-item .blog-card',

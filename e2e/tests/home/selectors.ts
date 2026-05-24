@@ -7,6 +7,8 @@ export const SELECTORS = {
   projectsSection: 'section#projects',
   blogSection: 'section#blog',
   contactSection: 'section#contact',
+  experienceSection: 'section#experience',
+  sideBar: 'app-side-nav .sidebar',
   sidebarBlogButton: '.sidebar__item:has-text("Blog")',
   sidebarContactButton: '.sidebar__item:has-text("Contact")',
   bottomBlogButton: '.bottom-nav__item:has-text("Blog")',

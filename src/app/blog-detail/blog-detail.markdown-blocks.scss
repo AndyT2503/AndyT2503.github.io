@@ -1,5 +1,5 @@
 // Markdown styles – code blocks & tables (lazy-loaded with blog-detail route)
-app-blog-detail markdown {
+:host ::ng-deep markdown {
   pre {
     position: relative;
     margin: 22px 0 28px;

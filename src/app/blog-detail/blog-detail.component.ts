@@ -12,16 +12,19 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Blog } from '@shared/models';
+import { injectWindow } from '@shared/providers';
 import { DataService, SeoService } from '@shared/services';
+import { MenuService } from '@shared/services/menu.service';
 import { MarkdownModule } from 'ngx-markdown';
 import { BlogHeaderCardComponent } from './components/blog-header-card/blog-header-card.component';
-import { injectWindow } from '@shared/providers';
-import { MenuService } from '@shared/services/menu.service';
+import { RelatedBlogsComponent } from './components/related-blogs/related-blogs.component';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [MarkdownModule, BlogHeaderCardComponent],
+  imports: [MarkdownModule, BlogHeaderCardComponent, RelatedBlogsComponent],
   templateUrl: './blog-detail.component.html',
   styleUrls: [
     './blog-detail.component.scss',
@@ -29,7 +32,6 @@ import { MenuService } from '@shared/services/menu.service';
     './blog-detail.markdown-blocks.scss',
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
 })
 export class BlogDetailComponent implements OnInit {
   private readonly dataService = inject(DataService);
@@ -39,45 +41,30 @@ export class BlogDetailComponent implements OnInit {
   private readonly window = injectWindow();
   private readonly menuService = inject(MenuService);
   readonly slug = input.required<string>();
-  readonly blog = signal<Blog | null>(null);
 
   readonly thumbnailUrl = computed(() => {
     return `content/images/${this.slug()}/default.jpg`;
   });
 
+  readonly blogResource = rxResource<Blog | null, string>({
+    params: () => this.slug(),
+    stream: (resourceParams) =>
+      this.dataService.getBlogDataBySlug(resourceParams.params).pipe(
+        tap({
+          next: (blog) => {
+            this.scrollToTop();
+            this.seoService.applyBlog(blog, resourceParams.params);
+          },
+          error: () => {
+            this.router.navigate(['/'], { fragment: 'blog' });
+          },
+        }),
+      ),
+    defaultValue: null,
+  });
+
   ngOnInit(): void {
     this.menuService.setActiveSection('blog');
-    this.scrollToTop();
-    this.loadBlog();
-  }
-
-
-  private loadBlog(): void {
-    if (!this.slug()) {
-      this.router.navigate(['/'], { fragment: 'blog' });
-      return;
-    }
-
-    this.dataService.getBlogData().subscribe({
-      next: (blogs) => this.handleBlog(blogs),
-    });
-  }
-
-  private handleBlog(blogs: Blog[]): void {
-    const blog = blogs.find((b) => b.slug === this.slug());
-
-    if (!blog) {
-      this.router.navigate(['/'], { fragment: 'blog' });
-      return;
-    }
-
-    this.blog.set(blog);
-
-    this.applySeo(blog);
-  }
-
-  private applySeo(blog: Blog): void {
-    this.seoService.applyBlog(blog, this.slug());
   }
 
   private scrollToTop(): void {

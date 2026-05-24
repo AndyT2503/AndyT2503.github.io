@@ -1,4 +1,4 @@
-@if (blog(); as blog) {
+@if (blogResource.value(); as blog) {
   <div class="post">
     <div class="post__container rt-container">
       <div class="post__header rt-fade-up">
@@ -13,6 +13,10 @@
       <article>
         <markdown src="content/article/{{ slug() }}.md"></markdown>
       </article>
+
+      <div class="related-posts">
+        <app-related-blogs [slug]="slug()" />
+      </div>
 
       <div class="post__footer rt-fade-up">
         <div class="post__copyright">© 2026 Tu Hoang</div>

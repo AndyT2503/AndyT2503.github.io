@@ -15,6 +15,7 @@ describe('BlogComponent', () => {
         date: '2026-01-01',
         description: 'd',
         readingTime: 1,
+        relatedBlogs: [],
       }),
     ];
 

@@ -5,6 +5,7 @@ export interface IBlog {
   date: string;
   description: string;
   readingTime: number;
+  relatedBlogs: number[];
 }
 
 export class Blog {
@@ -14,6 +15,7 @@ export class Blog {
   date: string;
   description: string;
   readingTime: number;
+  relatedBlogs: number[];
   get slug() {
     return this.title
       .toLowerCase()
@@ -32,5 +34,6 @@ export class Blog {
     this.date = blog.date;
     this.description = blog.description;
     this.readingTime = blog.readingTime;
+    this.relatedBlogs = blog.relatedBlogs;
   }
 }

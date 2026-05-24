@@ -1,5 +1,5 @@
 // Markdown styles – base typography (lazy-loaded with blog-detail route)
-app-blog-detail markdown {
+:host ::ng-deep markdown {
   display: block;
   width: 100%;
   max-width: 1200px;

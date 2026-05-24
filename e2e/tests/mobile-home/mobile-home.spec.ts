@@ -27,7 +27,7 @@ test.describe('Mobile home page', () => {
     await page.waitForLoadState('networkidle');
   });
 
-  test('renders mobile header and resume link', async ({ page }) => {
+  test('renders mobile header, resume link and bottom navigation', async ({ page }) => {
     await expect(page.locator(SELECTORS.mobileHeader)).toBeVisible();
     await expect(page.locator(SELECTORS.mobileLogo)).toContainText('TU HOANG');
     await expect(page.locator(SELECTORS.mobileResumeLink)).toHaveAttribute(
@@ -39,6 +39,7 @@ test.describe('Mobile home page', () => {
       '_blank',
     );
     await expect(page.locator(SELECTORS.introSection)).toBeVisible();
+    await expect(page.locator(SELECTORS.bottomNav)).toBeVisible();
   });
 
   test('navigates between sections with bottom navigation', async ({ page }) => {

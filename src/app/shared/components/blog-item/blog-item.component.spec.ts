@@ -12,6 +12,7 @@ describe('BlogItemComponent', () => {
     date: '2026-01-01',
     description: 'Description',
     readingTime: 5,
+    relatedBlogs: [],
   });
 
   it('renders blog metadata from the blog item', async () => {

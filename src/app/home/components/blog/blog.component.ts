@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DataService } from '@shared/services';
-import { BlogItemComponent } from './components/blog-item/blog-item.component';
+import { BlogItemComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-blog',
