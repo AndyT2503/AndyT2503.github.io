@@ -12,7 +12,7 @@
       </div>
 
       <div class="projects__featured-grid">
-        @for (project of featuredProjects(); track project.name; let i = $index) {
+        @for (project of featuredProjects.value(); track project.name; let i = $index) {
           <app-featured-project-card
             [project]="project"
             [gradient]="getGradientByIndex(i)"
@@ -26,7 +26,7 @@
       <h3 class="projects__other-title">Other Projects</h3>
 
       <div class="projects__other-grid">
-        @for (project of normalProjects(); track project.name) {
+        @for (project of normalProjects.value(); track project.name) {
           <app-normal-project-card
             [project]="project"
           />

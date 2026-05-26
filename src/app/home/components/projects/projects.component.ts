@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { DataService } from '@shared/services';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { LucideIconComponent } from '@shared/components';
+import { DataService } from '@shared/services';
 import { FeaturedProjectCardComponent } from './components/featured-project-card/featured-project-card.component';
 import { NormalProjectCardComponent } from './components/normal-project-card/normal-project-card.component';
 
@@ -16,8 +16,14 @@ import { NormalProjectCardComponent } from './components/normal-project-card/nor
 export class ProjectsComponent {
   private readonly dataService = inject(DataService);
 
-  readonly featuredProjects = toSignal(this.dataService.getFeaturedProjectData());
-  readonly normalProjects = toSignal(this.dataService.getNormalProjectData());
+  readonly featuredProjects = rxResource({
+    stream: () => this.dataService.getFeaturedProjectData(),
+    defaultValue: [],
+  });
+  readonly normalProjects = rxResource({
+    stream: () => this.dataService.getNormalProjectData(),
+    defaultValue: [],
+  });
 
   getGradientByIndex(index: number): string {
     if (index % 3 === 0) return 'pink-orange';

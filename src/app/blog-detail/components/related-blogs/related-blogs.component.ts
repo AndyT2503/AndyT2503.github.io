@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { BlogItemComponent } from '@shared/components';
 import { DataService } from '@shared/services';
-import { distinctUntilChanged, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-related-blogs',
@@ -14,11 +13,8 @@ import { distinctUntilChanged, switchMap } from 'rxjs';
 export class RelatedBlogsComponent {
   private readonly dataService = inject(DataService);
   readonly slug = input.required<string>();
-
-  readonly listBlog = toSignal(
-    toObservable(this.slug).pipe(
-      distinctUntilChanged(),
-      switchMap((slug) => this.dataService.getRelatedBlogs(slug)),
-    ),
-  );
+  readonly relatedBlogs = rxResource({
+    params: this.slug,
+    stream: (resourceParams) => this.dataService.getRelatedBlogs(resourceParams.params),
+  })
 }

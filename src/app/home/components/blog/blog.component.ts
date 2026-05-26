@@ -1,9 +1,5 @@
-
-import {
-  ChangeDetectionStrategy,
-  Component, inject
-} from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { DataService } from '@shared/services';
 import { BlogItemComponent } from '../../../shared/components';
 
@@ -16,5 +12,9 @@ import { BlogItemComponent } from '../../../shared/components';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogComponent {
-  readonly listBlog = toSignal(inject(DataService).getBlogData());
+  private readonly dataService = inject(DataService);
+  readonly listBlog = rxResource({
+    stream: () => this.dataService.getBlogData(),
+    defaultValue: [],
+  });
 }

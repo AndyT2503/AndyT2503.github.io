@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { DataService } from '@shared/services';
 import { ExperienceCardComponent } from './components/experience-card/experience-card';
 
@@ -12,7 +12,9 @@ import { ExperienceCardComponent } from './components/experience-card/experience
   imports: [ExperienceCardComponent],
 })
 export class ExperienceComponent {
-  readonly listWorkExperience = toSignal(
-    inject(DataService).getWorkExperienceData(),
-  );
+  private readonly dataService = inject(DataService);
+  readonly listWorkExperience = rxResource({
+    stream: () => this.dataService.getWorkExperienceData(),
+    defaultValue: [],
+  });
 }
