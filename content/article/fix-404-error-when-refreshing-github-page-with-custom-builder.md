@@ -209,4 +209,3 @@ Our builder logic is done. we run `npm run build` to compile it to Node.js scrip
 
 ## Summary
 We already explored how to create a custom **Angular CLI Builder** to fix **404 redirect issue** on Github Page. **CLI Builder API** is an intensive tool which you can do a lot of thing with this. If you want to learn more about **CLI Builder**, you can visit [Angular.io](https://angular.io/guide/cli-builder "Angular.io").  
-Full code of the example is [here](https://github.com/AndyT2503/AndyT2503.github.io/tree/v2 "here").

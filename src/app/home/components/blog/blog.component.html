@@ -6,7 +6,7 @@
     </div>
 
     <div class="blog__grid">
-      @for (item of listBlog(); track item.id) {
+      @for (item of listBlog.value(); track item.id) {
         <app-blog-item class="blog__item" [blogItem]="item"></app-blog-item>
       }
     </div>
